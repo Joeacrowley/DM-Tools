@@ -721,7 +721,7 @@ test_df$v1
 # Drop labelled or unlabelled values
 v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, maybe = 2, no = 3))
 v
-nolabel_to_na(v) # 9 is now NA
+nolabel_to_na(v) # 9 is now NA, because it has no label
 
 size <- labelled(c(1.88, 1.62, 1.78, 99, 1.91), c("not measured" = 99))
 size
