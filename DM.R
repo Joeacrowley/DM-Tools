@@ -134,7 +134,7 @@ df %>% mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm =
 
 ####### Row or group-wise operations ###########################################
 
-# Row-wise variable summaries
+# Row-wise variable summaries [SLOW]
 df %>% 
   rowwise() %>%
   mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm = T)) %>% 
@@ -184,7 +184,6 @@ num_df <- num_df %>% mutate(
 )
 
 num_df %>% print()
-
 
 ####### Recoding variables based on other variables ############################
 
@@ -530,6 +529,17 @@ df %>% count(NatFrEst_quarts,NatFrEst_quarts_wt) # They match, weights are weak 
 # Look at weights with quantiles... 
 quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% matrix(nrow = 8,ncol = 5)
 quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% plot
+
+####### Checking edits that effect numeric variables ###########################
+
+# Take a random sample...
+df %>% count(NatFrEst_quarts_wt, NatFrEst) %>% 
+  sample_n(50) %>% print(n=50)
+
+# Look at min and max values
+df %>% group_by(NatFrEst_quarts_wt) %>% 
+  summarise(min = min(NatFrEst, na.rm = T), 
+            max = max(NatFrEst, na.rm = T))
 
 ############## Renaming ########################################################
 
