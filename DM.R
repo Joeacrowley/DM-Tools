@@ -494,6 +494,38 @@ df %>% count(NatFrEst_quarts,NatFrEst_quarts_wt) # They match, weights are weak 
 quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% matrix(nrow = 8,ncol = 5)
 quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% plot
 
+############## Renaming ########################################################
+
+# One variable at a time
+df %>% names
+df %>% rename(sex = RSex, `Weight variable` = WtFactor, serial_number = Sserial) %>% 
+  names
+
+# General edits...
+df %>% rename_all(tolower) %>% names
+
+
+# Using tidy-select to identify variables, and apply a function
+df %>% select(libauth, leftrigh, welfare2) %>% glimpse
+
+df %>% select(libauth, leftrigh, welfare2) %>% 
+  rename_with(~paste0(.x, "_f"), .cols = everything()) %>% 
+  names()
+
+# rename with an external vector of names
+
+# Uses a named vector...
+lookup <- c(`Left-right scale` = "leftrigh", 
+            `Libertarian-authoritarian scale` = "libauth", 
+            `Welfarism scale` = "welfare2", 
+            dole = "Dole"
+            )
+
+rename(df, all_of(lookup)) %>% names
+
+
+
+
 
 ############## The labelled package ############################################
 
