@@ -147,6 +147,43 @@ df %>%
   mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm = T)) %>% 
   count(av_ati2) # Remember, without ungroup output is still grouped... 
 
+# Quicker row-wise functions... 
+?rowSums
+
+df <- df %>% mutate(
+  av_ati3 = rowMeans(across(c(libauth, leftrigh)), na.rm = T)
+)
+
+df %>% select(av_ati3, libauth, leftrigh) %>% 
+  sample_n(50) %>% print(n=1000)
+
+set.seed(123)  # for reproducibility
+
+num_df <- data.frame(
+  var1 = sample(1:100, 50, replace = T),
+  var2 = sample(1:45, 50, replace = T),
+  var3 = sample(1:20, 50, replace = T),
+  var4 = sample(1:75, 50, replace = T),
+  var5 = sample(1:50, 50, replace = T)
+)
+
+num_df <- num_df %>% mutate(
+  
+  # All columns
+  row_total = rowSums(across(everything()), na.rm = T), 
+  
+  # Identify column numbers
+  rows_2_4 = rowSums(across(c(2,4)), na.rm = T), 
+  
+  # Identfy variable with ends_with
+  ends_with_3_5 = rowSums(across(ends_with(c("3","5")))),
+  
+  # With character vector
+  `1_and_2` = rowSums(across(all_of(c("var1", "var2"))))
+  
+)
+
+num_df %>% print()
 
 
 ####### Recoding variables based on other variables ############################
