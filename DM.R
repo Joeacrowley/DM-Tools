@@ -499,10 +499,12 @@ look_for(df, c("paptype", "RAgeCat"))
 # generate_dictionary() == look_for()
 
 # results as dataframe
+# all levels of variables compressed into single row. 
 look_for(df, c("paptype", "RAgeCat")) %>%
   convert_list_columns_to_character()
 
 # results as LONG dataframe
+# i.e. each level of variables gets its own row
 look_for(df, c("paptype", "RAgeCat")) %>%
   lookfor_to_long_format() %>%
   convert_list_columns_to_character()
@@ -552,6 +554,10 @@ df2$s2
 # Drop multiple labels at once...
 df2 <- df2 %>% remove_value_labels(s2 = 8:9)
 df2$s2
+
+ # Within mutate, here dropping user_na and keeping variable labels. 
+df2 %>% mutate(s2 = remove_labels(s2, keep_var_label = T, user_na_to_na = T)) 
+  
 
 # set_value_labels() has the same role as val_labels, over writes all values
 df2 <- df2 %>% set_value_labels(s2 = c(Yes = 1, "Don't know" = 8, Unknown = 9))
