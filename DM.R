@@ -251,6 +251,19 @@ df <- df %>%
 
 df %>% count(dole3)
 
+# fct_recode with an external vector
+
+df %>% count(SMNews)
+
+# Define levels to recode...
+to_recode <- c(Often = "Several times a day", Often = "Every day", Often = "Several times a week", 
+               `Not often` = "Never", `Not often` = "Less often than once a month", `Not often` = "Once a month")
+
+df <- df %>% mutate(SMNews_f = as_factor(SMNews),
+                    SMNews_f = fct_recode(SMNews_f, !!!to_recode))
+
+df %>% count(SMNews_f, SMNews)
+
 ################### Manage missing data in factors #############################
 
 attributes(df$Spend1)
