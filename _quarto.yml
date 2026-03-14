@@ -1,0 +1,14 @@
+project:
+  type: book
+
+book:
+  title: "Data Management in R"
+  author: "JC"
+  chapters:
+    - 0. Index.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    toc: true
