@@ -5,7 +5,7 @@ book:
   title: "Data Management in R"
   author: "JC"
   chapters:
-    - Index.qmd
+    - index.qmd
 
 
 format:
