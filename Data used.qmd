@@ -1,0 +1,31 @@
+---
+title: "Data being used"
+format: html
+editor: visual
+---
+
+## Packages
+
+```{r, warnings = F, message = F, echo = T}
+library(haven)
+library(tidyverse)
+library(labelled)
+```
+
+## Load BSA teaching data
+
+```{r}
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+```
+
+## Variable summary
+
+```{r}
+names(df)
+
+df %>% glimpse
+
+look_for(df, details = "none")
+
+look_for(df)
+```

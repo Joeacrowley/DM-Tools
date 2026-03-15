@@ -6,6 +6,7 @@ book:
   author: "JC"
   chapters:
     - index.qmd
+    - Data used.qmd
 
 
 format:
