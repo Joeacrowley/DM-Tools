@@ -4,7 +4,6 @@ format: html
 editor: visual
 ---
 
-
 ```{r}
 #| echo: false
 #| message: false
@@ -21,10 +20,10 @@ df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_p
 
 ## The labelled package
 
-What is useful?  
-  -  the data dictionary tool... look_for()  
-  -  recode skipmeal with labelled()   
-  -  look_for()  
+What is useful?\
+- the data dictionary tool... look_for()\
+- recode skipmeal with labelled()\
+- look_for()
 
 ## look_for()
 
@@ -86,7 +85,7 @@ df2$s2
 
 <br>
 
-## Basic labelled data edits 
+## Basic labelled data edits
 
 ```{r}
 # Edit a single label
@@ -134,7 +133,7 @@ df2$s2
 df2 %>% mutate(s2 = remove_labels(s2, keep_var_label = T, user_na_to_na = T)) 
 ```
 
-```{r}  
+```{r}
 
 # set_value_labels() has the same role as val_labels, over writes all values
 df2 <- df2 %>% set_value_labels(s2 = c(Yes = 1, "Don't know" = 8, Unknown = 9))
@@ -184,7 +183,7 @@ val_labels(test_df2) <- list(v1 = c(no = 3, yes = 1), v2 = c(a = 1, b = 2, c = 3
 val_labels(test_df2)
 ```
 
-<br> 
+<br>
 
 ## Sort labelled data
 
@@ -215,7 +214,7 @@ test_df2 %>% count(v1, v1a)
 
 ```
 
-## Handle missing data  
+## Handle missing data
 
 ### Tag missing values
 
@@ -244,6 +243,7 @@ attributes(test_df$v2)
 ### Convert to NA
 
 Missing tag to NA
+
 ```{r}
 test_df$v2 <- user_na_to_na(test_df$v2)
 test_df
@@ -274,7 +274,6 @@ attributes(test_df$v1)
 
 ## Drop labelled or unlabelled values
 
-
 ```{r}
 v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, maybe = 2, no = 3))
 v
@@ -286,7 +285,7 @@ Set values with no label to NA.
 nolabel_to_na(v) # 9 is now NA, because it has no label
 ```
 
-Perhaps more realistic, set only values with a label to NA... 
+Perhaps more realistic, set only values with a label to NA...
 
 ```{r}
 size <- labelled(c(1.88, 1.62, 1.78, 99, 1.91), c("not measured" = 99))
@@ -298,7 +297,7 @@ val_labels_to_na(size)
 
 There are also the haven function zap_missing() and zap_labelled()
 
-More concise in many cases. 
+More concise in many cases.
 
 ```{r}
 df %>% count(RAgeCat)
@@ -309,9 +308,9 @@ df %>% count(zap_labels(RAgeCat, user_na = T)) # Retain user_na as valid value
 
 <br>
 
-## labelled version of recode 
+## labelled version of recode
 
-This is an extension to the method from dplyr for labelled numeric data. 
+This is an extension to the method from dplyr for labelled numeric data.
 
 Although `recode` is called below with `dplyr`, this functionality is provided by `labelled`.
 
@@ -324,7 +323,7 @@ x
 dplyr::recode(x,`3` = 2L, .combine_value_labels = T)
 ```
 
-Where combined values have a label, these are combined... 
+Where combined values have a label, these are combined...
 
 ```{r}
 x <- labelled(1:3, c(yes = 1, no = 2, maybe = 3))
@@ -363,7 +362,7 @@ dplyr::recode(
 )
 ```
 
-Here recode drops value labels, so values are combined but labels dropped. Useful where combining labels is not helpful. 
+Here recode drops value labels, so values are combined but labels dropped. Useful where combining labels is not helpful.
 
 ```{r}
 dplyr::recode(
@@ -379,6 +378,7 @@ dplyr::recode(
 ### tidyr style labelled recode
 
 Create a test data frame for tidyr style recoding
+
 ```{r}
 test_df <- test_df %>% set_value_labels(v1 = c(Yes = 1, No = 2, Maybe = 3))
 test_df
@@ -401,15 +401,17 @@ test_df %>% count(as_factor(v1), as_factor(v1a)) # Review result
 
 <br>
 
-## Convert labelled data to factors  
+## Convert labelled data to factors
 
 Application of to_factor() - convert labelled data to factors
+
 ```{r}
 v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, no = 3, maybe = 2))
 v
 ```
 
 The labelled() to_factor() function seems similar to as_factor()
+
 ```{r}
 v %>% to_factor() %>% levels()
 v %>% as_factor() %>% levels()
@@ -424,8 +426,8 @@ to_factor(v, levels = "v") # values not labels
 to_factor(v, levels ="p") # both
 ```
 
-
 ### Missing data
+
 ```{r}
 to_factor(v, nolabel_to_na = T) # unalabelled values to NA
 ```
@@ -442,7 +444,7 @@ to_factor(v, sort_levels = "l") %>% levels() # Order by labels
 
 Back to labelled (perhaps for easy edits?).
 
-Note values now 1:4, not 1, 2, 3 and 9. 
+Note values now 1:4, not 1, 2, 3 and 9.
 
 1:4 is what as.numeric would return when applied to this factor.
 
@@ -451,15 +453,15 @@ f <- to_factor(v)
 to_labelled(f) 
 ```
 
-<br> 
+<br>
 
-## Applied examples 
+## Applied examples
 
 ### skipmeals
 
-Example of skipmeals - simplify into two groups, provide my own new labels. 
+Example of skipmeals - simplify into two groups, provide my own new labels.
 
-Could just factor() really. 
+Could just factor() really.
 
 ```{r}
 df %>% count(skipmeal)
@@ -476,7 +478,7 @@ df %>% count(to_factor(skipmeal2))
 
 ```
 
-### Edit labels 
+### Edit labels
 
 This code edits the labels on the libertarian-authoritatian scale, then drops user missing values.
 
@@ -502,11 +504,11 @@ freq(as_factor(df$incdiffs, levels = "both"))
 val_labels(df$incdiffs)
 ```
 
-This first example shows how it can go wrong. 
+This first example shows how it can go wrong.
 
 The 'agree' and 'strongly agree' should be combined, instead both become 'strongly agree'.
 
-While the 'other' responses are combined into 9L - 'Not answered'. 
+While the 'other' responses are combined into 9L - 'Not answered'.
 
 Not very helpful
 
@@ -528,9 +530,9 @@ val_labels(df$incdiffs2) # value labels themselves unchanged
 df %>% count(as_factor(incdiffs2), as_factor(incdiffs))
 ```
 
-Alterntaively we can set the `.combine_value_labels` argument, but this code won't run. 
+Alterntaively we can set the `.combine_value_labels` argument, but this code won't run.
 
-The issue is that df$incdiffs contains user-defined NA values.
+The issue is that df\$incdiffs contains user-defined NA values.
 
 ```{r, error=T}
 attributes(df$incdiffs) # values -1, 8 and 9 are user tagged NA. 
@@ -547,7 +549,6 @@ df <- df %>%
   ))
 
 ```
-
 
 Once we remove user defined NA, the class changes
 
