@@ -1,0 +1,515 @@
+---
+title: "Group numeric variables"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+<br>
+
+## Benefit claimants
+
+`NatFrEst` - number of people claiming benefits who give false info.
+
+```{r}
+attributes(df$NatFrEst) 
+df %>% count(NatFrEst) %>% print(n=100)
+hist(zap_missing(df$NatFrEst))
+```
+
+## ntile()
+
+Rough buckets, ignores ties (same value can end up in differet buckets) resulting groups more or less perfectly quintiles - because does not respect ties.
+
+```{r}
+ntile(zap_missing(df$NatFrEst), n = 5) %>% freq # No labels - hard to understand
+```
+
+### Refining ntile
+
+```{r}
+# Function to add labels to ntile breaks
+ntile_lab <- function(data, var, breaks = 5) { 
+  
+  var_to_use <- data %>% pull(var)
+  
+  vec <- ntile(zap_missing(var_to_use), n = breaks)
+  
+  breaks <- map(na.omit(unique(vec)),
+                ~paste0(
+                  min(zap_missing(var_to_use)[vec == .x],na.rm = T), " - ",
+                  max(zap_missing(var_to_use)[vec == .x],na.rm = T)
+                )
+  )
+  vec_unique <-  as.vector(na.omit(unique(vec)))
+  names(vec_unique) <-  breaks
+  vec_unique
+  
+  result <- vec %>% set_value_labels(.labels = vec_unique)
+  
+  return(result)
+  
+  }
+```
+
+#### Example 1
+
+```{r}
+# Test ntile_lab
+ntile_lab(data = df, var = "NatFrEst") %>% as_factor() %>% fct_count()
+```
+
+**Remember**, ntile creates roughly equal groups, but as a result those groups can contain the same values, see below...
+
+```{r}
+df$chk_ntile <- ntile_lab(data = df, var = "NatFrEst") %>% as_factor()
+df %>% group_by(chk_ntile) %>% summarise(
+  min = min(NatFrEst, na.rm = T),
+  max = max(NatFrEst, na.rm = T)
+)
+```
+
+#### Example 2
+
+```{r}
+# Now with 10 breaks
+ntile_lab(data = df, var = "NatFrEst", breaks = 10) %>% as_factor() %>% fct_count()
+```
+
+## cut()
+
+From base R.
+
+The `breaks` argument is either a vector of two or more numbers, giving the break points to cut the variable into, or a single value indicating how many roughly equal groups to split it into.
+
+### Sequence of break points
+
+Square bracket in output indicates the groups are capped on that side, e.g. here the right hand side includes ten in the first group.
+
+```{r}
+cut(df$NatFrEst, breaks = seq(from = 0, to = 100, by = 10)) %>% fct_count() 
+```
+
+Controlling where groups end and start is hard...
+
+If we use the following breaks:
+
+```{r}
+seq(from = 0, to = 100, by = 10)
+```
+
+Here cut() implements those breaks so the results run from 0 up to 9, then 10 to 19, and, problematically, 100 is NA.
+
+That is because bands close on the left (the rightmost value is excluded).
+
+```{r}
+
+df <- df %>% mutate(ben_cheat = cut(
+    NatFrEst, 
+    breaks = seq(from = 0, to = 100, by = 10), 
+    include.lowest = F, 
+    right = F)
+  )
+
+df %>% count(ben_cheat, NatFrEst) %>% print(n=100)
+```
+
+Now we set right = T...
+
+-   Now breaks are 1-10, 11-20, 21-30, etc,\
+-   meaning 100 is included
+
+However, it excludes zero, because include.lowest = F.
+
+```{r}
+df <- df %>% mutate(ben_cheat = cut(
+  NatFrEst, 
+  breaks = seq(from = 0, to = 100, by = 10), 
+  include.lowest = F, 
+  right = T)
+  )
+
+df %>% count(ben_cheat, NatFrEst) %>% print(n=100)
+```
+
+So, now also set include.lowest = T
+
+This is probably best:
+
+-   breaks are 0-10, 11-20, 21-30,\
+-   0 is included,\
+-   and 100 is included.
+
+```{r}
+df <- df %>% mutate(ben_cheat = cut(
+  NatFrEst, 
+  breaks = seq(from = 0, to = 100, by = 10), 
+  include.lowest = T, 
+  right = T)
+  )
+
+df %>% count(ben_cheat, NatFrEst) %>% print(n=100)
+```
+
+With decimalised data one would need to take even more care, nonetheless the settings above work ok here.
+
+```{r}
+df %>% count(libauth) %>% print(n=1000)
+
+# Actually the same settings as above again seem best
+df <- df %>% mutate(libauth_brack = cut(
+    libauth, 
+    seq(1,5,by = 1), 
+    include.lowest = T, 
+    right = T)
+  )
+
+df %>% count(libauth_brack, libauth) %>% print(n=1000)
+```
+
+#### Handling missing values
+
+Note, user missing values will be included if the breaks include them, see below. These would need dropping. 
+
+```{r}
+
+# Actually the same settings as above again seem best
+df <- df %>% mutate(libauth_brack = cut(
+    libauth, 
+    seq(-1,5,by = 1), 
+    include.lowest = T, 
+    right = T)
+  )
+
+df %>% count(libauth_brack, libauth) %>% print(n=1000)
+
+```
+
+<br>
+
+### cut() with a preset number of groups
+
+Using a single value to ask for a preset number of groups is particularly risky with user missing values, as below they are included by default. 
+
+```{r}
+
+# Actually the same settings as above again seem best
+df <- df %>% mutate(libauth_brack = cut(
+    libauth, 
+    5, 
+    include.lowest = T, 
+    right = T)
+  )
+
+df %>% count(libauth_brack, libauth) %>% print(n=1000)
+
+```
+
+More properly... with `user_na_to_na` dropping the user missing values. 
+
+*Note* the use of `dig.lab`, otherwise the break values are not clean, e.g. here the first break would be 0.996.
+
+From documentation:
+
+> When breaks is specified as a single number, the range of the data is divided into breaks pieces of equal length, and then the outer limits are moved away by 0.1% of the range to ensure that the extreme values both fall within the break intervals. (If x is a constant vector, equal-length intervals are created, one of which includes the single value.)
+ 
+```{r}
+
+# Actually the same settings as above again seem best
+df <- df %>% mutate(libauth_brack = cut(
+    user_na_to_na(libauth), 
+    5, 
+    include.lowest = T, 
+    right = T, 
+    dig.lab = 1
+    )
+  )
+
+df %>% count(libauth_brack, libauth) %>% print(n=1000)
+
+```
+
+<br> 
+
+### Nice cut
+
+This formats the output of cut. It assumes you'll want the breaks to close on the right and include the lowest value in the sequence of breaks.
+
+```{r}
+
+nice_cut <- function(
+    variable, 
+    keep_user_na = F,
+    breaks,
+    dig_lab = 1, 
+    lab_style = 1
+){
+  
+  if(keep_user_na == F){variable <- user_na_to_na(variable)}
+  
+  new_variable <- cut(
+    variable, 
+    breaks, 
+    include.lowest = T, 
+    right = T, 
+    dig.lab = dig_lab
+    )
+
+  new_levels <- new_variable %>% levels()
+  new_levels <- as.character(new_levels)
+     
+   if(lab_style == 1){
+     
+     new_levels <- str_replace(new_levels, "\\(|\\[", "Greater than ")
+     new_levels <- str_replace(new_levels, ",", " and up to ")
+
+    } else if (lab_style == 2) {
+      
+     new_levels <- str_replace(new_levels, "\\(|\\[", "")
+     new_levels <- str_replace(new_levels, ",", " > & <= ")
+
+    } else if (lab_style == 3) {
+      
+     new_levels <- str_replace(new_levels, "\\(|\\[", "")
+     new_levels <- str_replace(new_levels, ",", "-")
+     
+    }
+
+  new_levels <- str_remove(new_levels, "]")
+  
+  factor(
+    new_variable, 
+    labels = new_levels
+    )
+
+}
+
+```
+
+At most basic, it takes a vector in the `variable` argument.
+```{r}
+
+nice_cut(
+  variable = df$libauth, 
+  breaks = 5
+) %>% fct_count()
+
+nice_cut(
+  variable = df$welfare2, 
+  breaks = 5, 
+  lab_style = 3
+) %>% fct_count()
+```
+
+But the intention is to use it within mutate.
+
+Example below shows max and min values within each new break.
+
+```{r}
+
+df %>% mutate(libauth_nice_cut = 
+                nice_cut(variable = libauth,
+                         breaks = 5)
+              ) %>% 
+  group_by(libauth_nice_cut) %>% 
+  summarise(min = min(libauth, na.rm = T), max = max(libauth, na.rm = T))
+
+```
+
+Can also use user-defined values. 
+
+```{r}
+
+df %>% mutate(libauth_nice_cut = 
+                nice_cut(variable = libauth,
+                         breaks = 1:5, 
+                         lab_style = 3)
+              ) %>% 
+  count(libauth_nice_cut)
+
+```
+
+
+<br>
+
+## tidyr versions to group numeric data
+
+`cut_width()` breaks vector into chunks of a given width, here 5.
+
+```{r}
+cut_width(sample(1:100, size = 100, replace = T), width = 5) %>% fct_count() %>% print(n=21)
+
+cut_width(zap_missing(df$NatFrEst), width = 7.5) %>% fct_count()
+```
+
+<br>
+
+`cut_interval` n groups of equal range
+
+```{r}
+cut_interval(zap_missing(df$NatFrEst), length = 10) %>% fct_count
+```
+
+<br>
+
+`cut_number` - n groups with approx equal observations in each
+
+```{r}
+cut_number(zap_missing(df$NatFrEst), n = 5) %>% fct_count # equal ish for sure.
+```
+
+## Quantiles
+
+Returns a numeric vector of cut points...
+
+```{r}
+# max val is 999, it includes user NA 
+quantile(df$NatFrEst)
+```
+
+<br>
+
+```{r}
+# With zap_missing, the na_rm argument is required. 
+quantile(zap_missing(df$NatFrEst), na.rm=T)
+```
+
+### Can be matched with cut()
+
+```{r}
+# right = T in the cut() function gives the best result, although % not perfectly 25%. 
+df <- df %>% 
+  mutate(NatFrEst_quarts = 
+    cut(
+      NatFrEst, 
+      breaks = quantile(zap_missing(df$NatFrEst), na.rm=T), 
+      include.lowest = T, 
+      right = T)
+    )
+
+fct_count(na.omit(df$NatFrEst_quarts), prop = T)
+```
+
+### Returning a single quantile
+
+```{r}
+
+# Can return a single value if you needed a 10% cut point... 
+quantile(df$NatFrEst, probs = 0.1) 
+
+# Or very detailed sequences
+quantile(df$NatFrEst, probs = seq(0,1,0.1))
+
+# Now, exclude missing and return value at which we cross 90th percentile
+quantile(zap_missing(df$NatFrEst), probs = 0.9,na.rm =T)
+
+```
+
+#### Deriving a variable with the result
+
+```{r}
+
+# Cut people at the 90th percentile for highest perceptions of benefit cheating
+cut_val <- quantile(zap_missing(df$NatFrEst), probs = 0.9,na.rm=T)
+cut_val
+
+df <- df %>% mutate(NatFrEst_top_10 = 
+    case_when(
+      is.na(zap_missing(NatFrEst)) ~ NA, 
+      NatFrEst > cut_val ~ 1, 
+      TRUE ~ 0), 
+    NatFrEst_top_10 = factor(
+        NatFrEst_top_10, 
+        levels = c(0,1), 
+        labels = c("Less than 75%", "More than 75%")
+      )
+    )
+
+df %>% 
+  count(NatFrEst_top_10) %>% 
+  group_by(!is.na(NatFrEst_top_10)) %>% 
+  mutate(p = n / sum(n))
+
+```
+
+```{r}
+
+df %>% mutate(NatFrEst_90 = 
+     cut(
+       NatFrEst, 
+       breaks = c(0,cut_val,100), 
+       include.lowest = T, 
+       right = T)) %>% 
+  count(NatFrEst_90) 
+
+```
+
+<br>
+
+## Weighted quantiles
+
+```{r}
+wtd.quantile(df$NatFrEst, weights = df$WtFactor) # Again, returns a numeric vector... 
+```
+
+As before can be fed into cut.
+
+```{r}
+# right = T in the cut() function gives the best result, although % not perfectly 25%. 
+df <- df %>% mutate(NatFrEst_quarts_wt = 
+                      cut(NatFrEst, 
+                          breaks = wtd.quantile(zap_missing(df$NatFrEst), na.rm=T), 
+                          include.lowest = T, 
+                          right = T))
+
+df %>% count(NatFrEst_quarts_wt)
+df %>% count(NatFrEst_quarts,NatFrEst_quarts_wt) # They match, weights are weak I guess.
+```
+
+# Look at weights with quantiles...
+
+```{r}
+
+quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% matrix(nrow = 8,ncol = 5)
+
+quantile(df$WtFactor, probs = seq(0,1,0.025)) %>% plot
+
+```
+
+<br>
+
+## Checking edits
+
+### Random sample
+
+```{r}
+
+# Take a random sample...
+df %>% 
+  count(NatFrEst_quarts_wt, NatFrEst) %>% 
+  sample_n(20) %>%
+  print(n=20)
+
+```
+
+### Min - max values
+
+```{r}
+# Look at min and max values
+df %>% group_by(NatFrEst_quarts_wt) %>% 
+  summarise(min = min(NatFrEst, na.rm = T), 
+            max = max(NatFrEst, na.rm = T))
+```

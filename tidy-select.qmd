@@ -1,0 +1,189 @@
+---
+title: "tidy-select"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+## Identifying variabes
+
+```{r}
+# Operations across multiple variables...
+df %>% select(contains("pove")) %>% names
+df %>% select(starts_with("s")) %>% names
+df %>% select(ends_with("s")) %>% names
+df %>% select(contains(c("welfare", "leftrigh", "libauth"))) %>% names
+df %>% select(contains("pov") & !starts_with("much")) %>% names
+```
+
+## Applying changes across multiple varables
+
+```{r}
+# Valid values range from 1 - 5
+df %>% count(welfare2) %>% print(n=100)
+val_labels(df[c("leftrigh", "libauth", "welfare2")])
+```
+
+<br>
+
+```{r}
+
+df <- 
+  df %>% 
+  mutate(
+    # First remove user-defined NA... 
+    across(c(leftrigh, libauth, welfare2), 
+                ~user_na_to_na(.x), 
+                .names = "{.col}_2"), 
+    # Then amend with case_when
+    across(ends_with("_2"), 
+           ~case_when(.x <= 2.5 ~ 1, 
+                      .x < 3.5 ~ 2, 
+                      .x >= 3.5 ~ 3)
+           )
+    )
+
+df %>% count(leftrigh_2, leftrigh) %>% print(n=100)
+```
+
+<br> 
+
+```{r}
+# Not  ideal, as these variable really require different value labels...
+df <- df %>% 
+  mutate(leftrigh_2 = factor(leftrigh_2, 
+                             levels = c(1,2,3), 
+                             labels = c("Leftwing", "Middling", "Rightwing")
+                             )
+         )
+
+df %>% count(leftrigh_2) 
+df %>% count(leftrigh_2, leftrigh) %>% print(n=50)
+```
+
+## Create some test data
+
+```{r}
+# Function to generate labelled_spss vectors with missing values defined
+generate_var <- function(n = 1000) {
+  labelled_spss(
+    sample(
+      c(1:5, 8, 9, NA),
+      size = n,
+      replace = TRUE,
+      prob = c(0.15, 0.2, 0.25, 0.2, 0.1, 0.05, 0.03, 0.02)
+    ),
+    labels = c(
+      "Strongly agree" = 1,
+      "Agree" = 2,
+      "Neither agree nor disagree" = 3,
+      "Disagree" = 4,
+      "Strongly disagree" = 5,
+      "Don't know" = 8,
+      "Refused" = 9
+    ),
+    na_values = c(8, 9) # <- user-defined missing values
+  )
+}
+
+# Create dummy data set
+set.seed(123)
+dummy_data <- tibble(
+  q1 = generate_var(),
+  q2 = generate_var(),
+  q3 = generate_var(),
+  q4 = generate_var(),
+  q5 = generate_var()
+)
+
+# View data
+look_for(dummy_data)
+
+```
+
+<br>
+
+## Combining factor and case_when
+
+Using across to apply edits across multiple variables... 
+
+```{r}
+# Using case_when() and factor()
+dummy_data <- 
+  dummy_data %>% 
+  mutate(across(everything(), 
+                ~factor(
+                  case_when(.x <= 2 ~ 1, 
+                           .x == 3 ~ 2, 
+                           .x >= 4 & .x < 8 ~ 3), 
+                  levels = c(1,2,3), 
+                  labels = c("Agree","Neither","Disagree")),
+                .names = "{.col}_2"
+                )
+         ) 
+
+dummy_data %>% count(q1, q1_2)
+```
+
+<br>
+
+## Recoding variables while labelled()
+
+This is nice as it's quick to type and combines the labels from the old ones into the new ones.
+
+```{r}
+
+# Using recode from labelled()
+dummy_data <- 
+  dummy_data %>% 
+  mutate(across(!contains("_2"), 
+                ~recode(user_na_to_na(.x),
+                  `1` = 1L, 
+                  `2` = 1L, 
+                  `3` = 2L, 
+                  `4` = 3L,
+                  `5` = 3L, 
+                  .combine_value_labels = T
+                  ),
+                .names = "{.col}_2"
+  ))
+   
+
+dummy_data %>% count(q1, q1_2) %>% mutate_if(is.labelled, as_factor, levels = "both")
+```
+
+<br> 
+
+```{r}
+# using fct_recode from forcats...
+dummy_data <- 
+  dummy_data %>% 
+    mutate(across(!contains("_2"), 
+                  ~fct_recode(to_factor(.x), 
+         "Agree" = "Strongly agree", 
+         "Agree" = "Agree", 
+         "Disagree" = "Disagree", 
+         "Disagree" = "Strongly disagree"
+                    ), 
+         .names = "{.col}_2")
+         )
+
+# The result has left the user_NA values in place.  
+# add user_na_to_na = TRUE to to_factor() to remove them.    
+dummy_data %>% count(q1_2)
+dummy_data %>% count(q1, q1_2)
+```
+

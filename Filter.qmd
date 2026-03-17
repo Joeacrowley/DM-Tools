@@ -1,0 +1,53 @@
+---
+title: "Filter"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+<br> 
+
+## Basic filtering
+
+```{r}
+
+df %>% filter(PartyId2 == 1) %>% count(PartyId2)
+
+```
+
+## Filtering conditions using many variables
+
+```{r}
+
+names(df)
+grep("rsex", names(df), ignore.case = T, value = T)
+
+df %>% 
+  filter(if_any(ends_with("Rsex"), ~ . > 1)) %>% # Women only
+  count(RSex)
+
+```
+
+
+```{r}
+
+names(df) # RSex and RAgeCat occur right after each other
+
+df %>% 
+  filter(if_all(RSex:RAgeCat, ~ . > 1)) %>% # Womeny older than 24
+  count(RSex, RAgeCat)
+
+```

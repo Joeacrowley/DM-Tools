@@ -1,0 +1,199 @@
+---
+title: "Numeric variables"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warnings: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+<br>
+
+## Mean of single variables
+
+```{r}
+df <- df %>% mutate(libauth_av = mean(libauth, na.rm = T), 
+                    leftrigh_av = mean(leftrigh, na.rm = T))
+
+df %>% count(libauth_av)
+df %>% count(leftrigh_av)
+```
+
+<br>
+
+## Mean of multiple variables at once (each mean is separate)
+
+### A purrr-style formula
+
+```{r}
+
+df <- df %>% mutate(
+  across(
+    c(welfare2:libauth), 
+    ~mean(.x, na.rm = T), 
+    .names = "{.col}_mean")
+  )
+
+df %>% count(libauth_mean)
+df %>% count(leftrigh_mean)
+df %>% count(welfare2_mean)
+
+```
+
+<br>
+
+## Calculate multiple statistics per variable
+
+### Requires a named list of functions
+
+Adds a column with the mean of `welfare2` and the standard deviation.
+
+```{r}
+
+df %>% select(welfare2) %>% 
+  mutate(
+    across(
+      all_of("welfare2"), 
+      # First part is name for stat column, second is the statistic function
+      list(var_mean = mean, sd = sd), 
+      .names = "{.col}_{.fn}")
+    )
+
+```
+
+## Selecting variables to edit
+
+### Selecting variables based on type
+
+Can select variables to be edited based on variable type as well.
+
+```{r}
+
+df %>% select(Sserial, WtFactor, welfare2, libauth) %>%
+  mutate(
+    across(
+      where(is.double) & !c(Sserial),
+      # Otherwise, name comes out as WtFactor_1 
+      list(rounded = round), 
+      .names = "{.col}_{.fn}"
+      )
+    ) %>% 
+  glimpse
+
+```
+
+<br>
+
+### Selecting based on location
+
+```{r}
+df %>% mutate(across(2, round))
+```
+
+<br>
+
+### Mean across multiple variables
+
+Note variables calculated column-wise.
+
+DOES NOT WORK - this takes the average only of the first variable
+
+```{r}
+df <- df %>% mutate(av_ati = mean(libauth, leftrigh, na.rm = T))
+df %>% count(libauth, leftrigh, av_ati)
+```
+
+Mean of both variables for whole sample
+
+```{r}
+df <- df %>% mutate(av_ati = mean(c(libauth, leftrigh), na.rm = T))
+df %>% count(av_ati)
+```
+
+Mean of both variables allowing tidy select - use c_across
+
+```{r}
+df %>% mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm = T)) %>% count(av_ati2)
+```
+
+<br>
+
+## Row or group-wise operations
+
+### Row-wise variable summaries \[SLOW\]
+
+```{r}
+df %>% 
+  rowwise() %>%
+  mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm = T)) %>% 
+  count(libauth, leftrigh, av_ati2)
+```
+
+<br>
+
+### Quicker row-wise functions...
+
+```{r}
+df <- df %>% mutate(
+  av_ati3 = rowMeans(across(c(libauth, leftrigh)), na.rm = T)
+)
+
+df %>% select(av_ati3, libauth, leftrigh) %>% 
+  sample_n(30) %>% print(n=1000)
+```
+
+<br>
+
+#### Another example
+
+```{r}
+set.seed(123)  # for reproducibility
+
+num_df <- data.frame(
+  var1 = sample(1:100, 50, replace = T),
+  var2 = sample(1:45, 50, replace = T),
+  var3 = sample(1:20, 50, replace = T),
+  var4 = sample(1:75, 50, replace = T),
+  var5 = sample(1:50, 50, replace = T)
+)
+
+num_df <- num_df %>% mutate(
+  
+  # All columns
+  row_total = rowSums(across(everything()), na.rm = T), 
+  
+  # Identify column numbers
+  rows_2_4 = rowSums(across(c(2,4)), na.rm = T), 
+  
+  # Identfy variable with ends_with
+  ends_with_3_5 = rowSums(across(ends_with(c("3","5")))),
+  
+  # With character vector
+  `1_and_2` = rowSums(across(all_of(c("var1", "var2"))))
+  
+)
+
+num_df %>% print()
+```
+
+<br>
+
+### Group wise variable summaries
+
+```{r}
+df %>% 
+  group_by(RSex) %>%
+  mutate(av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))), na.rm = T)) %>% 
+  count(av_ati2) # Remember, without ungroup output is still grouped... 
+```

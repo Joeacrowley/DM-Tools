@@ -6,10 +6,21 @@ book:
   author: "JC"
   chapters:
     - index.qmd
-    - Data used.qmd
+    - Data-used.qmd
+    - Numeric-variables.qmd
+    - Group numeric variables.qmd
+    - case_when.qmd
+    - Factors.qmd
+    - Filter.qmd
+    - Renaming.qmd
+    - tidy-select.qmd
+    - labelled.qmd
+    - Missing-data.qmd
 
 
 format:
   html:
     theme: cosmo
     toc: true
+    page-layout: full
+    css: dense-notes.css

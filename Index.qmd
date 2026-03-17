@@ -5,3 +5,13 @@ editor: visual
 ---
 
 Index to my data management notes in Quarto.
+
+Future topics to cover:
+
+-   date handling,
+
+-   pivoting,
+
+-   handle strings,
+
+-   variable labels.

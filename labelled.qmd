@@ -1,0 +1,581 @@
+---
+title: "labelled"
+format: html
+editor: visual
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+## The labelled package
+
+What is useful?  
+  -  the data dictionary tool... look_for()  
+  -  recode skipmeal with labelled()   
+  -  look_for()  
+
+## look_for()
+
+```{r}
+
+# Simplified
+look_for(df, details = FALSE)
+
+# Full output
+look_for(df)
+
+# Single variable
+look_for(df, "paptype")
+
+# Select particular variables
+look_for(df, c("paptype", "RAgeCat"))
+
+# generate_dictionary() == look_for()
+
+```
+
+<br>
+
+```{r}
+# results as dataframe
+# all levels of variables compressed into single row. 
+look_for(df, c("paptype", "RAgeCat")) %>%
+  convert_list_columns_to_character()
+```
+
+```{r}
+# results as LONG dataframe
+# i.e. each level of variables gets its own row
+look_for(df, c("paptype", "RAgeCat")) %>%
+  lookfor_to_long_format() %>%
+  convert_list_columns_to_character()
+```
+
+<br>
+
+## Create labelled data
+
+```{r}
+v <- labelled(
+  c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA),
+  c(yes = 1, no = 3, "don't know" = 8, refused = 9)
+)
+
+v
+
+#  dplyr style for data frame
+df2 <- tibble(s1 = c("M", "M", "F"), s2 = c(1, 1, 2)) %>%
+  set_variable_labels(s1 = "Sex", s2 = "Question") %>%
+  set_value_labels(s1 = c(Male = "M", Female = "F"), s2 = c(Yes = 1, No = 2))
+
+df2$s2
+
+```
+
+<br>
+
+## Basic labelled data edits 
+
+```{r}
+# Edit a single label
+val_label(v, 8)
+val_label(v, 8) <- "DK"
+v
+```
+
+```{r}
+# val_labels removes unspecified labels
+val_labels(v)
+val_labels(v) <- c("Don't know" = 8)
+v
+```
+
+```{r}
+# Using NULL with val_labels removes all labels and haven-labelled class
+val_labels(v) <- NULL
+v
+```
+
+```{r}
+# We can also remove value labels with...
+remove_val_labels(v)
+```
+
+## More tidyverse style syntax
+
+```{r}
+# Drop all or only one label...
+df2 <- df2 %>% set_value_labels(s1 = NULL) # All of a variable's labels
+df2 <- df2 %>% remove_value_labels(s2 = 2) # removing one value label
+val_labels(df2$s1)
+val_labels(df2$s2)
+```
+
+```{r}
+# Drop multiple labels at once...
+df2 <- df2 %>% remove_value_labels(s2 = 8:9)
+df2$s2
+```
+
+```{r}
+# Within mutate, here dropping user_na and keeping variable labels. 
+df2 %>% mutate(s2 = remove_labels(s2, keep_var_label = T, user_na_to_na = T)) 
+```
+
+```{r}  
+
+# set_value_labels() has the same role as val_labels, over writes all values
+df2 <- df2 %>% set_value_labels(s2 = c(Yes = 1, "Don't know" = 8, Unknown = 9))
+df2$s2
+```
+
+```{r}
+# Whereas add_value_labels updates an existing variable (like val_label)
+df2 <- df2 %>% add_value_labels(s2 = c(No = 2))
+df2$s2
+```
+
+```{r}
+# Reattaching labels restores haven-labelled class
+val_labels(v) <- c(yes = 1, no = 3, refused = 9, "don't know" = 8)
+v # By default labels appear in the order added (8 here is after 9)
+```
+
+## Apply edits across multiple variables
+
+```{r}
+# Editing multiple columns at once... 
+test_df <- data.frame(v1 = 1:3, v2 = c(2, 3, 1), v3 = 3:1)
+test_df 
+```
+
+All variables at once...
+
+```{r}
+val_label(test_df, 1) <- "yes"
+val_labels(test_df) 
+```
+
+Specific variables, reference by name.
+
+```{r}
+val_label(test_df[, c("v1", "v3")], 2) <- "maybe"
+val_label(test_df[, c("v2", "v3")], 3) <- "no"
+val_labels(test_df )
+```
+
+Or use a named list.
+
+```{r}
+test_df2 <- data.frame(v1 = 1:3, v2 = c(2, 3, 1), v3 = 3:1)
+val_labels(test_df2) <- list(v1 = c(no = 3, yes = 1), v2 = c(a = 1, b = 2, c = 3))
+val_labels(test_df2)
+```
+
+<br> 
+
+## Sort labelled data
+
+To sort them by their numeric values...
+
+```{r}
+sort_val_labels(v)
+sort_val_labels(v, decreasing = T) # ascending is default
+```
+
+Or their labels...
+
+```{r}
+sort_val_labels(v, according_to = "l")
+```
+
+### dplyr style
+
+```{r}
+test_df2$v1
+test_df2 <- test_df2 %>% mutate(v1a = sort_val_labels(v1))
+
+# labelling order reversed
+test_df2$v1a 
+
+# but values the same 
+test_df2 %>% count(v1, v1a)
+
+```
+
+## Handle missing data  
+
+### Tag missing values
+
+```{r}
+# Tag number 2 as a missing value (user defined style)
+na_values(test_df$v1) <- (2)
+na_values(test_df$v1)
+test_df$v1 # Still appears as 2
+```
+
+```{r}
+na_range(test_df$v2) <-  c(2, 3)
+
+# Oddly, if missing values set with na_range, they have to be returned with na_range
+na_range(test_df$v2) 
+
+# na_values returns NULL
+na_values(test_df$v2)
+
+# And yet there are most definitely values set to user-missing
+attributes(test_df$v2)
+```
+
+<br>
+
+### Convert to NA
+
+Missing tag to NA
+```{r}
+test_df$v2 <- user_na_to_na(test_df$v2)
+test_df
+```
+
+### Drop missing tag
+
+```{r}
+test_df$v1 <- remove_user_na(test_df$v1)
+test_df$v1
+test_df
+```
+
+A more dplyr syntax style...
+
+```{r}
+test_df$v1
+test_df <- test_df %>% mutate(v1 = set_na_values(v1, c(2,3)))
+attributes(test_df$v1)
+
+test_df <- test_df %>% mutate(v1 = remove_user_na(v1))
+test_df$v1
+attributes(test_df$v1)
+
+```
+
+<br>
+
+## Drop labelled or unlabelled values
+
+
+```{r}
+v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, maybe = 2, no = 3))
+v
+```
+
+Set values with no label to NA.
+
+```{r}
+nolabel_to_na(v) # 9 is now NA, because it has no label
+```
+
+Perhaps more realistic, set only values with a label to NA... 
+
+```{r}
+size <- labelled(c(1.88, 1.62, 1.78, 99, 1.91), c("not measured" = 99))
+size
+val_labels_to_na(size)
+```
+
+### haven-style
+
+There are also the haven function zap_missing() and zap_labelled()
+
+More concise in many cases. 
+
+```{r}
+df %>% count(RAgeCat)
+df %>% count(zap_missing(RAgeCat)) # Remove user_na only, convert to NA. 
+df %>% count(zap_labels(RAgeCat)) # Remove all labels, user_na to NA by defaault
+df %>% count(zap_labels(RAgeCat, user_na = T)) # Retain user_na as valid value
+```
+
+<br>
+
+## labelled version of recode 
+
+This is an extension to the method from dplyr for labelled numeric data. 
+
+Although `recode` is called below with `dplyr`, this functionality is provided by `labelled`.
+
+```{r}
+# Recoding with the labelled package
+x <- labelled(1:3, c(yes = 1, no = 2))
+x
+
+# Code below sets number 3 to be 2, and uses it's label.
+dplyr::recode(x,`3` = 2L, .combine_value_labels = T)
+```
+
+Where combined values have a label, these are combined... 
+
+```{r}
+x <- labelled(1:3, c(yes = 1, no = 2, maybe = 3))
+x
+dplyr::recode(x,`3` = 2L, .combine_value_labels = T)
+```
+
+A slightly realistic example
+
+```{r}
+# Grouping agree / disagree style scale...
+x <- labelled(
+  1:4,
+  c(
+    "strongly agree" = 1,
+    "agree" = 2,
+    "disagree" = 3,
+    "strongly disagree" = 4
+  )
+)
+
+x
+```
+
+Then, merge groups labels, .sep allows user defined break.
+
+```{r}
+dplyr::recode(
+  x,
+  `1` = 1L,
+  `2` = 1L,
+  `3` = 2L,
+  `4` = 2L,
+  .combine_value_labels = TRUE, 
+  .sep = " or "
+)
+```
+
+Here recode drops value labels, so values are combined but labels dropped. Useful where combining labels is not helpful. 
+
+```{r}
+dplyr::recode(
+  x,
+  `1` = 1L,
+  `2` = 1L,
+  `3` = 2L,
+  `4` = 2L,
+  .keep_value_labels = F,
+)
+```
+
+### tidyr style labelled recode
+
+Create a test data frame for tidyr style recoding
+```{r}
+test_df <- test_df %>% set_value_labels(v1 = c(Yes = 1, No = 2, Maybe = 3))
+test_df
+```
+
+Application within mutate()
+
+```{r}
+test_df$v1
+test_df <- test_df %>% 
+  mutate(v1a = recode(v1, 
+                      `1` = 1L, 
+                      `2` = 1L, 
+                      .combine_value_labels = TRUE)
+         )
+
+test_df$v1a
+test_df %>% count(as_factor(v1), as_factor(v1a)) # Review result
+```
+
+<br>
+
+## Convert labelled data to factors  
+
+Application of to_factor() - convert labelled data to factors
+```{r}
+v <- labelled(c(1, 2, 2, 2, 3, 9, 1, 3, 2, NA), c(yes = 1, no = 3, maybe = 2))
+v
+```
+
+The labelled() to_factor() function seems similar to as_factor()
+```{r}
+v %>% to_factor() %>% levels()
+v %>% as_factor() %>% levels()
+```
+
+Options...
+
+```{r}
+v
+to_factor(v) # labels as levels
+to_factor(v, levels = "v") # values not labels
+to_factor(v, levels ="p") # both
+```
+
+
+### Missing data
+```{r}
+to_factor(v, nolabel_to_na = T) # unalabelled values to NA
+```
+
+### Factor order
+
+```{r}
+to_factor(v, sort_levels = "n") %>% levels() # Order is the order labels were defined in
+to_factor(v, sort_levels = "v") %>% levels() # Order by values 
+to_factor(v, sort_levels = "l") %>% levels() # Order by labels 
+```
+
+## Convert factors to labelled data
+
+Back to labelled (perhaps for easy edits?).
+
+Note values now 1:4, not 1, 2, 3 and 9. 
+
+1:4 is what as.numeric would return when applied to this factor.
+
+```{r}
+f <- to_factor(v)
+to_labelled(f) 
+```
+
+<br> 
+
+## Applied examples 
+
+### skipmeals
+
+Example of skipmeals - simplify into two groups, provide my own new labels. 
+
+Could just factor() really. 
+
+```{r}
+df %>% count(skipmeal)
+
+df <- df %>% 
+  mutate(skipmeal2 = case_when(
+    skipmeal %in% 1:4 ~ 1, 
+    skipmeal %in% 5:7 ~ 2)) %>% 
+  set_value_labels(skipmeal2 = c("Less often than once a week" = 1, 
+                                 "Once a week or more" = 2))
+
+df %>% count(skipmeal2, skipmeal)
+df %>% count(to_factor(skipmeal2))
+
+```
+
+### Edit labels 
+
+This code edits the labels on the libertarian-authoritatian scale, then drops user missing values.
+
+```{r}
+df %>% count(libauth)
+val_labels(df$libauth)
+
+df <- df %>% 
+  mutate(libauth2 = add_value_labels(libauth, c("Libertarian" = 1, "Authoritarian" = 5)), 
+         libauth2 = user_na_to_na(libauth2))
+         
+val_labels(df$libauth2)
+df %>% count(libauth2) %>% print(n=100)
+```
+
+### Combine levels with recode
+
+This has to be done exactly right.
+
+```{r}
+# Review data
+freq(as_factor(df$incdiffs, levels = "both")) 
+val_labels(df$incdiffs)
+```
+
+This first example shows how it can go wrong. 
+
+The 'agree' and 'strongly agree' should be combined, instead both become 'strongly agree'.
+
+While the 'other' responses are combined into 9L - 'Not answered'. 
+
+Not very helpful
+
+```{r}
+df <- df %>% 
+  mutate(incdiffs2 = recode(incdiffs, 
+                      `2` = 1L, 
+                      `1` = 1L, 
+                      `3` = 3L,
+                      `4` = 5L,
+                      `5` = 5L, 
+                      .default = 9L, 
+                      # .combine_value_labels = T
+                      ))
+
+val_labels(df$incdiffs2) # value labels themselves unchanged
+
+# But numeric values in the data have been recoded
+df %>% count(as_factor(incdiffs2), as_factor(incdiffs))
+```
+
+Alterntaively we can set the `.combine_value_labels` argument, but this code won't run. 
+
+The issue is that df$incdiffs contains user-defined NA values.
+
+```{r, error=T}
+attributes(df$incdiffs) # values -1, 8 and 9 are user tagged NA. 
+class(df$incdiffs)
+
+df <- df %>% 
+  mutate(incdiffs2 = recode(incdiffs, 
+                            `2` = 1L, 
+                            `1` = 1L, 
+                            `3` = 2L,
+                            `4` = 3L,
+                            `5` = 3L,
+                            .combine_value_labels = T
+  ))
+
+```
+
+
+Once we remove user defined NA, the class changes
+
+```{r}
+df$incdiffs %>% class
+user_na_to_na(df$incdiffs) %>% class # no longer has haven_labelled_spss
+```
+
+<br>
+
+This interim step (removing user NA values and the haven_labelled_spss class) needs to happen before recoding.
+
+Now these values in the data are changed and new combined labels are also added.
+
+```{r}
+# In tidyr style, collapsing variable labels...
+df <- df %>% 
+  mutate(incdiffs2 = user_na_to_na(incdiffs),
+         incdiffs2 = recode(incdiffs2, 
+                            `1` = 1L, 
+                            `2` = 1L,
+                            `3` = 2L,
+                            `4` = 3L,
+                            `5` = 3L,
+                            .combine_value_labels = T)) 
+
+df %>% 
+  select(incdiffs, incdiffs2) %>% 
+  mutate_all(~to_factor(.x, levels ="p")) %>% 
+  count(incdiffs, incdiffs2)
+```

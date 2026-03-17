@@ -1,0 +1,184 @@
+---
+title: "Factors"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+## fct_collapse
+
+```{r}
+# Example - opions about benefits, simplifying dole2
+attributes(df$Married)$label
+
+# factorise opinions about benefits. 
+df <- df %>% mutate(Married2 = as_factor(Married))
+
+df %>% count(Married2)
+levels(df$Married2)
+
+# Collapse levels of a factor
+df <- df %>% 
+  mutate(Married3 = fct_collapse(Married2, 
+      "Single" = c("Separated/divorced", "Widowed", "Never married"),
+      ))
+
+df %>% count(Married3)
+df %>% count(Married3, Married2)
+
+ # Label needs updating, no longer makes sense
+attributes(df$Married3)$label
+
+```
+
+<br>
+
+Group other levels with `other_level`.
+
+```{r}
+
+df %>% count(as_factor(RAgeCat, levels = "both"))
+
+# Other level to provide summary level for unused levels. 
+df <- df %>% mutate(age3 = fct_collapse(as_factor(RAgeCat), 
+    "DK/Refused/Not answered" = "DK/Refused/Not answered", 
+    "Youngish" = c("18-24", "25-34", "35-44"), 
+    other_level = "Older"
+    )
+)
+
+df %>% count(age3)
+df %>% count(age3, as_factor(RAgeCat))
+
+```
+
+<br>
+
+## fct_recode
+
+```{r}
+
+# Recode factor levels
+df <- df %>% 
+  mutate(Married3 = fct_recode(Married2, 
+     "Separated, divorced, widowed" = "Separated/divorced", 
+     "Separated, divorced, widowed" = "Widowed"
+     ))
+
+df %>% count(Married3)
+df %>% count(Married3, Married2)
+
+```
+
+<br>
+
+### fct_recode with an external vector
+
+```{r}
+
+# First convert haven labelled varibale to a factor
+df <- df %>% mutate(SMNews_f = as_factor(SMNews))
+df %>% count(SMNews_f)
+
+# Define levels to recode...
+to_recode <- c(Often = "Several times a day", 
+               Often = "Every day", 
+               Often = "Several times a week", 
+               `Not often` = "Never", 
+               `Not often` = "Less often than once a month", 
+               `Not often` = "Once a month")
+
+df <- df %>% mutate(
+  # Recode factor levels in 'to_recode'
+  SMNews_f2 = fct_recode(SMNews_f, !!!to_recode)
+  )
+
+df %>% count(SMNews_f2, SMNews_f)
+
+```
+
+<br>
+
+## Manage missing data in factors
+
+### Using fct_recode
+
+```{r}
+# Or, setting levels to NA can be done in fct_recode
+df %>% count(as_factor(Married, levels = "both"))
+
+df %>% mutate(Married = fct_recode(
+    as_factor(Married), 
+    NULL = "No information")
+    ) %>% 
+  count(Married)
+```
+
+### Remove user missing data in haven labelled data
+
+```{r}
+attributes(df$Spend1)
+df %>% count(Spend1)
+
+# Remove user NA tagged labels with zap_missing()
+df <- df %>% mutate(Spend1_f = as_factor(zap_missing(Spend1)))
+df %>% count(Spend1_f) %>% print(n=12)
+var_label(df$Spend1_f) # label retained
+
+```
+
+### Baffling fct functions
+
+Set `NA` values to a valid factor level.
+
+```{r}
+# Make NA a valid level
+df %>% count(Spend1_f)
+df <- df %>% mutate(Spend1_f = fct_na_value_to_level(Spend1_f, level = "No priority known")) 
+df %>% count(Spend1_f)
+```
+
+Set a particular factor level to `NA`.
+
+```{r}
+# Move levels to NA
+df <- df %>% mutate(Spend1_f = fct_na_level_to_value(Spend1_f, extra_levels = "No priority known"))
+df %>% count(Spend1_f)
+```
+
+<br>
+
+### Combine factor levels
+
+```{r}
+
+fct_cross(as_factor(df$RSex), as_factor(df$RAgeCat)) %>% fct_count(., prop = T) 
+
+df <- df %>% mutate(age_sex = fct_cross(as_factor(RSex), as_factor(RAgeCat)))
+df %>% count(age_sex)
+
+```
+
+### Drop empty levels
+
+```{r}
+
+# drop unused levels - fct_drop
+df$TaxSpend %>% as_factor() %>% fct_count()
+
+df$TaxSpend %>% as_factor() %>% fct_drop() %>% fct_count()
+
+```

@@ -1,0 +1,82 @@
+---
+title: "Missing data"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(haven) 
+library(tidyverse) 
+library(clean) 
+library(labelled) 
+library(Hmisc) 
+
+df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+
+```
+
+## drop_na
+
+I like this function, it's not complicated or anything but it works nicely.
+
+It retains `complete` rows. 
+
+```{r}
+
+df %>% nrow 
+df %>% drop_na %>% nrow # By default, user NA values are not dropped
+df %>% remove_user_na() %>% drop_na() %>% nrow() # Valid rows the same after these values have their missing tag dropped
+df %>% user_na_to_na() %>% drop_na() %>% nrow() # But increases hugely when they are set to `NA`.
+
+df %>% count(RAgeCat)
+df %>% 
+  mutate(RAgeCat = user_na_to_na(RAgeCat)) %>%
+  drop_na(RAgeCat) %>% 
+  nrow
+
+```
+
+## coalesce
+
+From help: 
+
+Given a set of vectors, coalesce() finds the first non-missing value at each position. 
+
+It's inspired by the SQL COALESCE function which does the same thing for SQL NULLs.
+
+```{r}
+# BSA is not great for this... so creating a test dataset
+coalesce_data <- 
+  data_frame(
+  v1 = sample(c(1:10, NA), 100, replace = T), 
+  v2 = sample(c(1:10, NA), 100, replace = T),
+  v3 = sample(c(1:10, NA), 100, replace = T)
+)
+
+coalesce_data 
+```
+
+Replace NA with the first non-missing value, going in order...
+
+```{r}
+coalesce_data %>% 
+  mutate(
+    non_miss = coalesce(v1,v2,v3),
+    non_miss_reverse = coalesce(v3,v2,v1)
+  ) %>% 
+  print(n=30)
+```
+
+A more tidy-select sort of approach
+
+```{r}
+coalesce_data %>% 
+  mutate(
+    non_miss = reduce(across(everything()), coalesce)
+    ) %>% 
+  print(n=30)
+```
+

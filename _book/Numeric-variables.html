@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Numeric variables – Data Management in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Group numeric variables.html" rel="next">
+<link href="./Data-used.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="dense-notes.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Numeric-variables.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Management in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data management in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-used.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Numeric-variables.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Group numeric variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./case_when.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">case_when</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Filter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Renaming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Renaming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">tidy-select</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labelled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">labelled</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#mean-of-single-variables" id="toc-mean-of-single-variables" class="nav-link active" data-scroll-target="#mean-of-single-variables"><span class="header-section-number">3.1</span> Mean of single variables</a></li>
+  <li><a href="#mean-of-multiple-variables-at-once-each-mean-is-separate" id="toc-mean-of-multiple-variables-at-once-each-mean-is-separate" class="nav-link" data-scroll-target="#mean-of-multiple-variables-at-once-each-mean-is-separate"><span class="header-section-number">3.2</span> Mean of multiple variables at once (each mean is separate)</a>
+  <ul class="collapse">
+  <li><a href="#a-purrr-style-formula" id="toc-a-purrr-style-formula" class="nav-link" data-scroll-target="#a-purrr-style-formula"><span class="header-section-number">3.2.1</span> A purrr-style formula</a></li>
+  </ul></li>
+  <li><a href="#calculate-multiple-statistics-per-variable" id="toc-calculate-multiple-statistics-per-variable" class="nav-link" data-scroll-target="#calculate-multiple-statistics-per-variable"><span class="header-section-number">3.3</span> Calculate multiple statistics per variable</a>
+  <ul class="collapse">
+  <li><a href="#requires-a-named-list-of-functions" id="toc-requires-a-named-list-of-functions" class="nav-link" data-scroll-target="#requires-a-named-list-of-functions"><span class="header-section-number">3.3.1</span> Requires a named list of functions</a></li>
+  </ul></li>
+  <li><a href="#selecting-variables-to-edit" id="toc-selecting-variables-to-edit" class="nav-link" data-scroll-target="#selecting-variables-to-edit"><span class="header-section-number">3.4</span> Selecting variables to edit</a>
+  <ul class="collapse">
+  <li><a href="#selecting-variables-based-on-type" id="toc-selecting-variables-based-on-type" class="nav-link" data-scroll-target="#selecting-variables-based-on-type"><span class="header-section-number">3.4.1</span> Selecting variables based on type</a></li>
+  <li><a href="#selecting-based-on-location" id="toc-selecting-based-on-location" class="nav-link" data-scroll-target="#selecting-based-on-location"><span class="header-section-number">3.4.2</span> Selecting based on location</a></li>
+  <li><a href="#mean-across-multiple-variables" id="toc-mean-across-multiple-variables" class="nav-link" data-scroll-target="#mean-across-multiple-variables"><span class="header-section-number">3.4.3</span> Mean across multiple variables</a></li>
+  </ul></li>
+  <li><a href="#row-or-group-wise-operations" id="toc-row-or-group-wise-operations" class="nav-link" data-scroll-target="#row-or-group-wise-operations"><span class="header-section-number">3.5</span> Row or group-wise operations</a>
+  <ul class="collapse">
+  <li><a href="#row-wise-variable-summaries-slow" id="toc-row-wise-variable-summaries-slow" class="nav-link" data-scroll-target="#row-wise-variable-summaries-slow"><span class="header-section-number">3.5.1</span> Row-wise variable summaries [SLOW]</a></li>
+  <li><a href="#quicker-row-wise-functions" id="toc-quicker-row-wise-functions" class="nav-link" data-scroll-target="#quicker-row-wise-functions"><span class="header-section-number">3.5.2</span> Quicker row-wise functions…</a></li>
+  <li><a href="#group-wise-variable-summaries" id="toc-group-wise-variable-summaries" class="nav-link" data-scroll-target="#group-wise-variable-summaries"><span class="header-section-number">3.5.3</span> Group wise variable summaries</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><br></p>
+<section id="mean-of-single-variables" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="mean-of-single-variables"><span class="header-section-number">3.1</span> Mean of single variables</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_av =</span> <span class="fu">mean</span>(libauth, <span class="at">na.rm =</span> T), </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">leftrigh_av =</span> <span class="fu">mean</span>(leftrigh, <span class="at">na.rm =</span> T))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_av)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  libauth_av     n
+       &lt;dbl&gt; &lt;int&gt;
+1       2.80  3224</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(leftrigh_av)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  leftrigh_av     n
+        &lt;dbl&gt; &lt;int&gt;
+1        2.01  3224</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="mean-of-multiple-variables-at-once-each-mean-is-separate" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="mean-of-multiple-variables-at-once-each-mean-is-separate"><span class="header-section-number">3.2</span> Mean of multiple variables at once (each mean is separate)</h2>
+<section id="a-purrr-style-formula" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="a-purrr-style-formula"><span class="header-section-number">3.2.1</span> A purrr-style formula</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">across</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(welfare2<span class="sc">:</span>libauth), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> T), </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">"{.col}_mean"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  libauth_mean     n
+         &lt;dbl&gt; &lt;int&gt;
+1         2.80  3224</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(leftrigh_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  leftrigh_mean     n
+          &lt;dbl&gt; &lt;int&gt;
+1          2.01  3224</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(welfare2_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  welfare2_mean     n
+          &lt;dbl&gt; &lt;int&gt;
+1          2.16  3224</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="calculate-multiple-statistics-per-variable" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="calculate-multiple-statistics-per-variable"><span class="header-section-number">3.3</span> Calculate multiple statistics per variable</h2>
+<section id="requires-a-named-list-of-functions" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="requires-a-named-list-of-functions"><span class="header-section-number">3.3.1</span> Requires a named list of functions</h3>
+<p>Adds a column with the mean of <code>welfare2</code> and the standard deviation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(welfare2) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_of</span>(<span class="st">"welfare2"</span>), </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># First part is name for stat column, second is the statistic function</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">var_mean =</span> mean, <span class="at">sd =</span> sd), </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,224 × 3
+   welfare2                welfare2_var_mean welfare2_sd
+   &lt;dbl+lbl&gt;                           &lt;dbl&gt;       &lt;dbl&gt;
+ 1 2.5                                  2.16        1.79
+ 2 3.12                                 2.16        1.79
+ 3 3.12                                 2.16        1.79
+ 4 2.25                                 2.16        1.79
+ 5 3.38                                 2.16        1.79
+ 6 2.88                                 2.16        1.79
+ 7 2                                    2.16        1.79
+ 8 2.75                                 2.16        1.79
+ 9 1.25                                 2.16        1.79
+10 9 (NA) [Missing values]              2.16        1.79
+# ℹ 3,214 more rows</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="selecting-variables-to-edit" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="selecting-variables-to-edit"><span class="header-section-number">3.4</span> Selecting variables to edit</h2>
+<section id="selecting-variables-based-on-type" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="selecting-variables-based-on-type"><span class="header-section-number">3.4.1</span> Selecting variables based on type</h3>
+<p>Can select variables to be edited based on variable type as well.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(Sserial, WtFactor, welfare2, libauth) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">where</span>(is.double) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">c</span>(Sserial),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Otherwise, name comes out as WtFactor_1 </span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">rounded =</span> round), </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  glimpse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,224
+Columns: 7
+$ Sserial          &lt;dbl+lbl&gt; 310001, 310002, 310003, 310004, 310005, 310006, 3…
+$ WtFactor         &lt;dbl+lbl&gt; 0.9119594, 0.4439626, 1.2182741, 1.5839969, 0.474…
+$ welfare2         &lt;dbl+lbl&gt;  2.500000,  3.125000,  3.125000,  2.250000,  3.37…
+$ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  4.66…
+$ WtFactor_rounded &lt;dbl&gt; 1, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 1,…
+$ welfare2_rounded &lt;dbl&gt; 2, 3, 3, 2, 3, 3, 2, 3, 1, 9, 3, 2, 9, 2, 3, 3, 4, 3,…
+$ libauth_rounded  &lt;dbl&gt; 4, 4, 4, 2, 5, 4, 2, 3, 2, 4, 4, 2, 9, 2, 3, 4, 4, 3,…</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="selecting-based-on-location" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="selecting-based-on-location"><span class="header-section-number">3.4.2</span> Selecting based on location</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">2</span>, round))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,224 × 31
+   Sserial   WtFactor RSex       RAgeCat   eq_inc_quintiles          RClassGp   
+   &lt;dbl+lbl&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;                 &lt;dbl+lbl&gt;  
+ 1 310001           1 2 [Female] 6 [60-64] -1 (NA) [Item not applic… 1 [Manager…
+ 2 310002           0 2 [Female] 3 [35-44]  5 [Highest quintile - M… 1 [Manager…
+ 3 310003           1 2 [Female] 4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
+ 4 310004           2 1 [Male]   2 [25-34]  4 [4th quintile - More … 1 [Manager…
+ 5 310005           0 1 [Male]   6 [60-64] -1 (NA) [Item not applic… 5 [Semi-ro…
+ 6 310006           1 1 [Male]   4 [45-54]  1 [Lowest quintile - Up… 3 [Employe…
+ 7 310007           1 1 [Male]   2 [25-34]  5 [Highest quintile - M… 1 [Manager…
+ 8 310008           1 2 [Female] 4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
+ 9 310009           1 1 [Male]   4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
+10 310010           1 1 [Male]   1 [18-24] -1 (NA) [Item not applic… 5 [Semi-ro…
+# ℹ 3,214 more rows
+# ℹ 25 more variables: HEdQual3 &lt;dbl+lbl&gt;, Married &lt;dbl+lbl&gt;,
+#   ChildHh &lt;dbl+lbl&gt;, skipmeal &lt;dbl+lbl&gt;, paptype &lt;dbl+lbl&gt;, SMNews &lt;dbl+lbl&gt;,
+#   PartyId2 &lt;dbl+lbl&gt;, Politics &lt;dbl+lbl&gt;, SocTrust &lt;dbl+lbl&gt;,
+#   Spend1 &lt;dbl+lbl&gt;, Dole &lt;dbl+lbl&gt;, TaxSpend &lt;dbl+lbl&gt;, MuchPov &lt;dbl+lbl&gt;,
+#   Poverty1 &lt;dbl+lbl&gt;, Poverty2 &lt;dbl+lbl&gt;, NatFrEst &lt;dbl+lbl&gt;,
+#   incdiffs &lt;dbl+lbl&gt;, welfare2 &lt;dbl+lbl&gt;, leftrigh &lt;dbl+lbl&gt;, …</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="mean-across-multiple-variables" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="mean-across-multiple-variables"><span class="header-section-number">3.4.3</span> Mean across multiple variables</h3>
+<p>Note variables calculated column-wise.</p>
+<p>DOES NOT WORK - this takes the average only of the first variable</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati =</span> <span class="fu">mean</span>(libauth, leftrigh, <span class="at">na.rm =</span> T))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth, leftrigh, av_ati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 398 × 4
+   libauth                                        leftrigh          av_ati     n
+   &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;          &lt;dbl&gt; &lt;int&gt;
+ 1 -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, d…   2.80   588
+ 2  1 [libertarian]                                1 [left]           2.80     1
+ 3  1 [libertarian]                                1.6                2.80     1
+ 4  1 [libertarian]                                5 [right]          2.80     1
+ 5  1.17                                           1.4                2.80     1
+ 6  1.17                                           1.8                2.80     2
+ 7  1.33                                           1 [left]           2.80     1
+ 8  1.33                                           3.2                2.80     1
+ 9  1.5                                            1 [left]           2.80     1
+10  1.5                                            1.4                2.80     2
+# ℹ 388 more rows</code></pre>
+</div>
+</div>
+<p>Mean of both variables for whole sample</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati =</span> <span class="fu">mean</span>(<span class="fu">c</span>(libauth, leftrigh), <span class="at">na.rm =</span> T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `av_ati = mean(c(libauth, leftrigh), na.rm = T)`.
+Caused by warning:
+! `..1` and `..2` have conflicting value labels.
+ℹ Labels for these values will be taken from `..1`.
+✖ Values: 1 and 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  av_ati     n
+   &lt;dbl&gt; &lt;int&gt;
+1   2.40  3224</code></pre>
+</div>
+</div>
+<p>Mean of both variables allowing tidy select - use c_across</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
+  na.rm = T)`.
+Caused by warning:
+! `libauth` and `leftrigh` have conflicting value labels.
+ℹ Labels for these values will be taken from `libauth`.
+✖ Values: 1 and 5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  av_ati2     n
+    &lt;dbl&gt; &lt;int&gt;
+1    2.40  3224</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="row-or-group-wise-operations" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="row-or-group-wise-operations"><span class="header-section-number">3.5</span> Row or group-wise operations</h2>
+<section id="row-wise-variable-summaries-slow" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="row-wise-variable-summaries-slow"><span class="header-section-number">3.5.1</span> Row-wise variable summaries [SLOW]</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(libauth, leftrigh, av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 3224 warnings in `mutate()`.
+The first warning was:
+ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
+  na.rm = T)`.
+ℹ In row 1.
+Caused by warning:
+! `libauth` and `leftrigh` have conflicting value labels.
+ℹ Labels for these values will be taken from `libauth`.
+✖ Values: 1 and 5
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 3223 remaining warnings.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 398 × 4
+# Rowwise: 
+   libauth                                        leftrigh         av_ati2     n
+   &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;          &lt;dbl&gt; &lt;int&gt;
+ 1 -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, …   -1      588
+ 2  1 [libertarian]                                1 [left]           1        1
+ 3  1 [libertarian]                                1.6                1.3      1
+ 4  1 [libertarian]                                5 [right]          3        1
+ 5  1.17                                           1.4                1.28     1
+ 6  1.17                                           1.8                1.48     2
+ 7  1.33                                           1 [left]           1.17     1
+ 8  1.33                                           3.2                2.27     1
+ 9  1.5                                            1 [left]           1.25     1
+10  1.5                                            1.4                1.45     2
+# ℹ 388 more rows</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="quicker-row-wise-functions" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="quicker-row-wise-functions"><span class="header-section-number">3.5.2</span> Quicker row-wise functions…</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">av_ati3 =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(libauth, leftrigh)), <span class="at">na.rm =</span> T)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(av_ati3, libauth, leftrigh) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 3
+   av_ati3 libauth                                        leftrigh              
+     &lt;dbl&gt; &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;             
+ 1    3.53  4.67                                           2.4                  
+ 2   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
+ 3    3.5   4                                              3                    
+ 4    4     5 [authoritarian]                              3                    
+ 5    3.22  3.83                                           2.6                  
+ 6    2.8   3                                              2.6                  
+ 7    3.17  3.33                                           3                    
+ 8    2.9   4                                              1.8                  
+ 9    3.13  2.67                                           3.6                  
+10    2.75  4.5                                            1 [left]             
+11   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
+12   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
+13    3.1   4                                              2.2                  
+14    2.57  3.33                                           1.8                  
+15    2.72  2.83                                           2.6                  
+16    2.93  3.67                                           2.2                  
+17    2.4   3                                              1.8                  
+18    3.17  3.33                                           3                    
+19    1.75  1.5                                            2                    
+20    2.85  3.5                                            2.2                  
+21    3.33  2.67                                           4                    
+22    3     3                                              3                    
+23    3     4                                              2                    
+24    3.22  3.83                                           2.6                  
+25    3.67  3.33                                           4                    
+26    3.53  3.67                                           3.4                  
+27    2.97  3.33                                           2.6                  
+28    3.52  4.83                                           2.2                  
+29   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
+30    3.05  3.5                                            2.6                  </code></pre>
+</div>
+</div>
+<p><br></p>
+<section id="another-example" class="level4" data-number="3.5.2.1">
+<h4 data-number="3.5.2.1" class="anchored" data-anchor-id="another-example"><span class="header-section-number">3.5.2.1</span> Another example</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">45</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var3 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var4 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var5 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="at">replace =</span> T)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> num_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># All columns</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_total =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">everything</span>()), <span class="at">na.rm =</span> T), </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identify column numbers</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">rows_2_4 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)), <span class="at">na.rm =</span> T), </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identfy variable with ends_with</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ends_with_3_5 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="fu">c</span>(<span class="st">"3"</span>,<span class="st">"5"</span>)))),</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># With character vector</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">1_and_2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>))))</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>num_df <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   var1 var2 var3 var4 var5 row_total rows_2_4 ends_with_3_5 1_and_2
+1    31   12   18   67   20       148       79            38      43
+2    79   13   10   36   24       162       49            34      92
+3    51   18   12   52    9       142       70            21      69
+4    14   33    2   22   41       112       55            43      47
+5    67   27   10   49   37       190       76            47      94
+6    42   25   12   42   23       144       67            35      67
+7    50   38   20   59   14       181       97            34      88
+8    43   21   14   11   46       135       32            60      64
+9    14   15   17   55    6       107       70            23      29
+10   25   41   14    8   27       115       49            41      66
+11   90   26    3   46    1       166       72             4     116
+12   91   31    8   66   26       222       97            34     122
+13   69   16   14   46   42       187       62            56      85
+14   91   30   19   70   49       259      100            68     121
+15   57    6   15   72   17       167       78            32      63
+16   92   43   17   44   29       225       87            46     135
+17    9    8   11   32   26        86       40            37      17
+18   93   22    7   36   27       185       58            34     115
+19   99   22   15   45   21       202       67            36     121
+20   72   39    6   14    7       138       53            13     111
+21   26   31   14   16   26       113       47            40      57
+22    7   17    7   33   41       105       50            48      24
+23   42   34   10   40   20       146       74            30      76
+24    9    4    5   40    6        64       44            11      13
+25   83   13    6   10   50       162       23            56      96
+26   36    5   16   72   30       159       77            46      41
+27   78   25   11    9   31       154       34            42     103
+28   81   22    4    7   29       143       29            33     103
+29   43   25   12    7   17       104       32            29      68
+30   76   32   14   58   37       217       90            51     108
+31   15   25   19   61   20       140       86            39      40
+32   32   23    7   74   35       171       97            42      55
+33    7   35    9   24   25       100       59            34      42
+34    9   40    7   63   46       165      103            53      49
+35   41   30    2   54   33       160       84            35      71
+36   74   12   16   23    2       127       35            18      86
+37   23   31   13   26    4        97       57            17      54
+38   27   30   19   33   10       119       63            29      57
+39   60   35   20   57   33       205       92            53      95
+40   53   14   15   29    5       116       43            20      67
+41    7   29    7   10   25        78       39            32      36
+42   53   32    4   53    8       150       85            12      85
+43   27    7    1   54   25       114       61            26      34
+44   96    3    8   11   21       139       14            29      99
+45   38   23   20   25   45       151       48            65      61
+46   89   15   16   52   18       190       67            34     104
+47   34   21   11   26   42       134       47            53      55
+48   93   37   16    7   31       184       44            47     130
+49   69    8   20   25    6       128       33            26      77
+50   72   10    8   32    7       129       42            15      82</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="group-wise-variable-summaries" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="group-wise-variable-summaries"><span class="header-section-number">3.5.3</span> Group wise variable summaries</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RSex) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(av_ati2) <span class="co"># Remember, without ungroup output is still grouped... </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 2 warnings in `mutate()`.
+The first warning was:
+ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
+  na.rm = T)`.
+ℹ In group 1: `RSex = 1`.
+Caused by warning:
+! `libauth` and `leftrigh` have conflicting value labels.
+ℹ Labels for these values will be taken from `libauth`.
+✖ Values: 1 and 5
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+# Groups:   RSex [2]
+  RSex       av_ati2     n
+  &lt;dbl+lbl&gt;    &lt;dbl&gt; &lt;int&gt;
+1 1 [Male]      2.38  1454
+2 2 [Female]    2.42  1770</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./Data-used.html" class="pagination-link" aria-label="Data being used">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Group numeric variables.html" class="pagination-link" aria-label="Group numeric variables">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
