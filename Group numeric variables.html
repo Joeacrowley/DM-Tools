@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Group numeric variables – Data Management in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./case_when.html" rel="next">
+<link href="./Numeric-variables.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="dense-notes.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Group numeric variables.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Management in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data management in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-used.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Numeric-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Group numeric variables.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./case_when.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">case_when</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Filter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Renaming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Renaming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">tidy-select</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labelled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">labelled</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#benefit-claimants" id="toc-benefit-claimants" class="nav-link active" data-scroll-target="#benefit-claimants"><span class="header-section-number">4.1</span> Benefit claimants</a></li>
+  <li><a href="#ntile" id="toc-ntile" class="nav-link" data-scroll-target="#ntile"><span class="header-section-number">4.2</span> ntile()</a>
+  <ul class="collapse">
+  <li><a href="#refining-ntile" id="toc-refining-ntile" class="nav-link" data-scroll-target="#refining-ntile"><span class="header-section-number">4.2.1</span> Refining ntile</a></li>
+  </ul></li>
+  <li><a href="#cut" id="toc-cut" class="nav-link" data-scroll-target="#cut"><span class="header-section-number">4.3</span> cut()</a>
+  <ul class="collapse">
+  <li><a href="#sequence-of-break-points" id="toc-sequence-of-break-points" class="nav-link" data-scroll-target="#sequence-of-break-points"><span class="header-section-number">4.3.1</span> Sequence of break points</a></li>
+  <li><a href="#cut-with-a-preset-number-of-groups" id="toc-cut-with-a-preset-number-of-groups" class="nav-link" data-scroll-target="#cut-with-a-preset-number-of-groups"><span class="header-section-number">4.3.2</span> cut() with a preset number of groups</a></li>
+  <li><a href="#nice-cut" id="toc-nice-cut" class="nav-link" data-scroll-target="#nice-cut"><span class="header-section-number">4.3.3</span> Nice cut</a></li>
+  </ul></li>
+  <li><a href="#tidyr-versions-to-group-numeric-data" id="toc-tidyr-versions-to-group-numeric-data" class="nav-link" data-scroll-target="#tidyr-versions-to-group-numeric-data"><span class="header-section-number">4.4</span> tidyr versions to group numeric data</a></li>
+  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles"><span class="header-section-number">4.5</span> Quantiles</a>
+  <ul class="collapse">
+  <li><a href="#can-be-matched-with-cut" id="toc-can-be-matched-with-cut" class="nav-link" data-scroll-target="#can-be-matched-with-cut"><span class="header-section-number">4.5.1</span> Can be matched with cut()</a></li>
+  <li><a href="#returning-a-single-quantile" id="toc-returning-a-single-quantile" class="nav-link" data-scroll-target="#returning-a-single-quantile"><span class="header-section-number">4.5.2</span> Returning a single quantile</a></li>
+  </ul></li>
+  <li><a href="#weighted-quantiles" id="toc-weighted-quantiles" class="nav-link" data-scroll-target="#weighted-quantiles"><span class="header-section-number">4.6</span> Weighted quantiles</a></li>
+  <li><a href="#look-at-weights-with-quantiles" id="toc-look-at-weights-with-quantiles" class="nav-link" data-scroll-target="#look-at-weights-with-quantiles"><span class="header-section-number">5</span> Look at weights with quantiles…</a>
+  <ul class="collapse">
+  <li><a href="#checking-edits" id="toc-checking-edits" class="nav-link" data-scroll-target="#checking-edits"><span class="header-section-number">5.1</span> Checking edits</a>
+  <ul class="collapse">
+  <li><a href="#random-sample" id="toc-random-sample" class="nav-link" data-scroll-target="#random-sample"><span class="header-section-number">5.1.1</span> Random sample</a></li>
+  <li><a href="#min---max-values" id="toc-min---max-values" class="nav-link" data-scroll-target="#min---max-values"><span class="header-section-number">5.1.2</span> Min - max values</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><br></p>
+<section id="benefit-claimants" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="benefit-claimants"><span class="header-section-number">4.1</span> Benefit claimants</h2>
+<p><code>NatFrEst</code> - number of people claiming benefits who give false info.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>NatFrEst) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$label
+[1] "Out of every 100 people receiving benefits in Britain, how many have broken the law by giving false information to support their claim?"
+
+$na_range
+[1]  101 3000
+
+$class
+[1] "haven_labelled_spss" "haven_labelled"      "vctrs_vctr"         
+[4] "double"             
+
+$format.spss
+[1] "F3.0"
+
+$labels
+Don`t know    Refusal 
+       998        999 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(NatFrEst) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 2
+   NatFrEst                  n
+   &lt;dbl+lbl&gt;             &lt;int&gt;
+ 1   0                       8
+ 2   1                      68
+ 3   2                      82
+ 4   3                      43
+ 5   4                      25
+ 6   5                     192
+ 7   6                       3
+ 8   7                      14
+ 9   8                      10
+10   9                       1
+11  10                     354
+12  12                       7
+13  13                       1
+14  15                      90
+15  18                       1
+16  19                       1
+17  20                     286
+18  23                       1
+19  25                     190
+20  27                       3
+21  30                     194
+22  32                       2
+23  33                      19
+24  35                      45
+25  38                       1
+26  40                     188
+27  42                       1
+28  43                       3
+29  45                      23
+30  46                       2
+31  47                       1
+32  48                       2
+33  49                       1
+34  50                     436
+35  51                       2
+36  55                      20
+37  56                       1
+38  57                       2
+39  59                       1
+40  60                     160
+41  63                       1
+42  65                      29
+43  66                       2
+44  68                       2
+45  69                       2
+46  70                     107
+47  75                      77
+48  78                       2
+49  79                       1
+50  80                     126
+51  82                       2
+52  85                      18
+53  86                       1
+54  88                       2
+55  90                      58
+56  93                       1
+57  95                      10
+58  98                       4
+59  99                      19
+60 100                      30
+61 998 (NA) [Don`t know]   242
+62 999 (NA) [Refusal]        4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Group-numeric-variables_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ntile" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="ntile"><span class="header-section-number">4.2</span> ntile()</h2>
+<p>Rough buckets, ignores ties (same value can end up in differet buckets) resulting groups more or less perfectly quintiles - because does not respect ties.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ntile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> freq <span class="co"># No labels - hard to understand</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+**Frequency table**   
+
+Class:      integer (numeric)  
+Length:     3,224  
+Available:  2,978 (92.37%, NA: 246 = 7.63%)  
+Unique:     5  
+  
+Mean:       3  
+SD:         1.41 (CV: 0.47, MAD: 1.48)  
+Five-Num:   1 | 2 | 3 | 4 | 5 (IQR: 2, CQV: 0.33)  
+Outliers:   0 (0%)
+
+
+|   |  Item|  Count|  Percent|  Cum. Count|  Cum. Percent|
+|:--|-----:|------:|--------:|-----------:|-------------:|
+|1  |     1|    596|   20.01%|         596|        20.01%|
+|2  |     2|    596|   20.01%|        1192|        40.03%|
+|3  |     3|    596|   20.01%|        1788|        60.04%|
+|4  |     4|    595|   19.98%|        2383|        80.02%|
+|5  |     5|    595|   19.98%|        2978|       100.00%|</code></pre>
+</div>
+</div>
+<section id="refining-ntile" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="refining-ntile"><span class="header-section-number">4.2.1</span> Refining ntile</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to add labels to ntile breaks</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ntile_lab <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var, <span class="at">breaks =</span> <span class="dv">5</span>) { </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  var_to_use <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(var)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  vec <span class="ot">&lt;-</span> <span class="fu">ntile</span>(<span class="fu">zap_missing</span>(var_to_use), <span class="at">n =</span> breaks)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  breaks <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="fu">na.omit</span>(<span class="fu">unique</span>(vec)),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">min</span>(<span class="fu">zap_missing</span>(var_to_use)[vec <span class="sc">==</span> .x],<span class="at">na.rm =</span> T), <span class="st">" - "</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">max</span>(<span class="fu">zap_missing</span>(var_to_use)[vec <span class="sc">==</span> .x],<span class="at">na.rm =</span> T)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  vec_unique <span class="ot">&lt;-</span>  <span class="fu">as.vector</span>(<span class="fu">na.omit</span>(<span class="fu">unique</span>(vec)))</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(vec_unique) <span class="ot">&lt;-</span>  breaks</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  vec_unique</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> vec <span class="sc">%&gt;%</span> <span class="fu">set_value_labels</span>(<span class="at">.labels =</span> vec_unique)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="example-1" class="level4" data-number="4.2.1.1">
+<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="example-1"><span class="header-section-number">4.2.1.1</span> Example 1</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test ntile_lab</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ntile_lab</span>(<span class="at">data =</span> df, <span class="at">var =</span> <span class="st">"NatFrEst"</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  f            n
+  &lt;fct&gt;    &lt;int&gt;
+1 0 - 10     596
+2 10 - 25    596
+3 25 - 40    596
+4 40 - 60    595
+5 60 - 100   595
+6 &lt;NA&gt;       246</code></pre>
+</div>
+</div>
+<p><strong>Remember</strong>, ntile creates roughly equal groups, but as a result those groups can contain the same values, see below…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>chk_ntile <span class="ot">&lt;-</span> <span class="fu">ntile_lab</span>(<span class="at">data =</span> df, <span class="at">var =</span> <span class="st">"NatFrEst"</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(chk_ntile) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">min =</span> <span class="fu">min</span>(NatFrEst, <span class="at">na.rm =</span> T),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="fu">max</span>(NatFrEst, <span class="at">na.rm =</span> T)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  chk_ntile min                   max               
+  &lt;fct&gt;     &lt;dbl+lbl&gt;             &lt;dbl+lbl&gt;         
+1 0 - 10      0                    10               
+2 10 - 25    10                    25               
+3 25 - 40    25                    40               
+4 40 - 60    40                    60               
+5 60 - 100   60                   100               
+6 &lt;NA&gt;      998 (NA) [Don`t know] 999 (NA) [Refusal]</code></pre>
+</div>
+</div>
+</section>
+<section id="example-2" class="level4" data-number="4.2.1.2">
+<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="example-2"><span class="header-section-number">4.2.1.2</span> Example 2</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now with 10 breaks</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ntile_lab</span>(<span class="at">data =</span> df, <span class="at">var =</span> <span class="st">"NatFrEst"</span>, <span class="at">breaks =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   f            n
+   &lt;fct&gt;    &lt;int&gt;
+ 1 0 - 5      298
+ 2 5 - 10     298
+ 3 10 - 15    298
+ 4 15 - 25    298
+ 5 25 - 30    298
+ 6 30 - 40    298
+ 7 40 - 50    298
+ 8 50 - 60    298
+ 9 60 - 75    297
+10 75 - 100   297
+11 &lt;NA&gt;       246</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="cut" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="cut"><span class="header-section-number">4.3</span> cut()</h2>
+<p>From base R.</p>
+<p>The <code>breaks</code> argument is either a vector of two or more numbers, giving the break points to cut the variable into, or a single value indicating how many roughly equal groups to split it into.</p>
+<section id="sequence-of-break-points" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="sequence-of-break-points"><span class="header-section-number">4.3.1</span> Sequence of break points</h3>
+<p>Square bracket in output indicates the groups are capped on that side, e.g.&nbsp;here the right hand side includes ten in the first group.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span>(df<span class="sc">$</span>NatFrEst, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   f            n
+   &lt;fct&gt;    &lt;int&gt;
+ 1 (0,10]     792
+ 2 (10,20]    386
+ 3 (20,30]    388
+ 4 (30,40]    255
+ 5 (40,50]    469
+ 6 (50,60]    186
+ 7 (60,70]    143
+ 8 (70,80]    206
+ 9 (80,90]     81
+10 (90,100]    64
+11 &lt;NA&gt;       254</code></pre>
+</div>
+</div>
+<p>Controlling where groups end and start is hard…</p>
+<p>If we use the following breaks:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
+</div>
+</div>
+<p>Here cut() implements those breaks so the results run from 0 up to 9, then 10 to 19, and, problematically, 100 is NA.</p>
+<p>That is because bands close on the left (the rightmost value is excluded).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ben_cheat =</span> <span class="fu">cut</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    NatFrEst, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> F, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> F)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(ben_cheat, NatFrEst) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 3
+   ben_cheat NatFrEst                  n
+   &lt;fct&gt;     &lt;dbl+lbl&gt;             &lt;int&gt;
+ 1 [0,10)      0                       8
+ 2 [0,10)      1                      68
+ 3 [0,10)      2                      82
+ 4 [0,10)      3                      43
+ 5 [0,10)      4                      25
+ 6 [0,10)      5                     192
+ 7 [0,10)      6                       3
+ 8 [0,10)      7                      14
+ 9 [0,10)      8                      10
+10 [0,10)      9                       1
+11 [10,20)    10                     354
+12 [10,20)    12                       7
+13 [10,20)    13                       1
+14 [10,20)    15                      90
+15 [10,20)    18                       1
+16 [10,20)    19                       1
+17 [20,30)    20                     286
+18 [20,30)    23                       1
+19 [20,30)    25                     190
+20 [20,30)    27                       3
+21 [30,40)    30                     194
+22 [30,40)    32                       2
+23 [30,40)    33                      19
+24 [30,40)    35                      45
+25 [30,40)    38                       1
+26 [40,50)    40                     188
+27 [40,50)    42                       1
+28 [40,50)    43                       3
+29 [40,50)    45                      23
+30 [40,50)    46                       2
+31 [40,50)    47                       1
+32 [40,50)    48                       2
+33 [40,50)    49                       1
+34 [50,60)    50                     436
+35 [50,60)    51                       2
+36 [50,60)    55                      20
+37 [50,60)    56                       1
+38 [50,60)    57                       2
+39 [50,60)    59                       1
+40 [60,70)    60                     160
+41 [60,70)    63                       1
+42 [60,70)    65                      29
+43 [60,70)    66                       2
+44 [60,70)    68                       2
+45 [60,70)    69                       2
+46 [70,80)    70                     107
+47 [70,80)    75                      77
+48 [70,80)    78                       2
+49 [70,80)    79                       1
+50 [80,90)    80                     126
+51 [80,90)    82                       2
+52 [80,90)    85                      18
+53 [80,90)    86                       1
+54 [80,90)    88                       2
+55 [90,100)   90                      58
+56 [90,100)   93                       1
+57 [90,100)   95                      10
+58 [90,100)   98                       4
+59 [90,100)   99                      19
+60 &lt;NA&gt;      100                      30
+61 &lt;NA&gt;      998 (NA) [Don`t know]   242
+62 &lt;NA&gt;      999 (NA) [Refusal]        4</code></pre>
+</div>
+</div>
+<p>Now we set right = T…</p>
+<ul>
+<li>Now breaks are 1-10, 11-20, 21-30, etc,<br>
+</li>
+<li>meaning 100 is included</li>
+</ul>
+<p>However, it excludes zero, because include.lowest = F.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ben_cheat =</span> <span class="fu">cut</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  NatFrEst, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>), </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">include.lowest =</span> F, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> T)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(ben_cheat, NatFrEst) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 3
+   ben_cheat NatFrEst                  n
+   &lt;fct&gt;     &lt;dbl+lbl&gt;             &lt;int&gt;
+ 1 (0,10]      1                      68
+ 2 (0,10]      2                      82
+ 3 (0,10]      3                      43
+ 4 (0,10]      4                      25
+ 5 (0,10]      5                     192
+ 6 (0,10]      6                       3
+ 7 (0,10]      7                      14
+ 8 (0,10]      8                      10
+ 9 (0,10]      9                       1
+10 (0,10]     10                     354
+11 (10,20]    12                       7
+12 (10,20]    13                       1
+13 (10,20]    15                      90
+14 (10,20]    18                       1
+15 (10,20]    19                       1
+16 (10,20]    20                     286
+17 (20,30]    23                       1
+18 (20,30]    25                     190
+19 (20,30]    27                       3
+20 (20,30]    30                     194
+21 (30,40]    32                       2
+22 (30,40]    33                      19
+23 (30,40]    35                      45
+24 (30,40]    38                       1
+25 (30,40]    40                     188
+26 (40,50]    42                       1
+27 (40,50]    43                       3
+28 (40,50]    45                      23
+29 (40,50]    46                       2
+30 (40,50]    47                       1
+31 (40,50]    48                       2
+32 (40,50]    49                       1
+33 (40,50]    50                     436
+34 (50,60]    51                       2
+35 (50,60]    55                      20
+36 (50,60]    56                       1
+37 (50,60]    57                       2
+38 (50,60]    59                       1
+39 (50,60]    60                     160
+40 (60,70]    63                       1
+41 (60,70]    65                      29
+42 (60,70]    66                       2
+43 (60,70]    68                       2
+44 (60,70]    69                       2
+45 (60,70]    70                     107
+46 (70,80]    75                      77
+47 (70,80]    78                       2
+48 (70,80]    79                       1
+49 (70,80]    80                     126
+50 (80,90]    82                       2
+51 (80,90]    85                      18
+52 (80,90]    86                       1
+53 (80,90]    88                       2
+54 (80,90]    90                      58
+55 (90,100]   93                       1
+56 (90,100]   95                      10
+57 (90,100]   98                       4
+58 (90,100]   99                      19
+59 (90,100]  100                      30
+60 &lt;NA&gt;        0                       8
+61 &lt;NA&gt;      998 (NA) [Don`t know]   242
+62 &lt;NA&gt;      999 (NA) [Refusal]        4</code></pre>
+</div>
+</div>
+<p>So, now also set include.lowest = T</p>
+<p>This is probably best:</p>
+<ul>
+<li>breaks are 0-10, 11-20, 21-30,<br>
+</li>
+<li>0 is included,<br>
+</li>
+<li>and 100 is included.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ben_cheat =</span> <span class="fu">cut</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  NatFrEst, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>), </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">include.lowest =</span> T, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> T)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(ben_cheat, NatFrEst) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 3
+   ben_cheat NatFrEst                  n
+   &lt;fct&gt;     &lt;dbl+lbl&gt;             &lt;int&gt;
+ 1 [0,10]      0                       8
+ 2 [0,10]      1                      68
+ 3 [0,10]      2                      82
+ 4 [0,10]      3                      43
+ 5 [0,10]      4                      25
+ 6 [0,10]      5                     192
+ 7 [0,10]      6                       3
+ 8 [0,10]      7                      14
+ 9 [0,10]      8                      10
+10 [0,10]      9                       1
+11 [0,10]     10                     354
+12 (10,20]    12                       7
+13 (10,20]    13                       1
+14 (10,20]    15                      90
+15 (10,20]    18                       1
+16 (10,20]    19                       1
+17 (10,20]    20                     286
+18 (20,30]    23                       1
+19 (20,30]    25                     190
+20 (20,30]    27                       3
+21 (20,30]    30                     194
+22 (30,40]    32                       2
+23 (30,40]    33                      19
+24 (30,40]    35                      45
+25 (30,40]    38                       1
+26 (30,40]    40                     188
+27 (40,50]    42                       1
+28 (40,50]    43                       3
+29 (40,50]    45                      23
+30 (40,50]    46                       2
+31 (40,50]    47                       1
+32 (40,50]    48                       2
+33 (40,50]    49                       1
+34 (40,50]    50                     436
+35 (50,60]    51                       2
+36 (50,60]    55                      20
+37 (50,60]    56                       1
+38 (50,60]    57                       2
+39 (50,60]    59                       1
+40 (50,60]    60                     160
+41 (60,70]    63                       1
+42 (60,70]    65                      29
+43 (60,70]    66                       2
+44 (60,70]    68                       2
+45 (60,70]    69                       2
+46 (60,70]    70                     107
+47 (70,80]    75                      77
+48 (70,80]    78                       2
+49 (70,80]    79                       1
+50 (70,80]    80                     126
+51 (80,90]    82                       2
+52 (80,90]    85                      18
+53 (80,90]    86                       1
+54 (80,90]    88                       2
+55 (80,90]    90                      58
+56 (90,100]   93                       1
+57 (90,100]   95                      10
+58 (90,100]   98                       4
+59 (90,100]   99                      19
+60 (90,100]  100                      30
+61 &lt;NA&gt;      998 (NA) [Don`t know]   242
+62 &lt;NA&gt;      999 (NA) [Refusal]        4</code></pre>
+</div>
+</div>
+<p>With decimalised data one would need to take even more care, nonetheless the settings above work ok here.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+   libauth                                            n
+   &lt;dbl+lbl&gt;                                      &lt;int&gt;
+ 1 -1 (NA) [skip, didn`t return SC questionnaire]   588
+ 2  1 [libertarian]                                   3
+ 3  1.17                                              3
+ 4  1.33                                              2
+ 5  1.5                                              11
+ 6  1.67                                             19
+ 7  1.83                                             28
+ 8  2                                                33
+ 9  2.17                                             41
+10  2.33                                             62
+11  2.4                                               3
+12  2.5                                              77
+13  2.67                                             93
+14  2.83                                            117
+15  3                                               172
+16  3.17                                            161
+17  3.33                                            207
+18  3.4                                               1
+19  3.5                                             225
+20  3.6                                               3
+21  3.67                                            256
+22  3.83                                            241
+23  4                                               220
+24  4.17                                            171
+25  4.2                                               2
+26  4.33                                            153
+27  4.4                                               2
+28  4.5                                             104
+29  4.6                                               1
+30  4.67                                             68
+31  4.83                                             41
+32  5 [authoritarian]                                67
+33  9 (NA) [Missing values]                          49</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually the same settings as above again seem best</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_brack =</span> <span class="fu">cut</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    libauth, </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="at">by =</span> <span class="dv">1</span>), </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> T, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> T)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_brack, libauth) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 3
+   libauth_brack libauth                                            n
+   &lt;fct&gt;         &lt;dbl+lbl&gt;                                      &lt;int&gt;
+ 1 [1,2]          1 [libertarian]                                   3
+ 2 [1,2]          1.17                                              3
+ 3 [1,2]          1.33                                              2
+ 4 [1,2]          1.5                                              11
+ 5 [1,2]          1.67                                             19
+ 6 [1,2]          1.83                                             28
+ 7 [1,2]          2                                                33
+ 8 (2,3]          2.17                                             41
+ 9 (2,3]          2.33                                             62
+10 (2,3]          2.4                                               3
+11 (2,3]          2.5                                              77
+12 (2,3]          2.67                                             93
+13 (2,3]          2.83                                            117
+14 (2,3]          3                                               172
+15 (3,4]          3.17                                            161
+16 (3,4]          3.33                                            207
+17 (3,4]          3.4                                               1
+18 (3,4]          3.5                                             225
+19 (3,4]          3.6                                               3
+20 (3,4]          3.67                                            256
+21 (3,4]          3.83                                            241
+22 (3,4]          4                                               220
+23 (4,5]          4.17                                            171
+24 (4,5]          4.2                                               2
+25 (4,5]          4.33                                            153
+26 (4,5]          4.4                                               2
+27 (4,5]          4.5                                             104
+28 (4,5]          4.6                                               1
+29 (4,5]          4.67                                             68
+30 (4,5]          4.83                                             41
+31 (4,5]          5 [authoritarian]                                67
+32 &lt;NA&gt;          -1 (NA) [skip, didn`t return SC questionnaire]   588
+33 &lt;NA&gt;           9 (NA) [Missing values]                          49</code></pre>
+</div>
+</div>
+<section id="handling-missing-values" class="level4" data-number="4.3.1.1">
+<h4 data-number="4.3.1.1" class="anchored" data-anchor-id="handling-missing-values"><span class="header-section-number">4.3.1.1</span> Handling missing values</h4>
+<p>Note, user missing values will be included if the breaks include them, see below. These would need dropping.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually the same settings as above again seem best</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_brack =</span> <span class="fu">cut</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    libauth, </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">5</span>,<span class="at">by =</span> <span class="dv">1</span>), </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> T, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> T)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_brack, libauth) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 3
+   libauth_brack libauth                                            n
+   &lt;fct&gt;         &lt;dbl+lbl&gt;                                      &lt;int&gt;
+ 1 [-1,0]        -1 (NA) [skip, didn`t return SC questionnaire]   588
+ 2 (0,1]          1 [libertarian]                                   3
+ 3 (1,2]          1.17                                              3
+ 4 (1,2]          1.33                                              2
+ 5 (1,2]          1.5                                              11
+ 6 (1,2]          1.67                                             19
+ 7 (1,2]          1.83                                             28
+ 8 (1,2]          2                                                33
+ 9 (2,3]          2.17                                             41
+10 (2,3]          2.33                                             62
+11 (2,3]          2.4                                               3
+12 (2,3]          2.5                                              77
+13 (2,3]          2.67                                             93
+14 (2,3]          2.83                                            117
+15 (2,3]          3                                               172
+16 (3,4]          3.17                                            161
+17 (3,4]          3.33                                            207
+18 (3,4]          3.4                                               1
+19 (3,4]          3.5                                             225
+20 (3,4]          3.6                                               3
+21 (3,4]          3.67                                            256
+22 (3,4]          3.83                                            241
+23 (3,4]          4                                               220
+24 (4,5]          4.17                                            171
+25 (4,5]          4.2                                               2
+26 (4,5]          4.33                                            153
+27 (4,5]          4.4                                               2
+28 (4,5]          4.5                                             104
+29 (4,5]          4.6                                               1
+30 (4,5]          4.67                                             68
+31 (4,5]          4.83                                             41
+32 (4,5]          5 [authoritarian]                                67
+33 &lt;NA&gt;           9 (NA) [Missing values]                          49</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="cut-with-a-preset-number-of-groups" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="cut-with-a-preset-number-of-groups"><span class="header-section-number">4.3.2</span> cut() with a preset number of groups</h3>
+<p>Using a single value to ask for a preset number of groups is particularly risky with user missing values, as below they are included by default.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually the same settings as above again seem best</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_brack =</span> <span class="fu">cut</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    libauth, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> T, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> T)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_brack, libauth) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 3
+   libauth_brack libauth                                            n
+   &lt;fct&gt;         &lt;dbl+lbl&gt;                                      &lt;int&gt;
+ 1 [-1.01,1]     -1 (NA) [skip, didn`t return SC questionnaire]   588
+ 2 [-1.01,1]      1 [libertarian]                                   3
+ 3 (1,3]          1.17                                              3
+ 4 (1,3]          1.33                                              2
+ 5 (1,3]          1.5                                              11
+ 6 (1,3]          1.67                                             19
+ 7 (1,3]          1.83                                             28
+ 8 (1,3]          2                                                33
+ 9 (1,3]          2.17                                             41
+10 (1,3]          2.33                                             62
+11 (1,3]          2.4                                               3
+12 (1,3]          2.5                                              77
+13 (1,3]          2.67                                             93
+14 (1,3]          2.83                                            117
+15 (1,3]          3                                               172
+16 (3,5]          3.17                                            161
+17 (3,5]          3.33                                            207
+18 (3,5]          3.4                                               1
+19 (3,5]          3.5                                             225
+20 (3,5]          3.6                                               3
+21 (3,5]          3.67                                            256
+22 (3,5]          3.83                                            241
+23 (3,5]          4                                               220
+24 (3,5]          4.17                                            171
+25 (3,5]          4.2                                               2
+26 (3,5]          4.33                                            153
+27 (3,5]          4.4                                               2
+28 (3,5]          4.5                                             104
+29 (3,5]          4.6                                               1
+30 (3,5]          4.67                                             68
+31 (3,5]          4.83                                             41
+32 (3,5]          5 [authoritarian]                                67
+33 (7,9.01]       9 (NA) [Missing values]                          49</code></pre>
+</div>
+</div>
+<p>More properly… with <code>user_na_to_na</code> dropping the user missing values.</p>
+<p><em>Note</em> the use of <code>dig.lab</code>, otherwise the break values are not clean, e.g.&nbsp;here the first break would be 0.996.</p>
+<p>From documentation:</p>
+<blockquote class="blockquote">
+<p>When breaks is specified as a single number, the range of the data is divided into breaks pieces of equal length, and then the outer limits are moved away by 0.1% of the range to ensure that the extreme values both fall within the break intervals. (If x is a constant vector, equal-length intervals are created, one of which includes the single value.)</p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually the same settings as above again seem best</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_brack =</span> <span class="fu">cut</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">user_na_to_na</span>(libauth), </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>, </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> T, </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> T, </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">dig.lab =</span> <span class="dv">1</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth_brack, libauth) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 3
+   libauth_brack libauth                                            n
+   &lt;fct&gt;         &lt;dbl+lbl&gt;                                      &lt;int&gt;
+ 1 [1,1.8]        1 [libertarian]                                   3
+ 2 [1,1.8]        1.17                                              3
+ 3 [1,1.8]        1.33                                              2
+ 4 [1,1.8]        1.5                                              11
+ 5 [1,1.8]        1.67                                             19
+ 6 (1.8,2.6]      1.83                                             28
+ 7 (1.8,2.6]      2                                                33
+ 8 (1.8,2.6]      2.17                                             41
+ 9 (1.8,2.6]      2.33                                             62
+10 (1.8,2.6]      2.4                                               3
+11 (1.8,2.6]      2.5                                              77
+12 (2.6,3.4]      2.67                                             93
+13 (2.6,3.4]      2.83                                            117
+14 (2.6,3.4]      3                                               172
+15 (2.6,3.4]      3.17                                            161
+16 (2.6,3.4]      3.33                                            207
+17 (2.6,3.4]      3.4                                               1
+18 (3.4,4.2]      3.5                                             225
+19 (3.4,4.2]      3.6                                               3
+20 (3.4,4.2]      3.67                                            256
+21 (3.4,4.2]      3.83                                            241
+22 (3.4,4.2]      4                                               220
+23 (3.4,4.2]      4.17                                            171
+24 (3.4,4.2]      4.2                                               2
+25 (4.2,5]        4.33                                            153
+26 (4.2,5]        4.4                                               2
+27 (4.2,5]        4.5                                             104
+28 (4.2,5]        4.6                                               1
+29 (4.2,5]        4.67                                             68
+30 (4.2,5]        4.83                                             41
+31 (4.2,5]        5 [authoritarian]                                67
+32 &lt;NA&gt;          -1 (NA) [skip, didn`t return SC questionnaire]   588
+33 &lt;NA&gt;           9 (NA) [Missing values]                          49</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="nice-cut" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="nice-cut"><span class="header-section-number">4.3.3</span> Nice cut</h3>
+<p>This formats the output of cut. It assumes you’ll want the breaks to close on the right and include the lowest value in the sequence of breaks.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>nice_cut <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    variable, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">keep_user_na =</span> F,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    breaks,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dig_lab =</span> <span class="dv">1</span>, </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">lab_style =</span> <span class="dv">1</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>){</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(keep_user_na <span class="sc">==</span> F){variable <span class="ot">&lt;-</span> <span class="fu">user_na_to_na</span>(variable)}</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  new_variable <span class="ot">&lt;-</span> <span class="fu">cut</span>(</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    variable, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    breaks, </span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">include.lowest =</span> T, </span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> T, </span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">dig.lab =</span> dig_lab</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  new_levels <span class="ot">&lt;-</span> new_variable <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  new_levels <span class="ot">&lt;-</span> <span class="fu">as.character</span>(new_levels)</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span>(lab_style <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">"</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">["</span>, <span class="st">"Greater than "</span>)</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">","</span>, <span class="st">" and up to "</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (lab_style <span class="sc">==</span> <span class="dv">2</span>) {</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">"</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">["</span>, <span class="st">""</span>)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">","</span>, <span class="st">" &gt; &amp; &lt;= "</span>)</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (lab_style <span class="sc">==</span> <span class="dv">3</span>) {</span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">"</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">["</span>, <span class="st">""</span>)</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>     new_levels <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(new_levels, <span class="st">","</span>, <span class="st">"-"</span>)</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>  new_levels <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(new_levels, <span class="st">"]"</span>)</span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(</span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>    new_variable, </span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> new_levels</span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>At most basic, it takes a vector in the <code>variable</code> argument.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nice_cut</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> df<span class="sc">$</span>libauth, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">5</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  f                                  n
+  &lt;fct&gt;                          &lt;int&gt;
+1 Greater than 1 and up to 1.8      38
+2 Greater than 1.8 and up to 2.6   244
+3 Greater than 2.6 and up to 3.4   751
+4 Greater than 3.4 and up to 4.2  1118
+5 Greater than 4.2 and up to 5     436
+6 &lt;NA&gt;                             637</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nice_cut</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> df<span class="sc">$</span>welfare2, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">5</span>, </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lab_style =</span> <span class="dv">3</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  f           n
+  &lt;fct&gt;   &lt;int&gt;
+1 1-1.8     200
+2 1.8-2.6   783
+3 2.6-3.4  1293
+4 3.4-4.2   273
+5 4.2-5      33
+6 &lt;NA&gt;      642</code></pre>
+</div>
+</div>
+<p>But the intention is to use it within mutate.</p>
+<p>Example below shows max and min values within each new break.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_nice_cut =</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">nice_cut</span>(<span class="at">variable =</span> libauth,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">breaks =</span> <span class="dv">5</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(libauth_nice_cut) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(libauth, <span class="at">na.rm =</span> T), <span class="at">max =</span> <span class="fu">max</span>(libauth, <span class="at">na.rm =</span> T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  libauth_nice_cut               min                                 max        
+  &lt;fct&gt;                          &lt;dbl+lbl&gt;                           &lt;dbl+lbl&gt;  
+1 Greater than 1 and up to 1.8    1 [libertarian]                    1.67       
+2 Greater than 1.8 and up to 2.6  1.83                               2.5        
+3 Greater than 2.6 and up to 3.4  2.67                               3.4        
+4 Greater than 3.4 and up to 4.2  3.5                                4.2        
+5 Greater than 4.2 and up to 5    4.33                               5 [authori…
+6 &lt;NA&gt;                           -1 (NA) [skip, didn`t return SC qu… 9 (NA) [Mi…</code></pre>
+</div>
+</div>
+<p>Can also use user-defined values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">libauth_nice_cut =</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">nice_cut</span>(<span class="at">variable =</span> libauth,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">lab_style =</span> <span class="dv">3</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(libauth_nice_cut)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  libauth_nice_cut     n
+  &lt;fct&gt;            &lt;int&gt;
+1 1-2                 99
+2 2-3                565
+3 3-4               1314
+4 4-5                609
+5 &lt;NA&gt;               637</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="tidyr-versions-to-group-numeric-data" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="tidyr-versions-to-group-numeric-data"><span class="header-section-number">4.4</span> tidyr versions to group numeric data</h2>
+<p><code>cut_width()</code> breaks vector into chunks of a given width, here 5.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut_width</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> T), <span class="at">width =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>() <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">21</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 21 × 2
+   f               n
+   &lt;fct&gt;       &lt;int&gt;
+ 1 [-2.5,2.5]      2
+ 2 (2.5,7.5]       7
+ 3 (7.5,12.5]      7
+ 4 (12.5,17.5]     1
+ 5 (17.5,22.5]     4
+ 6 (22.5,27.5]     4
+ 7 (27.5,32.5]     6
+ 8 (32.5,37.5]     6
+ 9 (37.5,42.5]     5
+10 (42.5,47.5]     4
+11 (47.5,52.5]     6
+12 (52.5,57.5]     7
+13 (57.5,62.5]     5
+14 (62.5,67.5]     2
+15 (67.5,72.5]     6
+16 (72.5,77.5]     5
+17 (77.5,82.5]     5
+18 (82.5,87.5]     5
+19 (87.5,92.5]     2
+20 (92.5,97.5]     5
+21 (97.5,102]      6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut_width</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">width =</span> <span class="fl">7.5</span>) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 2
+   f                n
+   &lt;fct&gt;        &lt;int&gt;
+ 1 [-3.75,3.75]   201
+ 2 (3.75,11.2]    599
+ 3 (11.2,18.8]     99
+ 4 (18.8,26.2]    478
+ 5 (26.2,33.8]    218
+ 6 (33.8,41.2]    234
+ 7 (41.2,48.8]     32
+ 8 (48.8,56.2]    460
+ 9 (56.2,63.8]    164
+10 (63.8,71.2]    142
+11 (71.2,78.8]     79
+12 (78.8,86.2]    148
+13 (86.2,93.8]     61
+14 (93.8,101]      63
+15 &lt;NA&gt;           246</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><code>cut_interval</code> n groups of equal range</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut_interval</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">length =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> fct_count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   f            n
+   &lt;fct&gt;    &lt;int&gt;
+ 1 [0,10]     800
+ 2 (10,20]    386
+ 3 (20,30]    388
+ 4 (30,40]    255
+ 5 (40,50]    469
+ 6 (50,60]    186
+ 7 (60,70]    143
+ 8 (70,80]    206
+ 9 (80,90]     81
+10 (90,100]    64
+11 &lt;NA&gt;       246</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><code>cut_number</code> - n groups with approx equal observations in each</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut_number</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> fct_count <span class="co"># equal ish for sure.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  f            n
+  &lt;fct&gt;    &lt;int&gt;
+1 [0,10]     800
+2 (10,25]    577
+3 (25,40]    452
+4 (40,60]    655
+5 (60,100]   494
+6 &lt;NA&gt;       246</code></pre>
+</div>
+</div>
+</section>
+<section id="quantiles" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="quantiles"><span class="header-section-number">4.5</span> Quantiles</h2>
+<p>Returns a numeric vector of cut points…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max val is 999, it includes user NA </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>NatFrEst)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  25%  50%  75% 100% 
+   0   12   35   60  999 </code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With zap_missing, the na_rm argument is required. </span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">na.rm=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  25%  50%  75% 100% 
+   0   10   30   50  100 </code></pre>
+</div>
+</div>
+<section id="can-be-matched-with-cut" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="can-be-matched-with-cut"><span class="header-section-number">4.5.1</span> Can be matched with cut()</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># right = T in the cut() function gives the best result, although % not perfectly 25%. </span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NatFrEst_quarts =</span> </span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cut</span>(</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>      NatFrEst, </span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">quantile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">na.rm=</span>T), </span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> T, </span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> T)</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_count</span>(<span class="fu">na.omit</span>(df<span class="sc">$</span>NatFrEst_quarts), <span class="at">prop =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  f            n     p
+  &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
+1 [0,10]     800 0.269
+2 (10,30]    774 0.260
+3 (30,50]    724 0.243
+4 (50,100]   680 0.228</code></pre>
+</div>
+</div>
+</section>
+<section id="returning-a-single-quantile" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="returning-a-single-quantile"><span class="header-section-number">4.5.2</span> Returning a single quantile</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Can return a single value if you needed a 10% cut point... </span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>NatFrEst, <span class="at">probs =</span> <span class="fl">0.1</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10% 
+  5 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or very detailed sequences</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>NatFrEst, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+   0    5   10   20   25   35   50   50   70   90  999 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, exclude missing and return value at which we cross 90th percentile</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">probs =</span> <span class="fl">0.9</span>,<span class="at">na.rm =</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>90% 
+ 75 </code></pre>
+</div>
+</div>
+<section id="deriving-a-variable-with-the-result" class="level4" data-number="4.5.2.1">
+<h4 data-number="4.5.2.1" class="anchored" data-anchor-id="deriving-a-variable-with-the-result"><span class="header-section-number">4.5.2.1</span> Deriving a variable with the result</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cut people at the 90th percentile for highest perceptions of benefit cheating</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>cut_val <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">probs =</span> <span class="fl">0.9</span>,<span class="at">na.rm=</span>T)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>cut_val</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>90% 
+ 75 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">NatFrEst_top_10 =</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">case_when</span>(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(<span class="fu">zap_missing</span>(NatFrEst)) <span class="sc">~</span> <span class="cn">NA</span>, </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>      NatFrEst <span class="sc">&gt;</span> cut_val <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>), </span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">NatFrEst_top_10 =</span> <span class="fu">factor</span>(</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>        NatFrEst_top_10, </span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), </span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Less than 75%"</span>, <span class="st">"More than 75%"</span>)</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(NatFrEst_top_10) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="sc">!</span><span class="fu">is.na</span>(NatFrEst_top_10)) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+# Groups:   !is.na(NatFrEst_top_10) [2]
+  NatFrEst_top_10     n `!is.na(NatFrEst_top_10)`      p
+  &lt;fct&gt;           &lt;int&gt; &lt;lgl&gt;                      &lt;dbl&gt;
+1 Less than 75%    2704 TRUE                      0.908 
+2 More than 75%     274 TRUE                      0.0920
+3 &lt;NA&gt;              246 FALSE                     1     </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">NatFrEst_90 =</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">cut</span>(</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>       NatFrEst, </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,cut_val,<span class="dv">100</span>), </span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">include.lowest =</span> T, </span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">right =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(NatFrEst_90) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  NatFrEst_90     n
+  &lt;fct&gt;       &lt;int&gt;
+1 [0,75]       2704
+2 (75,100]      274
+3 &lt;NA&gt;          246</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="weighted-quantiles" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="weighted-quantiles"><span class="header-section-number">4.6</span> Weighted quantiles</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wtd.quantile</span>(df<span class="sc">$</span>NatFrEst, <span class="at">weights =</span> df<span class="sc">$</span>WtFactor) <span class="co"># Again, returns a numeric vector... </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  25%  50%  75% 100% 
+   0   10   33   60  999 </code></pre>
+</div>
+</div>
+<p>As before can be fed into cut.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># right = T in the cut() function gives the best result, although % not perfectly 25%. </span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">NatFrEst_quarts_wt =</span> </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">cut</span>(NatFrEst, </span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">breaks =</span> <span class="fu">wtd.quantile</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">na.rm=</span>T), </span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">include.lowest =</span> T, </span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">right =</span> T))</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(NatFrEst_quarts_wt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  NatFrEst_quarts_wt     n
+  &lt;fct&gt;              &lt;int&gt;
+1 [0,10]               800
+2 (10,30]              774
+3 (30,50]              724
+4 (50,100]             680
+5 &lt;NA&gt;                 246</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(NatFrEst_quarts,NatFrEst_quarts_wt) <span class="co"># They match, weights are weak I guess.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  NatFrEst_quarts NatFrEst_quarts_wt     n
+  &lt;fct&gt;           &lt;fct&gt;              &lt;int&gt;
+1 [0,10]          [0,10]               800
+2 (10,30]         (10,30]              774
+3 (30,50]         (30,50]              724
+4 (50,100]        (50,100]             680
+5 &lt;NA&gt;            &lt;NA&gt;                 246</code></pre>
+</div>
+</div>
+</section>
+<section id="look-at-weights-with-quantiles" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Look at weights with quantiles…</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>WtFactor, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.025</span>)) <span class="sc">%&gt;%</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">8</span>,<span class="at">ncol =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in matrix(., nrow = 8, ncol = 5): data length [41] is not a
+sub-multiple or multiple of the number of rows [8]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]      [,3]     [,4]     [,5]
+[1,] 0.2949592 0.5430997 0.8005205 1.004449 1.296488
+[2,] 0.4050826 0.5627559 0.8259384 1.036413 1.369167
+[3,] 0.4340080 0.5864874 0.8544155 1.064659 1.438263
+[4,] 0.4541156 0.6080799 0.8791293 1.095074 1.525835
+[5,] 0.4735008 0.6386618 0.9042252 1.134774 1.672253
+[6,] 0.4889864 0.6765419 0.9300554 1.173027 1.812389
+[7,] 0.5078221 0.7133601 0.9545234 1.206362 2.079768
+[8,] 0.5225248 0.7541069 0.9770720 1.243203 2.448346</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>WtFactor, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.025</span>)) <span class="sc">%&gt;%</span> plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Group-numeric-variables_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+<section id="checking-edits" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="checking-edits"><span class="header-section-number">5.1</span> Checking edits</h2>
+<section id="random-sample" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="random-sample"><span class="header-section-number">5.1.1</span> Random sample</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a random sample...</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(NatFrEst_quarts_wt, NatFrEst) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 3
+   NatFrEst_quarts_wt NatFrEst                  n
+   &lt;fct&gt;              &lt;dbl+lbl&gt;             &lt;int&gt;
+ 1 (30,50]             33                      19
+ 2 (50,100]            80                     126
+ 3 (30,50]             45                      23
+ 4 (50,100]            56                       1
+ 5 (50,100]            63                       1
+ 6 [0,10]              10                     354
+ 7 (30,50]             47                       1
+ 8 [0,10]               4                      25
+ 9 (50,100]            85                      18
+10 (10,30]             19                       1
+11 (30,50]             38                       1
+12 (50,100]            99                      19
+13 (10,30]             12                       7
+14 (50,100]            79                       1
+15 [0,10]               8                      10
+16 &lt;NA&gt;               998 (NA) [Don`t know]   242
+17 (50,100]            82                       2
+18 [0,10]               5                     192
+19 (50,100]            70                     107
+20 (50,100]            59                       1</code></pre>
+</div>
+</div>
+</section>
+<section id="min---max-values" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="min---max-values"><span class="header-section-number">5.1.2</span> Min - max values</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at min and max values</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(NatFrEst_quarts_wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(NatFrEst, <span class="at">na.rm =</span> T), </span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(NatFrEst, <span class="at">na.rm =</span> T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  NatFrEst_quarts_wt min                   max               
+  &lt;fct&gt;              &lt;dbl+lbl&gt;             &lt;dbl+lbl&gt;         
+1 [0,10]               0                    10               
+2 (10,30]             12                    30               
+3 (30,50]             32                    50               
+4 (50,100]            51                   100               
+5 &lt;NA&gt;               998 (NA) [Don`t know] 999 (NA) [Refusal]</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./Numeric-variables.html" class="pagination-link" aria-label="Numeric variables">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./case_when.html" class="pagination-link" aria-label="case_when">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">case_when</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

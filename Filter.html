@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Data being used – Data Management in R</title>
+<title>7&nbsp; Filter – Data Management in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Numeric variables.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./Renaming.html" rel="next">
+<link href="./Factors.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Data used.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Filter.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Filter</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -152,26 +152,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Data used.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Data-used.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Numeric variables.html" class="sidebar-item-text sidebar-link">
+  <a href="./Numeric-variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Group numeric variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Group numeric variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./case_when.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">case_when</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">case_when</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Filter.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Filter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Renaming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Renaming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">tidy-select</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labelled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">labelled</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
   </div>
 </li>
     </ul>
@@ -184,9 +220,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">2.1</span> Packages</a></li>
-  <li><a href="#load-bsa-teaching-data" id="toc-load-bsa-teaching-data" class="nav-link" data-scroll-target="#load-bsa-teaching-data"><span class="header-section-number">2.2</span> Load BSA teaching data</a></li>
-  <li><a href="#variable-summary" id="toc-variable-summary" class="nav-link" data-scroll-target="#variable-summary"><span class="header-section-number">2.3</span> Variable summary</a></li>
+  <li><a href="#basic-filtering" id="toc-basic-filtering" class="nav-link active" data-scroll-target="#basic-filtering"><span class="header-section-number">7.1</span> Basic filtering</a></li>
+  <li><a href="#filtering-conditions-using-many-variables" id="toc-filtering-conditions-using-many-variables" class="nav-link" data-scroll-target="#filtering-conditions-using-many-variables"><span class="header-section-number">7.2</span> Filtering conditions using many variables</a></li>
   </ul>
 </nav>
     </div>
@@ -195,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data being used</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Filter</span></h1>
 </div>
 
 
@@ -212,22 +247,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="packages" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">2.1</span> Packages</h2>
-<div class="cell" data-warnings="false">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="load-bsa-teaching-data" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="load-bsa-teaching-data"><span class="header-section-number">2.2</span> Load BSA teaching data</h2>
+<p><br></p>
+<section id="basic-filtering" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="basic-filtering"><span class="header-section-number">7.1</span> Basic filtering</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">'/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav'</span>, <span class="at">user_na =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PartyId2 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">count</span>(PartyId2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  PartyId2             n
+  &lt;dbl+lbl&gt;        &lt;int&gt;
+1 1 [Conservative]   963</code></pre>
+</div>
 </div>
 </section>
-<section id="variable-summary" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="variable-summary"><span class="header-section-number">2.3</span> Variable summary</h2>
+<section id="filtering-conditions-using-many-variables" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="filtering-conditions-using-many-variables"><span class="header-section-number">7.2</span> Filtering conditions using many variables</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -239,235 +273,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [21] "Poverty2"         "NatFrEst"         "incdiffs"         "welfare2"        
 [25] "leftrigh"         "libauth"         </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> glimpse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">"rsex"</span>, <span class="fu">names</span>(df), <span class="at">ignore.case =</span> T, <span class="at">value =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 3,224
-Columns: 26
-$ Sserial          &lt;dbl+lbl&gt; 310001, 310002, 310003, 310004, 310005, 310006, 3…
-$ WtFactor         &lt;dbl+lbl&gt; 0.9119594, 0.4439626, 1.2182741, 1.5839969, 0.474…
-$ RSex             &lt;dbl+lbl&gt; 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 2, 2…
-$ RAgeCat          &lt;dbl+lbl&gt; 6, 3, 4, 2, 6, 4, 2, 4, 4, 1, 7, 1, 7, 3, 3, 7, 7…
-$ eq_inc_quintiles &lt;dbl+lbl&gt; -1,  5, -1,  4, -1,  1,  5, -1, -1, -1, -1,  2, -…
-$ RClassGp         &lt;dbl+lbl&gt; 1, 1, 1, 1, 5, 3, 1, 1, 1, 5, 3, 5, 5, 1, 3, 2, 1…
-$ HEdQual3         &lt;dbl+lbl&gt; 2, 2, 3, 2, 4, 8, 1, 3, 1, 2, 4, 2, 4, 1, 2, 2, 3…
-$ Married          &lt;dbl+lbl&gt; 1, 2, 1, 4, 4, 1, 4, 1, 1, 4, 1, 4, 4, 1, 1, 1, 3…
-$ ChildHh          &lt;dbl+lbl&gt; 2, 2, 1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 2, 2…
-$ skipmeal         &lt;dbl+lbl&gt; -1,  1, -1, -1,  1, -1,  1,  1,  1, -1,  1,  2, -…
-$ paptype          &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 0, 0, 2, 4, 0, 1, 0, 1, 0, 0, 1, 1…
-$ SMNews           &lt;dbl+lbl&gt; 8, 1, 2, 2, 8, 3, 1, 4, 8, 8, 8, 7, 8, 8, 3, 8, 1…
-$ PartyId2         &lt;dbl+lbl&gt; 8, 8, 4, 2, 3, 2, 2, 8, 3, 8, 1, 5, 2, 5, 3, 8, 2…
-$ Politics         &lt;dbl+lbl&gt; 4, 3, 4, 3, 5, 3, 1, 1, 1, 5, 1, 4, 3, 3, 3, 2, 3…
-$ SocTrust         &lt;dbl+lbl&gt;  1, -1,  2,  1, -1,  2, -1, -1, -1,  2, -1, -1,  …
-$ Spend1           &lt;dbl+lbl&gt;  3, -1,  3,  3, -1,  9, -1, -1, -1,  3, -1, -1,  …
-$ Dole             &lt;dbl+lbl&gt; 3, 2, 2, 3, 2, 2, 1, 8, 2, 2, 3, 1, 3, 1, 2, 3, 2…
-$ TaxSpend         &lt;dbl+lbl&gt; 3, 3, 2, 3, 3, 2, 3, 3, 3, 2, 3, 3, 2, 3, 3, 2, 3…
-$ MuchPov          &lt;dbl+lbl&gt; 8, 2, 2, 2, 1, 1, 2, 2, 2, 8, 1, 2, 1, 2, 2, 2, 1…
-$ Poverty1         &lt;dbl+lbl&gt; 2, 2, 2, 2, 2, 1, 1, 1, 1, 8, 2, 2, 1, 1, 2, 1, 8…
-$ Poverty2         &lt;dbl+lbl&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 8, 2, 1, 1, 1, 2, 1, 1…
-$ NatFrEst         &lt;dbl+lbl&gt;   5,  30,  50,  50,  50,  10,   1, 998,   5,  50,…
-$ incdiffs         &lt;dbl+lbl&gt; -1,  2, -1, -1,  4, -1,  2,  1,  1, -1,  3,  2, -…
-$ welfare2         &lt;dbl+lbl&gt;  2.500000,  3.125000,  3.125000,  2.250000,  3.37…
-$ leftrigh         &lt;dbl+lbl&gt;  2.4,  2.0,  2.2,  3.2,  1.6,  1.8,  2.4,  2.0,  …
-$ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  4.66…</code></pre>
+<pre><code>[1] "RSex"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df, <span class="at">details =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">ends_with</span>(<span class="st">"Rsex"</span>), <span class="sc">~</span> . <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="co"># Women only</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(RSex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable         label                                                    
-  1  Sserial          Archive Serial                                           
-  2  WtFactor         Final BSA weight                                         
-  3  RSex             Sex of respondent                                        
-  4  RAgeCat          Age of respondent(grouped)&lt;7 category&gt; dv                
-  5  eq_inc_quintiles Quintiles of total equivalised household income, net of ~
-  6  RClassGp         NS-SEC analytic classes [respondent] 6 category dv       
-  7  HEdQual3         Highest educational qual obtained - dv                   
-  8  Married          Marital status &lt;4 categories&gt; dv                         
-  9  ChildHh          Whether respondent has any children in household: dv     
- 10  skipmeal         How often do you or other members of your household skip~
- 11  paptype          Newspaper readership (grouped)                           
- 12  SMNews           How often, if at all, do you read the news via a social ~
- 13  PartyId2         Party political id (compressed) dv                       
- 14  Politics         How much interest do you have in politics?               
- 15  SocTrust         Generally speaking, would you say that most people can b~
- 16  Spend1           Which would be your highest priority for extra govt spen~
- 17  Dole             Opinions differ about the level of benefits for unemploy~
- 18  TaxSpend         If it had to choose, should govt reduce/increase/maintai~
- 19  MuchPov          Some people say there is very little real poverty in Bri~
- 20  Poverty1         Is someone in Britain in poverty if they had enough to b~
- 21  Poverty2         Is someone in Britain in poverty if they had enough to e~
- 22  NatFrEst         Out of every 100 people receiving benefits in Britain, h~
- 23  incdiffs         Differences in income in GB are too large?: SC B, C      
- 24  welfare2         Welfarism scale (welfhelp to proudwlf) dv                
- 25  leftrigh         Left-right scale (redistrb to indust4) dv                
- 26  libauth          Libertarian-authoritarian scale (TradVals to censor) dv  </code></pre>
+<pre><code># A tibble: 1 × 2
+  RSex           n
+  &lt;dbl+lbl&gt;  &lt;int&gt;
+1 2 [Female]  1770</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="co"># RSex and RAgeCat occur right after each other</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable         label               col_type missing values             
- 1   Sserial          Archive Serial      dbl+lbl  0       [-9] Refused       
-                                                           [-8] Don't know    
-                                                           [-2] Schedule not ~
-                                                           [-1] Not applicable
- 2   WtFactor         Final BSA weight    dbl+lbl  0       [-2] Skip, version~
-                                                           [-1] Item not appl~
- 3   RSex             Sex of respondent   dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Male           
-                                                           [2] Female         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 4   RAgeCat          Age of respondent(~ dbl+lbl  6       [-1] Item not appl~
-                                                           [1] 18-24          
-                                                           [2] 25-34          
-                                                           [3] 35-44          
-                                                           [4] 45-54          
-                                                           [5] 55-59          
-                                                           [6] 60-64          
-                                                           [7] 65+            
-                                                           [8] DK/Refused/Not~
- 5   eq_inc_quintiles Quintiles of total~ dbl+lbl  932     [-1] Item not appl~
-                                                           [1] Lowest quintil~
-                                                           [2] 2nd quintile -~
-                                                           [3] 3rd quintile -~
-                                                           [4] 4th quintile -~
-                                                           [5] Highest quinti~
- 6   RClassGp         NS-SEC analytic cl~ dbl+lbl  115     [-1] Not applicable
-                                                           [1] Managerial &amp; p~
-                                                           [2] Intermediate o~
-                                                           [3] Employers in s~
-                                                           [4] Lower supervis~
-                                                           [5] Semi-routine &amp;~
-                                                           [8] Not classifiab~
- 7   HEdQual3         Highest educationa~ dbl+lbl  66      [1] Degree         
-                                                           [2] Higher educ be~
-                                                           [3] O level or equ~
-                                                           [4] No qualificati~
-                                                           [8] DK/Refusal/NA  
- 8   Married          Marital status &lt;4 ~ dbl+lbl  3       [-1] Item not appl~
-                                                           [1] Married/living~
-                                                           [2] Separated/divo~
-                                                           [3] Widowed        
-                                                           [4] Never married  
-                                                           [9] No information 
- 9   ChildHh          Whether respondent~ dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Yes            
-                                                           [2] No             
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 10  skipmeal         How often do you o~ dbl+lbl  1567    [-1] skip, didn`t ~
-                                                           [1] Never          
-                                                           [2] Less than once~
-                                                           [3] Once a month   
-                                                           [4] Several times ~
-                                                           [5] Once a week    
-                                                           [6] Several times ~
-                                                           [7] Every day      
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 11  paptype          Newspaper readersh~ dbl+lbl  1       [-1] Item not appl~
-                                                           [0] No paper       
-                                                           [1] Popular        
-                                                           [2] Quality (inc r~
-                                                           [4] Other/more tha~
-                                                           [8] DK/Ref         
- 12  SMNews           How often, if at a~ dbl+lbl  2       [-1] Item not appl~
-                                                           [1] Several times ~
-                                                           [2] Every day      
-                                                           [3] Several times ~
-                                                           [4] At least once ~
-                                                           [5] A couple of ti~
-                                                           [6] Once a month   
-                                                           [7] Less often tha~
-                                                           [8] Never          
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 13  PartyId2         Party political id~ dbl+lbl  267     [-1] Item not appl~
-                                                           [1] Conservative   
-                                                           [2] Labour         
-                                                           [3] Liberal Democr~
-                                                           [4] Other party    
-                                                           [5] None           
-                                                           [6] Green Party    
-                                                           [8] Other/DK/Ref   
- 14  Politics         How much interest ~ dbl+lbl  1       [-1] Item not appl~
-                                                           [1] ... a great de~
-                                                           [2] quite a lot,   
-                                                           [3] some,          
-                                                           [4] not very much, 
-                                                           [5] or, none at al~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 15  SocTrust         Generally speaking~ dbl+lbl  2165    [-1] Item not appl~
-                                                           [1] Most people ca~
-                                                           [2] Can`t be too c~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 16  Spend1           Which would be you~ dbl+lbl  2152    [-1] Item not appl~
-                                                           [1] Education      
-                                                           [2] Defence        
-                                                           [3] Health         
-                                                           [4] Housing        
-                                                           [5] Public transpo~
-                                                           [6] Roads          
-                                                           [7] Police and pri~
-                                                           [8] Social securit~
-                                                           [9] Help for indus~
-                                                           [10] Overseas aid  
-                                                           [11] (None of thes~
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 17  Dole             Opinions differ ab~ dbl+lbl  154     [-1] Item not appl~
-                                                           [1] ...benefits fo~
-                                                           [2] or, benefits f~
-                                                           [3] (Neither)      
-                                                           [4] BOTH: UNEMPLOY~
-                                                           [5] BOTH: UNEMPLOY~
-                                                           [6] About right/in~
-                                                           [7] Other answer (~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 18  TaxSpend         If it had to choos~ dbl+lbl  48      [-1] Item not appl~
-                                                           [1] Reduce taxes a~
-                                                           [2] Keep taxes and~
-                                                           [3] Increase taxes~
-                                                           [4] (None)         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 19  MuchPov          Some people say th~ dbl+lbl  135     [-1] Item not appl~
-                                                           [1] ... that there~
-                                                           [2] or, that there~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 20  Poverty1         Is someone in Brit~ dbl+lbl  80      [-1] Item not appl~
-                                                           [1] Was in poverty 
-                                                           [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 21  Poverty2         Is someone in Brit~ dbl+lbl  58      [-1] Item not appl~
-                                                           [1] Was in poverty 
-                                                           [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 22  NatFrEst         Out of every 100 p~ dbl+lbl  246     [998] Don`t know   
-                                                           [999] Refusal      
- 23  incdiffs         Differences in inc~ dbl+lbl  1574    [-1] skip, didn`t ~
-                                                           [1] Strongly agree 
-                                                           [2] Agree          
-                                                           [3] Neither agree ~
-                                                           [4] Disagree       
-                                                           [5] Strongly disag~
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 24  welfare2         Welfarism scale (w~ dbl+lbl  642     [-1] skip, didn`t ~
-                                                           [1] sympathetic    
-                                                           [5] poor don`t des~
-                                                           [9] Missing values 
- 25  leftrigh         Left-right scale (~ dbl+lbl  645     [-1] skip, didn`t ~
-                                                           [1] left           
-                                                           [5] right          
-                                                           [9] Missing values 
- 26  libauth          Libertarian-author~ dbl+lbl  637     [-1] skip, didn`t ~
-                                                           [1] libertarian    
-                                                           [5] authoritarian  
-                                                           [9] Missing values </code></pre>
+<pre><code> [1] "Sserial"          "WtFactor"         "RSex"             "RAgeCat"         
+ [5] "eq_inc_quintiles" "RClassGp"         "HEdQual3"         "Married"         
+ [9] "ChildHh"          "skipmeal"         "paptype"          "SMNews"          
+[13] "PartyId2"         "Politics"         "SocTrust"         "Spend1"          
+[17] "Dole"             "TaxSpend"         "MuchPov"          "Poverty1"        
+[21] "Poverty2"         "NatFrEst"         "incdiffs"         "welfare2"        
+[25] "leftrigh"         "libauth"         </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(RSex<span class="sc">:</span>RAgeCat, <span class="sc">~</span> . <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="co"># Womeny older than 24</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(RSex, RAgeCat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  RSex       RAgeCat                              n
+  &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt;                        &lt;int&gt;
+1 2 [Female] 2 [25-34]                          255
+2 2 [Female] 3 [35-44]                          298
+3 2 [Female] 4 [45-54]                          302
+4 2 [Female] 5 [55-59]                          124
+5 2 [Female] 6 [60-64]                          127
+6 2 [Female] 7 [65+]                            549
+7 2 [Female] 8 (NA) [DK/Refused/Not answered]     4</code></pre>
 </div>
 </div>
 
@@ -877,13 +721,13 @@ $ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Data management in R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data management in R</span></span>
+      <a href="./Factors.html" class="pagination-link" aria-label="Factors">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Factors</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Numeric variables.html" class="pagination-link" aria-label="Numeric variables">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numeric variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Renaming.html" class="pagination-link" aria-label="Renaming">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Renaming</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
