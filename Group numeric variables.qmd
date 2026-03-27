@@ -182,7 +182,7 @@ df %>% count(libauth_brack, libauth) %>% print(n=1000)
 
 #### Handling missing values
 
-Note, user missing values will be included if the breaks include them, see below. These would need dropping. 
+Note, user missing values will be included if the breaks include them, see below. These would need dropping.
 
 ```{r}
 
@@ -202,7 +202,7 @@ df %>% count(libauth_brack, libauth) %>% print(n=1000)
 
 ### cut() with a preset number of groups
 
-Using a single value to ask for a preset number of groups is particularly risky with user missing values, as below they are included by default. 
+Using a single value to ask for a preset number of groups is particularly risky with user missing values, as below they are included by default.
 
 ```{r}
 
@@ -218,14 +218,14 @@ df %>% count(libauth_brack, libauth) %>% print(n=1000)
 
 ```
 
-More properly... with `user_na_to_na` dropping the user missing values. 
+More properly... with `user_na_to_na` dropping the user missing values.
 
 *Note* the use of `dig.lab`, otherwise the break values are not clean, e.g. here the first break would be 0.996.
 
 From documentation:
 
 > When breaks is specified as a single number, the range of the data is divided into breaks pieces of equal length, and then the outer limits are moved away by 0.1% of the range to ensure that the extreme values both fall within the break intervals. (If x is a constant vector, equal-length intervals are created, one of which includes the single value.)
- 
+
 ```{r}
 
 # Actually the same settings as above again seem best
@@ -242,11 +242,14 @@ df %>% count(libauth_brack, libauth) %>% print(n=1000)
 
 ```
 
-<br> 
+<br>
 
 ### Nice cut
 
 This formats the output of cut. It assumes you'll want the breaks to close on the right and include the lowest value in the sequence of breaks.
+
+Access function: [nice_cut](Scripts/nice_cut.R). 
+
 
 ```{r}
 
@@ -297,9 +300,15 @@ nice_cut <- function(
 
 }
 
+writeLines(
+  c("nice_cut <-", deparse(nice_cut, width.cutoff = 500)),
+  file.path("Scripts/", "nice_cut.R")
+)
+
 ```
 
 At most basic, it takes a vector in the `variable` argument.
+
 ```{r}
 
 nice_cut(
@@ -329,7 +338,7 @@ df %>% mutate(libauth_nice_cut =
 
 ```
 
-Can also use user-defined values. 
+Can also use user-defined values.
 
 ```{r}
 
@@ -341,7 +350,6 @@ df %>% mutate(libauth_nice_cut =
   count(libauth_nice_cut)
 
 ```
-
 
 <br>
 
