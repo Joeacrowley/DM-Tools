@@ -1032,6 +1032,7 @@ Outliers:   0 (0%)
 <section id="nice-cut" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="nice-cut"><span class="header-section-number">4.3.3</span> Nice cut</h3>
 <p>This formats the output of cut. It assumes you’ll want the breaks to close on the right and include the lowest value in the sequence of breaks.</p>
+<p>Access function: <a href="Scripts/nice_cut.R">nice_cut</a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>nice_cut <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    variable, </span>
@@ -1078,7 +1079,12 @@ Outliers:   0 (0%)
 <span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> new_levels</span>
 <span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"nice_cut &lt;-"</span>, <span class="fu">deparse</span>(nice_cut, <span class="at">width.cutoff =</span> <span class="dv">500</span>)),</span>
+<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"Scripts/"</span>, <span class="st">"nice_cut.R"</span>)</span>
+<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>At most basic, it takes a vector in the <code>variable</code> argument.</p>
 <div class="cell">
@@ -1166,26 +1172,26 @@ Outliers:   0 (0%)
 <pre><code># A tibble: 21 × 2
    f               n
    &lt;fct&gt;       &lt;int&gt;
- 1 [-2.5,2.5]      5
- 2 (2.5,7.5]       7
- 3 (7.5,12.5]      1
+ 1 [-2.5,2.5]      2
+ 2 (2.5,7.5]       3
+ 3 (7.5,12.5]      5
  4 (12.5,17.5]     7
- 5 (17.5,22.5]     4
- 6 (22.5,27.5]     5
- 7 (27.5,32.5]     8
- 8 (32.5,37.5]     5
- 9 (37.5,42.5]     6
+ 5 (17.5,22.5]     2
+ 6 (22.5,27.5]     4
+ 7 (27.5,32.5]     5
+ 8 (32.5,37.5]    10
+ 9 (37.5,42.5]    10
 10 (42.5,47.5]     4
 11 (47.5,52.5]     5
-12 (52.5,57.5]     4
-13 (57.5,62.5]     6
-14 (62.5,67.5]     6
+12 (52.5,57.5]     6
+13 (57.5,62.5]     4
+14 (62.5,67.5]     8
 15 (67.5,72.5]     4
-16 (72.5,77.5]     6
+16 (72.5,77.5]     5
 17 (77.5,82.5]     3
-18 (82.5,87.5]     5
-19 (87.5,92.5]     5
-20 (92.5,97.5]     3
+18 (82.5,87.5]     4
+19 (87.5,92.5]     4
+20 (92.5,97.5]     4
 21 (97.5,102]      1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut_width</span>(<span class="fu">zap_missing</span>(df<span class="sc">$</span>NatFrEst), <span class="at">width =</span> <span class="fl">7.5</span>) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1457,26 +1463,26 @@ sub-multiple or multiple of the number of rows [8]</code></pre>
 <pre><code># A tibble: 20 × 3
    NatFrEst_quarts_wt NatFrEst      n
    &lt;fct&gt;              &lt;dbl+lbl&gt; &lt;int&gt;
- 1 (10,30]            20          286
- 2 (50,100]           57            2
- 3 [0,10]             10          354
- 4 (50,100]           59            1
- 5 (50,100]           93            1
- 6 (10,30]            23            1
- 7 (50,100]           75           77
- 8 [0,10]              5          192
- 9 (30,50]            46            2
-10 (30,50]            32            2
-11 (50,100]           78            2
-12 (50,100]           70          107
-13 (50,100]           99           19
-14 (10,30]            12            7
-15 (50,100]           65           29
-16 (10,30]            18            1
-17 (30,50]            50          436
-18 (50,100]           55           20
-19 (50,100]           95           10
-20 [0,10]              4           25</code></pre>
+ 1 (50,100]            88           2
+ 2 (30,50]             33          19
+ 3 (50,100]            75          77
+ 4 (10,30]             23           1
+ 5 (30,50]             35          45
+ 6 (50,100]            70         107
+ 7 (50,100]            79           1
+ 8 (30,50]             49           1
+ 9 (50,100]            65          29
+10 [0,10]               7          14
+11 (50,100]            51           2
+12 (50,100]           100          30
+13 (50,100]            68           2
+14 (50,100]            82           2
+15 [0,10]               3          43
+16 (50,100]            95          10
+17 (10,30]             12           7
+18 (50,100]            99          19
+19 (30,50]             40         188
+20 [0,10]               4          25</code></pre>
 </div>
 </div>
 </section>
