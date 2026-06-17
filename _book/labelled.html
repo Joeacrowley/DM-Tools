@@ -294,105 +294,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplified</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df, <span class="at">details =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable         label                                                    
-  1  Sserial          Archive Serial                                           
-  2  WtFactor         Final BSA weight                                         
-  3  RSex             Sex of respondent                                        
-  4  RAgeCat          Age of respondent(grouped)&lt;7 category&gt; dv                
-  5  eq_inc_quintiles Quintiles of total equivalised household income, net of ~
-  6  RClassGp         NS-SEC analytic classes [respondent] 6 category dv       
-  7  HEdQual3         Highest educational qual obtained - dv                   
-  8  Married          Marital status &lt;4 categories&gt; dv                         
-  9  ChildHh          Whether respondent has any children in household: dv     
- 10  skipmeal         How often do you or other members of your household skip~
- 11  paptype          Newspaper readership (grouped)                           
- 12  SMNews           How often, if at all, do you read the news via a social ~
- 13  PartyId2         Party political id (compressed) dv                       
- 14  Politics         How much interest do you have in politics?               
- 15  SocTrust         Generally speaking, would you say that most people can b~
- 16  Spend1           Which would be your highest priority for extra govt spen~
- 17  Dole             Opinions differ about the level of benefits for unemploy~
- 18  TaxSpend         If it had to choose, should govt reduce/increase/maintai~
- 19  MuchPov          Some people say there is very little real poverty in Bri~
- 20  Poverty1         Is someone in Britain in poverty if they had enough to b~
- 21  Poverty2         Is someone in Britain in poverty if they had enough to e~
- 22  NatFrEst         Out of every 100 people receiving benefits in Britain, h~
- 23  incdiffs         Differences in income in GB are too large?: SC B, C      
- 24  welfare2         Welfarism scale (welfhelp to proudwlf) dv                
- 25  leftrigh         Left-right scale (redistrb to indust4) dv                
- 26  libauth          Libertarian-authoritarian scale (TradVals to censor) dv  </code></pre>
+<pre><code> pos variable         label                                               
+  1  Sserial          Archive Serial                                      
+  2  WtFactor         Final BSA weight                                    
+  3  RSex             Sex of respondent                                   
+  4  RAgeCat          —                                                   
+  5  eq_inc_quintiles —                                                   
+  6  RClassGp         —                                                   
+  7  HEdQual3         —                                                   
+  8  Married          —                                                   
+  9  ChildHh          Whether respondent has any children in household: dv
+ 10  skipmeal         —                                                   
+ 11  paptype          —                                                   
+ 12  SMNews           —                                                   
+ 13  PartyId2         —                                                   
+ 14  Politics         —                                                   
+ 15  SocTrust         —                                                   
+ 16  Spend1           —                                                   
+ 17  Dole             —                                                   
+ 18  TaxSpend         —                                                   
+ 19  MuchPov          —                                                   
+ 20  Poverty1         —                                                   
+ 21  Poverty2         —                                                   
+ 22  NatFrEst         —                                                   
+ 23  incdiffs         —                                                   
+ 24  welfare2         —                                                   
+ 25  leftrigh         —                                                   
+ 26  libauth          —                                                   </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full output</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> pos variable         label               col_type missing values             
- 1   Sserial          Archive Serial      dbl+lbl  0       [-9] Refused       
-                                                           [-8] Don't know    
-                                                           [-2] Schedule not ~
-                                                           [-1] Not applicable
- 2   WtFactor         Final BSA weight    dbl+lbl  0       [-2] Skip, version~
-                                                           [-1] Item not appl~
- 3   RSex             Sex of respondent   dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Male           
+ 1   Sserial          Archive Serial      dbl      0                          
+ 2   WtFactor         Final BSA weight    dbl      0                          
+ 3   RSex             Sex of respondent   dbl+lbl  0       [1] Male           
                                                            [2] Female         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 4   RAgeCat          Age of respondent(~ dbl+lbl  6       [-1] Item not appl~
-                                                           [1] 18-24          
+ 4   RAgeCat          —                   dbl+lbl  10      [1] 18-24          
                                                            [2] 25-34          
                                                            [3] 35-44          
                                                            [4] 45-54          
                                                            [5] 55-59          
                                                            [6] 60-64          
                                                            [7] 65+            
-                                                           [8] DK/Refused/Not~
- 5   eq_inc_quintiles Quintiles of total~ dbl+lbl  932     [-1] Item not appl~
-                                                           [1] Lowest quintil~
+ 5   eq_inc_quintiles —                   dbl+lbl  934     [1] Lowest quintil~
                                                            [2] 2nd quintile -~
                                                            [3] 3rd quintile -~
                                                            [4] 4th quintile -~
                                                            [5] Highest quinti~
- 6   RClassGp         NS-SEC analytic cl~ dbl+lbl  115     [-1] Not applicable
-                                                           [1] Managerial &amp; p~
+ 6   RClassGp         —                   dbl+lbl  102     [1] Managerial &amp; p~
                                                            [2] Intermediate o~
                                                            [3] Employers in s~
                                                            [4] Lower supervis~
                                                            [5] Semi-routine &amp;~
-                                                           [8] Not classifiab~
- 7   HEdQual3         Highest educationa~ dbl+lbl  66      [1] Degree         
+ 7   HEdQual3         —                   dbl+lbl  68      [1] Degree         
                                                            [2] Higher educ be~
                                                            [3] O level or equ~
                                                            [4] No qualificati~
-                                                           [8] DK/Refusal/NA  
- 8   Married          Marital status &lt;4 ~ dbl+lbl  3       [-1] Item not appl~
-                                                           [1] Married/living~
+ 8   Married          —                   dbl+lbl  8       [1] Married/living~
                                                            [2] Separated/divo~
                                                            [3] Widowed        
                                                            [4] Never married  
-                                                           [9] No information 
- 9   ChildHh          Whether respondent~ dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Yes            
+ 9   ChildHh          Whether respondent~ dbl+lbl  0       [1] Yes            
                                                            [2] No             
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 10  skipmeal         How often do you o~ dbl+lbl  1567    [-1] skip, didn`t ~
-                                                           [1] Never          
+ 10  skipmeal         —                   dbl+lbl  1586    [1] Never          
                                                            [2] Less than once~
                                                            [3] Once a month   
                                                            [4] Several times ~
                                                            [5] Once a week    
                                                            [6] Several times ~
                                                            [7] Every day      
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 11  paptype          Newspaper readersh~ dbl+lbl  1       [-1] Item not appl~
-                                                           [0] No paper       
-                                                           [1] Popular        
-                                                           [2] Quality (inc r~
+ 11  paptype          —                   dbl+lbl  1       [1] No paper       
+                                                           [2] Popular        
+                                                           [3] Quality (inc r~
                                                            [4] Other/more tha~
-                                                           [8] DK/Ref         
- 12  SMNews           How often, if at a~ dbl+lbl  2       [-1] Item not appl~
-                                                           [1] Several times ~
+ 12  SMNews           —                   dbl+lbl  4       [1] Several times ~
                                                            [2] Every day      
                                                            [3] Several times ~
                                                            [4] At least once ~
@@ -400,31 +376,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                                                            [6] Once a month   
                                                            [7] Less often tha~
                                                            [8] Never          
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 13  PartyId2         Party political id~ dbl+lbl  267     [-1] Item not appl~
-                                                           [1] Conservative   
+ 13  PartyId2         —                   dbl+lbl  257     [1] Conservative   
                                                            [2] Labour         
                                                            [3] Liberal Democr~
                                                            [4] Other party    
                                                            [5] None           
                                                            [6] Green Party    
-                                                           [8] Other/DK/Ref   
- 14  Politics         How much interest ~ dbl+lbl  1       [-1] Item not appl~
-                                                           [1] ... a great de~
+ 14  Politics         —                   dbl+lbl  3       [1] ... a great de~
                                                            [2] quite a lot,   
                                                            [3] some,          
                                                            [4] not very much, 
                                                            [5] or, none at al~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 15  SocTrust         Generally speaking~ dbl+lbl  2165    [-1] Item not appl~
-                                                           [1] Most people ca~
+ 15  SocTrust         —                   dbl+lbl  2145    [1] Most people ca~
                                                            [2] Can`t be too c~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 16  Spend1           Which would be you~ dbl+lbl  2152    [-1] Item not appl~
-                                                           [1] Education      
+ 16  Spend1           —                   dbl+lbl  2132    [1] Education      
                                                            [2] Defence        
                                                            [3] Health         
                                                            [4] Housing        
@@ -435,93 +400,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                                                            [9] Help for indus~
                                                            [10] Overseas aid  
                                                            [11] (None of thes~
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 17  Dole             Opinions differ ab~ dbl+lbl  154     [-1] Item not appl~
-                                                           [1] ...benefits fo~
+ 17  Dole             —                   dbl+lbl  149     [1] ...benefits fo~
                                                            [2] or, benefits f~
                                                            [3] (Neither)      
                                                            [4] BOTH: UNEMPLOY~
                                                            [5] BOTH: UNEMPLOY~
                                                            [6] About right/in~
                                                            [7] Other answer (~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 18  TaxSpend         If it had to choos~ dbl+lbl  48      [-1] Item not appl~
-                                                           [1] Reduce taxes a~
+ 18  TaxSpend         —                   dbl+lbl  48      [1] Reduce taxes a~
                                                            [2] Keep taxes and~
                                                            [3] Increase taxes~
                                                            [4] (None)         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 19  MuchPov          Some people say th~ dbl+lbl  135     [-1] Item not appl~
-                                                           [1] ... that there~
+ 19  MuchPov          —                   dbl+lbl  140     [1] ... that there~
                                                            [2] or, that there~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 20  Poverty1         Is someone in Brit~ dbl+lbl  80      [-1] Item not appl~
-                                                           [1] Was in poverty 
+ 20  Poverty1         —                   dbl+lbl  76      [1] Was in poverty 
                                                            [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 21  Poverty2         Is someone in Brit~ dbl+lbl  58      [-1] Item not appl~
-                                                           [1] Was in poverty 
+ 21  Poverty2         —                   dbl+lbl  51      [1] Was in poverty 
                                                            [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 22  NatFrEst         Out of every 100 p~ dbl+lbl  246     [998] Don`t know   
-                                                           [999] Refusal      
- 23  incdiffs         Differences in inc~ dbl+lbl  1574    [-1] skip, didn`t ~
-                                                           [1] Strongly agree 
+ 22  NatFrEst         —                   dbl      235                        
+ 23  incdiffs         —                   dbl+lbl  1601    [1] Strongly agree 
                                                            [2] Agree          
                                                            [3] Neither agree ~
                                                            [4] Disagree       
                                                            [5] Strongly disag~
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 24  welfare2         Welfarism scale (w~ dbl+lbl  642     [-1] skip, didn`t ~
-                                                           [1] sympathetic    
-                                                           [5] poor don`t des~
-                                                           [9] Missing values 
- 25  leftrigh         Left-right scale (~ dbl+lbl  645     [-1] skip, didn`t ~
-                                                           [1] left           
-                                                           [5] right          
-                                                           [9] Missing values 
- 26  libauth          Libertarian-author~ dbl+lbl  637     [-1] skip, didn`t ~
-                                                           [1] libertarian    
-                                                           [5] authoritarian  
-                                                           [9] Missing values </code></pre>
+ 24  welfare2         —                   dbl      647                        
+ 25  leftrigh         —                   dbl      658                        
+ 26  libauth          —                   dbl      645                        </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Single variable</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df, <span class="st">"paptype"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable label                   col_type missing values                 
- 11  paptype  Newspaper readership (~ dbl+lbl  1       [-1] Item not applicab~
-                                                       [0] No paper           
-                                                       [1] Popular            
-                                                       [2] Quality (inc regio~
-                                                       [4] Other/more than on~
-                                                       [8] DK/Ref             </code></pre>
+<pre><code> pos variable label col_type missing values                       
+ 11  paptype  —     dbl+lbl  1       [1] No paper                 
+                                     [2] Popular                  
+                                     [3] Quality (inc regional)   
+                                     [4] Other/more than one paper</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select particular variables</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df, <span class="fu">c</span>(<span class="st">"paptype"</span>, <span class="st">"RAgeCat"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable label                   col_type missing values                 
- 4   RAgeCat  Age of respondent(grou~ dbl+lbl  6       [-1] Item not applicab~
-                                                       [1] 18-24              
-                                                       [2] 25-34              
-                                                       [3] 35-44              
-                                                       [4] 45-54              
-                                                       [5] 55-59              
-                                                       [6] 60-64              
-                                                       [7] 65+                
-                                                       [8] DK/Refused/Not ans~
- 11  paptype  Newspaper readership (~ dbl+lbl  1       [-1] Item not applicab~
-                                                       [0] No paper           
-                                                       [1] Popular            
-                                                       [2] Quality (inc regio~
-                                                       [4] Other/more than on~
-                                                       [8] DK/Ref             </code></pre>
+<pre><code> pos variable label col_type missing values                       
+ 4   RAgeCat  —     dbl+lbl  10      [1] 18-24                    
+                                     [2] 25-34                    
+                                     [3] 35-44                    
+                                     [4] 45-54                    
+                                     [5] 55-59                    
+                                     [6] 60-64                    
+                                     [7] 65+                      
+ 11  paptype  —     dbl+lbl  1       [1] No paper                 
+                                     [2] Popular                  
+                                     [3] Quality (inc regional)   
+                                     [4] Other/more than one paper</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate_dictionary() == look_for()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -533,10 +462,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">convert_list_columns_to_character</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
-    pos variable label                      col_type missing levels value_labels
-  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;                      &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;       
-1     4 RAgeCat  Age of respondent(grouped… dbl+lbl        6 ""     [-1] Item n…
-2    11 paptype  Newspaper readership (gro… dbl+lbl        1 ""     [-1] Item n…</code></pre>
+    pos variable label col_type missing levels value_labels                     
+  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;                            
+1     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 ""     [1] 18-24; [2] 25-34; [3] 35-44;…
+2    11 paptype  &lt;NA&gt;  dbl+lbl        1 ""     [1] No paper; [2] Popular; [3] Q…</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -546,24 +475,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lookfor_to_long_format</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">convert_list_columns_to_character</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 15 × 7
-     pos variable label                     col_type missing levels value_labels
-   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;                     &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;       
- 1     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [-1] Item n…
- 2     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [1] 18-24   
- 3     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [2] 25-34   
- 4     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [3] 35-44   
- 5     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [4] 45-54   
- 6     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [5] 55-59   
- 7     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [6] 60-64   
- 8     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [7] 65+     
- 9     4 RAgeCat  Age of respondent(groupe… dbl+lbl        6 &lt;NA&gt;   [8] DK/Refu…
-10    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [-1] Item n…
-11    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [0] No paper
-12    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [1] Popular 
-13    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [2] Quality…
-14    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [4] Other/m…
-15    11 paptype  Newspaper readership (gr… dbl+lbl        1 &lt;NA&gt;   [8] DK/Ref  </code></pre>
+<pre><code># A tibble: 11 × 7
+     pos variable label col_type missing levels value_labels                 
+   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;                        
+ 1     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [1] 18-24                    
+ 2     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [2] 25-34                    
+ 3     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [3] 35-44                    
+ 4     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [4] 45-54                    
+ 5     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [5] 55-59                    
+ 6     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [6] 60-64                    
+ 7     4 RAgeCat  &lt;NA&gt;  dbl+lbl       10 &lt;NA&gt;   [7] 65+                      
+ 8    11 paptype  &lt;NA&gt;  dbl+lbl        1 &lt;NA&gt;   [1] No paper                 
+ 9    11 paptype  &lt;NA&gt;  dbl+lbl        1 &lt;NA&gt;   [2] Popular                  
+10    11 paptype  &lt;NA&gt;  dbl+lbl        1 &lt;NA&gt;   [3] Quality (inc regional)   
+11    11 paptype  &lt;NA&gt;  dbl+lbl        1 &lt;NA&gt;   [4] Other/more than one paper</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -1096,58 +1021,58 @@ Labels:
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(RAgeCat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
-  RAgeCat                              n
-  &lt;dbl+lbl&gt;                        &lt;int&gt;
-1 1 [18-24]                          202
-2 2 [25-34]                          429
-3 3 [35-44]                          525
-4 4 [45-54]                          543
-5 5 [55-59]                          249
-6 6 [60-64]                          261
-7 7 [65+]                           1009
-8 8 (NA) [DK/Refused/Not answered]     6</code></pre>
+  RAgeCat        n
+  &lt;dbl+lbl&gt;  &lt;int&gt;
+1  1 [18-24]   190
+2  2 [25-34]   447
+3  3 [35-44]   501
+4  4 [45-54]   567
+5  5 [55-59]   235
+6  6 [60-64]   288
+7  7 [65+]     986
+8 NA            10</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">zap_missing</span>(RAgeCat)) <span class="co"># Remove user_na only, convert to NA. </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   `zap_missing(RAgeCat)`     n
   &lt;dbl+lbl&gt;              &lt;int&gt;
-1  1 [18-24]               202
-2  2 [25-34]               429
-3  3 [35-44]               525
-4  4 [45-54]               543
-5  5 [55-59]               249
-6  6 [60-64]               261
-7  7 [65+]                1009
-8 NA                         6</code></pre>
+1  1 [18-24]               190
+2  2 [25-34]               447
+3  3 [35-44]               501
+4  4 [45-54]               567
+5  5 [55-59]               235
+6  6 [60-64]               288
+7  7 [65+]                 986
+8 NA                        10</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">zap_labels</span>(RAgeCat)) <span class="co"># Remove all labels, user_na to NA by defaault</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   `zap_labels(RAgeCat)`     n
                   &lt;dbl&gt; &lt;int&gt;
-1                     1   202
-2                     2   429
-3                     3   525
-4                     4   543
-5                     5   249
-6                     6   261
-7                     7  1009
-8                    NA     6</code></pre>
+1                     1   190
+2                     2   447
+3                     3   501
+4                     4   567
+5                     5   235
+6                     6   288
+7                     7   986
+8                    NA    10</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">zap_labels</span>(RAgeCat, <span class="at">user_na =</span> T)) <span class="co"># Retain user_na as valid value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   `zap_labels(RAgeCat, user_na = T)`     n
                                &lt;dbl&gt; &lt;int&gt;
-1                                  1   202
-2                                  2   429
-3                                  3   525
-4                                  4   543
-5                                  5   249
-6                                  6   261
-7                                  7  1009
-8                                  8     6</code></pre>
+1                                  1   190
+2                                  2   447
+3                                  3   501
+4                                  4   567
+5                                  5   235
+6                                  6   288
+7                                  7   986
+8                                 NA    10</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -1439,19 +1364,17 @@ Labels:
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(skipmeal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 2
-   skipmeal                                           n
-   &lt;dbl+lbl&gt;                                      &lt;int&gt;
- 1 -1 (NA) [skip, didn`t return SC questionnaire]  1483
- 2  1 [Never]                                      1407
- 3  2 [Less than once a month]                       78
- 4  3 [Once a month]                                 32
- 5  4 [Several times a month]                        53
- 6  5 [Once a week]                                  39
- 7  6 [Several times a week]                         30
- 8  7 [Every day]                                    18
- 9  8 (NA) [Can't choose]                            54
-10  9 (NA) [Not answered]                            30</code></pre>
+<pre><code># A tibble: 8 × 2
+  skipmeal                        n
+  &lt;dbl+lbl&gt;                   &lt;int&gt;
+1  1 [Never]                   1395
+2  2 [Less than once a month]    84
+3  3 [Once a month]              21
+4  4 [Several times a month]     50
+5  5 [Once a week]               42
+6  6 [Several times a week]      25
+7  7 [Every day]                 21
+8 NA                           1586</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">skipmeal2 =</span> <span class="fu">case_when</span>(</span>
@@ -1462,28 +1385,26 @@ Labels:
 <span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb152-8"><a href="#cb152-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(skipmeal2, skipmeal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   skipmeal2                        skipmeal                                   n
-   &lt;dbl+lbl&gt;                        &lt;dbl+lbl&gt;                              &lt;int&gt;
- 1  1 [Less often than once a week]  1 [Never]                              1407
- 2  1 [Less often than once a week]  2 [Less than once a month]               78
- 3  1 [Less often than once a week]  3 [Once a month]                         32
- 4  1 [Less often than once a week]  4 [Several times a month]                53
- 5  2 [Once a week or more]          5 [Once a week]                          39
- 6  2 [Once a week or more]          6 [Several times a week]                 30
- 7  2 [Once a week or more]          7 [Every day]                            18
- 8 NA                               -1 (NA) [skip, didn`t return SC quest…  1483
- 9 NA                                8 (NA) [Can't choose]                    54
-10 NA                                9 (NA) [Not answered]                    30</code></pre>
+<pre><code># A tibble: 8 × 3
+  skipmeal2                        skipmeal                        n
+  &lt;dbl+lbl&gt;                        &lt;dbl+lbl&gt;                   &lt;int&gt;
+1  1 [Less often than once a week]  1 [Never]                   1395
+2  1 [Less often than once a week]  2 [Less than once a month]    84
+3  1 [Less often than once a week]  3 [Once a month]              21
+4  1 [Less often than once a week]  4 [Several times a month]     50
+5  2 [Once a week or more]          5 [Once a week]               42
+6  2 [Once a week or more]          6 [Several times a week]      25
+7  2 [Once a week or more]          7 [Every day]                 21
+8 NA                               NA                           1586</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">to_factor</span>(skipmeal2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   `to_factor(skipmeal2)`          n
   &lt;fct&gt;                       &lt;int&gt;
-1 Less often than once a week  1570
-2 Once a week or more            87
-3 &lt;NA&gt;                         1567</code></pre>
+1 Less often than once a week  1550
+2 Once a week or more            88
+3 &lt;NA&gt;                         1586</code></pre>
 </div>
 </div>
 </section>
@@ -1493,27 +1414,24 @@ Labels:
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 33 × 2
-   libauth                                            n
-   &lt;dbl+lbl&gt;                                      &lt;int&gt;
- 1 -1 (NA) [skip, didn`t return SC questionnaire]   588
- 2  1 [libertarian]                                   3
- 3  1.17                                              3
- 4  1.33                                              2
- 5  1.5                                              11
- 6  1.67                                             19
- 7  1.83                                             28
- 8  2                                                33
- 9  2.17                                             41
-10  2.33                                             62
-# ℹ 23 more rows</code></pre>
+<pre><code># A tibble: 30 × 2
+   libauth     n
+     &lt;dbl&gt; &lt;int&gt;
+ 1    1        2
+ 2    1.17     7
+ 3    1.33     4
+ 4    1.5      7
+ 5    1.67    11
+ 6    1.83    33
+ 7    2       21
+ 8    2.17    36
+ 9    2.33    82
+10    2.4      7
+# ℹ 20 more rows</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(df<span class="sc">$</span>libauth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>skip, didn`t return SC questionnaire                          libertarian 
-                                  -1                                    1 
-                       authoritarian                       Missing values 
-                                   5                                    9 </code></pre>
+<pre><code>NULL</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">libauth2 =</span> <span class="fu">add_value_labels</span>(libauth, <span class="fu">c</span>(<span class="st">"Libertarian"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Authoritarian"</span> <span class="ot">=</span> <span class="dv">5</span>)), </span>
@@ -1526,41 +1444,39 @@ Labels:
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth2) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 2
+<pre><code># A tibble: 30 × 2
    libauth2               n
    &lt;dbl+lbl&gt;          &lt;int&gt;
- 1  1 [Libertarian]       3
- 2  1.17                  3
- 3  1.33                  2
- 4  1.5                  11
- 5  1.67                 19
- 6  1.83                 28
- 7  2                    33
- 8  2.17                 41
- 9  2.33                 62
-10  2.4                   3
-11  2.5                  77
-12  2.67                 93
-13  2.83                117
-14  3                   172
-15  3.17                161
-16  3.33                207
+ 1  1 [Libertarian]       2
+ 2  1.17                  7
+ 3  1.33                  4
+ 4  1.5                   7
+ 5  1.67                 11
+ 6  1.83                 33
+ 7  2                    21
+ 8  2.17                 36
+ 9  2.33                 82
+10  2.4                   7
+11  2.5                  73
+12  2.67                 75
+13  2.83                106
+14  3                   171
+15  3.17                186
+16  3.33                204
 17  3.4                   1
-18  3.5                 225
-19  3.6                   3
-20  3.67                256
-21  3.83                241
-22  4                   220
-23  4.17                171
-24  4.2                   2
-25  4.33                153
-26  4.4                   2
-27  4.5                 104
-28  4.6                   1
-29  4.67                 68
-30  4.83                 41
-31  5 [Authoritarian]    67
-32 NA                   637</code></pre>
+18  3.5                 224
+19  3.6                   2
+20  3.67                237
+21  3.83                231
+22  4                   221
+23  4.17                176
+24  4.33                149
+25  4.5                 105
+26  4.6                   4
+27  4.67                 73
+28  4.83                 60
+29  5 [Authoritarian]    71
+30 NA                   645</code></pre>
 </div>
 </div>
 </section>
@@ -1577,32 +1493,27 @@ Labels:
 
 Class:      factor (numeric)  
 Length:     3,224  
-Levels:     8: [-1] skip, didn`t return SC questionnaire, [1] Strongly agree, [2] ...`  
-Available:  3,224 (100%, NA: 0 = 0%)  
-Unique:     8
+Levels:     5: [1] Strongly agree, [2] Agree, [3] Neither agree nor disagree, [4] ...  
+Available:  1,623 (50.34%, NA: 1,601 = 49.66%)  
+Unique:     5
 
 
-|   |Item                                       |  Count|  Percent|  Cum. Count|  Cum. Percent|
-|:--|:------------------------------------------|------:|--------:|-----------:|-------------:|
-|1  |[-1] skip, didn`t return SC questionnaire  |   1483|   46.00%|        1483|        46.00%|
-|2  |[2] Agree                                  |    710|   22.02%|        2193|        68.02%|
-|3  |[1] Strongly agree                         |    621|   19.26%|        2814|        87.28%|
-|4  |[3] Neither agree nor disagree             |    244|    7.57%|        3058|        94.85%|
-|5  |[4] Disagree                               |     57|    1.77%|        3115|        96.62%|
-|6  |[8] Can't choose                           |     47|    1.46%|        3162|        98.08%|
-|7  |[9] Not answered                           |     44|    1.36%|        3206|        99.44%|
-|8  |[5] Strongly disagree                      |     18|    0.56%|        3224|       100.00%|</code></pre>
+|   |Item                            |  Count|  Percent|  Cum. Count|  Cum. Percent|
+|:--|:-------------------------------|------:|--------:|-----------:|-------------:|
+|1  |[2] Agree                       |    712|   43.87%|         712|        43.87%|
+|2  |[1] Strongly agree              |    610|   37.58%|        1322|        81.45%|
+|3  |[3] Neither agree nor disagree  |    247|   15.22%|        1569|        96.67%|
+|4  |[4] Disagree                    |     40|    2.46%|        1609|        99.14%|
+|5  |[5] Strongly disagree           |     14|    0.86%|        1623|       100.00%|</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(df<span class="sc">$</span>incdiffs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>skip, didn`t return SC questionnaire                       Strongly agree 
-                                  -1                                    1 
-                               Agree           Neither agree nor disagree 
-                                   2                                    3 
-                            Disagree                    Strongly disagree 
-                                   4                                    5 
-                        Can't choose                         Not answered 
-                                   8                                    9 </code></pre>
+<pre><code>            Strongly agree                      Agree 
+                         1                          2 
+Neither agree nor disagree                   Disagree 
+                         3                          4 
+         Strongly disagree 
+                         5 </code></pre>
 </div>
 </div>
 <p>This first example shows how it can go wrong.</p>
@@ -1623,29 +1534,25 @@ Unique:     8
 <span id="cb168-11"><a href="#cb168-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb168-12"><a href="#cb168-12" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(df<span class="sc">$</span>incdiffs2) <span class="co"># value labels themselves unchanged</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>skip, didn`t return SC questionnaire                       Strongly agree 
-                                  -1                                    1 
-                               Agree           Neither agree nor disagree 
-                                   2                                    3 
-                            Disagree                    Strongly disagree 
-                                   4                                    5 
-                        Can't choose                         Not answered 
-                                   8                                    9 </code></pre>
+<pre><code>            Strongly agree                      Agree 
+                         1                          2 
+Neither agree nor disagree                   Disagree 
+                         3                          4 
+         Strongly disagree 
+                         5 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># But numeric values in the data have been recoded</span></span>
 <span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">as_factor</span>(incdiffs2), <span class="fu">as_factor</span>(incdiffs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 3
-  `as_factor(incdiffs2)`     `as_factor(incdiffs)`                    n
-  &lt;fct&gt;                      &lt;fct&gt;                                &lt;int&gt;
-1 Strongly agree             Strongly agree                         621
-2 Strongly agree             Agree                                  710
-3 Neither agree nor disagree Neither agree nor disagree             244
-4 Strongly disagree          Disagree                                57
-5 Strongly disagree          Strongly disagree                       18
-6 Not answered               skip, didn`t return SC questionnaire  1483
-7 Not answered               Can't choose                            47
-8 Not answered               Not answered                            44</code></pre>
+<pre><code># A tibble: 6 × 3
+  `as_factor(incdiffs2)`     `as_factor(incdiffs)`          n
+  &lt;fct&gt;                      &lt;fct&gt;                      &lt;int&gt;
+1 Strongly agree             Strongly agree               610
+2 Strongly agree             Agree                        712
+3 Neither agree nor disagree Neither agree nor disagree   247
+4 Strongly disagree          Disagree                      40
+5 Strongly disagree          Strongly disagree             14
+6 &lt;NA&gt;                       &lt;NA&gt;                        1601</code></pre>
 </div>
 </div>
 <p>Alterntaively we can set the <code>.combine_value_labels</code> argument, but this code won’t run.</p>
@@ -1653,36 +1560,23 @@ Unique:     8
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>incdiffs) <span class="co"># values -1, 8 and 9 are user tagged NA. </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$label
-[1] "Differences in income in GB are too large?: SC B, C"
-
-$na_values
-[1] -1  8  9
+<pre><code>$format.spss
+[1] "F8.0"
 
 $class
-[1] "haven_labelled_spss" "haven_labelled"      "vctrs_vctr"         
-[4] "double"             
-
-$format.spss
-[1] "F2.0"
-
-$display_width
-[1] 10
+[1] "haven_labelled" "vctrs_vctr"     "double"        
 
 $labels
-skip, didn`t return SC questionnaire                       Strongly agree 
-                                  -1                                    1 
-                               Agree           Neither agree nor disagree 
-                                   2                                    3 
-                            Disagree                    Strongly disagree 
-                                   4                                    5 
-                        Can't choose                         Not answered 
-                                   8                                    9 </code></pre>
+            Strongly agree                      Agree 
+                         1                          2 
+Neither agree nor disagree                   Disagree 
+                         3                          4 
+         Strongly disagree 
+                         5 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df<span class="sc">$</span>incdiffs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "haven_labelled_spss" "haven_labelled"      "vctrs_vctr"         
-[4] "double"             </code></pre>
+<pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incdiffs2 =</span> <span class="fu">recode</span>(incdiffs, </span>
@@ -1693,23 +1587,14 @@ skip, didn`t return SC questionnaire                       Strongly agree
 <span id="cb176-7"><a href="#cb176-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>L,</span>
 <span id="cb176-8"><a href="#cb176-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">.combine_value_labels =</span> T</span>
 <span id="cb176-9"><a href="#cb176-9" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `mutate()`:
-ℹ In argument: `incdiffs2 = recode(...)`.
-Caused by error in `vec_slice()`:
-! Can't subset elements past the end.
-ℹ Location 1 doesn't exist.
-ℹ There are only 0 elements.</code></pre>
-</div>
 </div>
 <p>Once we remove user defined NA, the class changes</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>incdiffs <span class="sc">%&gt;%</span> class</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>incdiffs <span class="sc">%&gt;%</span> class</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "haven_labelled_spss" "haven_labelled"      "vctrs_vctr"         
-[4] "double"             </code></pre>
+<pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">user_na_to_na</span>(df<span class="sc">$</span>incdiffs) <span class="sc">%&gt;%</span> class <span class="co"># no longer has haven_labelled_spss</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">user_na_to_na</span>(df<span class="sc">$</span>incdiffs) <span class="sc">%&gt;%</span> class <span class="co"># no longer has haven_labelled_spss</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
@@ -1718,33 +1603,31 @@ Caused by error in `vec_slice()`:
 <p>This interim step (removing user NA values and the haven_labelled_spss class) needs to happen before recoding.</p>
 <p>Now these values in the data are changed and new combined labels are also added.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In tidyr style, collapsing variable labels...</span></span>
-<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb182-3"><a href="#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incdiffs2 =</span> <span class="fu">user_na_to_na</span>(incdiffs),</span>
-<span id="cb182-4"><a href="#cb182-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">incdiffs2 =</span> <span class="fu">recode</span>(incdiffs2, </span>
-<span id="cb182-5"><a href="#cb182-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>L, </span>
-<span id="cb182-6"><a href="#cb182-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>L,</span>
-<span id="cb182-7"><a href="#cb182-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>L,</span>
-<span id="cb182-8"><a href="#cb182-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>L,</span>
-<span id="cb182-9"><a href="#cb182-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>L,</span>
-<span id="cb182-10"><a href="#cb182-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">.combine_value_labels =</span> T)) </span>
-<span id="cb182-11"><a href="#cb182-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-12"><a href="#cb182-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb182-13"><a href="#cb182-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(incdiffs, incdiffs2) <span class="sc">%&gt;%</span> </span>
-<span id="cb182-14"><a href="#cb182-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">to_factor</span>(.x, <span class="at">levels =</span><span class="st">"p"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb182-15"><a href="#cb182-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(incdiffs, incdiffs2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In tidyr style, collapsing variable labels...</span></span>
+<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb181-3"><a href="#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incdiffs2 =</span> <span class="fu">user_na_to_na</span>(incdiffs),</span>
+<span id="cb181-4"><a href="#cb181-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">incdiffs2 =</span> <span class="fu">recode</span>(incdiffs2, </span>
+<span id="cb181-5"><a href="#cb181-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>L, </span>
+<span id="cb181-6"><a href="#cb181-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>L,</span>
+<span id="cb181-7"><a href="#cb181-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>L,</span>
+<span id="cb181-8"><a href="#cb181-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>L,</span>
+<span id="cb181-9"><a href="#cb181-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>L,</span>
+<span id="cb181-10"><a href="#cb181-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">.combine_value_labels =</span> T)) </span>
+<span id="cb181-11"><a href="#cb181-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-12"><a href="#cb181-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb181-13"><a href="#cb181-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(incdiffs, incdiffs2) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-14"><a href="#cb181-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">to_factor</span>(.x, <span class="at">levels =</span><span class="st">"p"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-15"><a href="#cb181-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(incdiffs, incdiffs2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 3
-  incdiffs                                  incdiffs2                          n
-  &lt;fct&gt;                                     &lt;fct&gt;                          &lt;int&gt;
-1 [-1] skip, didn`t return SC questionnaire &lt;NA&gt;                            1483
-2 [1] Strongly agree                        [1] Strongly agree / Agree       621
-3 [2] Agree                                 [1] Strongly agree / Agree       710
-4 [3] Neither agree nor disagree            [2] Neither agree nor disagree   244
-5 [4] Disagree                              [3] Disagree / Strongly disag…    57
-6 [5] Strongly disagree                     [3] Disagree / Strongly disag…    18
-7 [8] Can't choose                          &lt;NA&gt;                              47
-8 [9] Not answered                          &lt;NA&gt;                              44</code></pre>
+<pre><code># A tibble: 6 × 3
+  incdiffs                       incdiffs2                            n
+  &lt;fct&gt;                          &lt;fct&gt;                            &lt;int&gt;
+1 [1] Strongly agree             [1] Strongly agree / Agree         610
+2 [2] Agree                      [1] Strongly agree / Agree         712
+3 [3] Neither agree nor disagree [2] Neither agree nor disagree     247
+4 [4] Disagree                   [3] Disagree / Strongly disagree    40
+5 [5] Strongly disagree          [3] Disagree / Strongly disagree    14
+6 &lt;NA&gt;                           &lt;NA&gt;                              1601</code></pre>
 </div>
 </div>
 

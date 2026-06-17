@@ -251,15 +251,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="packages" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">2.1</span> Packages</h2>
 <div class="cell" data-warnings="false">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="load-bsa-teaching-data" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="load-bsa-teaching-data"><span class="header-section-number">2.2</span> Load BSA teaching data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">'/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav'</span>, <span class="at">user_na =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"synthetic_bsa2019_sav.sav"</span>), <span class="at">user_na =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="variable-summary" class="level2" data-number="2.3">
@@ -279,133 +280,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,224
 Columns: 26
-$ Sserial          &lt;dbl+lbl&gt; 310001, 310002, 310003, 310004, 310005, 310006, 3…
-$ WtFactor         &lt;dbl+lbl&gt; 0.9119594, 0.4439626, 1.2182741, 1.5839969, 0.474…
-$ RSex             &lt;dbl+lbl&gt; 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 2, 2…
-$ RAgeCat          &lt;dbl+lbl&gt; 6, 3, 4, 2, 6, 4, 2, 4, 4, 1, 7, 1, 7, 3, 3, 7, 7…
-$ eq_inc_quintiles &lt;dbl+lbl&gt; -1,  5, -1,  4, -1,  1,  5, -1, -1, -1, -1,  2, -…
-$ RClassGp         &lt;dbl+lbl&gt; 1, 1, 1, 1, 5, 3, 1, 1, 1, 5, 3, 5, 5, 1, 3, 2, 1…
-$ HEdQual3         &lt;dbl+lbl&gt; 2, 2, 3, 2, 4, 8, 1, 3, 1, 2, 4, 2, 4, 1, 2, 2, 3…
-$ Married          &lt;dbl+lbl&gt; 1, 2, 1, 4, 4, 1, 4, 1, 1, 4, 1, 4, 4, 1, 1, 1, 3…
-$ ChildHh          &lt;dbl+lbl&gt; 2, 2, 1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 2, 2…
-$ skipmeal         &lt;dbl+lbl&gt; -1,  1, -1, -1,  1, -1,  1,  1,  1, -1,  1,  2, -…
-$ paptype          &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 0, 0, 2, 4, 0, 1, 0, 1, 0, 0, 1, 1…
-$ SMNews           &lt;dbl+lbl&gt; 8, 1, 2, 2, 8, 3, 1, 4, 8, 8, 8, 7, 8, 8, 3, 8, 1…
-$ PartyId2         &lt;dbl+lbl&gt; 8, 8, 4, 2, 3, 2, 2, 8, 3, 8, 1, 5, 2, 5, 3, 8, 2…
-$ Politics         &lt;dbl+lbl&gt; 4, 3, 4, 3, 5, 3, 1, 1, 1, 5, 1, 4, 3, 3, 3, 2, 3…
-$ SocTrust         &lt;dbl+lbl&gt;  1, -1,  2,  1, -1,  2, -1, -1, -1,  2, -1, -1,  …
-$ Spend1           &lt;dbl+lbl&gt;  3, -1,  3,  3, -1,  9, -1, -1, -1,  3, -1, -1,  …
-$ Dole             &lt;dbl+lbl&gt; 3, 2, 2, 3, 2, 2, 1, 8, 2, 2, 3, 1, 3, 1, 2, 3, 2…
-$ TaxSpend         &lt;dbl+lbl&gt; 3, 3, 2, 3, 3, 2, 3, 3, 3, 2, 3, 3, 2, 3, 3, 2, 3…
-$ MuchPov          &lt;dbl+lbl&gt; 8, 2, 2, 2, 1, 1, 2, 2, 2, 8, 1, 2, 1, 2, 2, 2, 1…
-$ Poverty1         &lt;dbl+lbl&gt; 2, 2, 2, 2, 2, 1, 1, 1, 1, 8, 2, 2, 1, 1, 2, 1, 8…
-$ Poverty2         &lt;dbl+lbl&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 8, 2, 1, 1, 1, 2, 1, 1…
-$ NatFrEst         &lt;dbl+lbl&gt;   5,  30,  50,  50,  50,  10,   1, 998,   5,  50,…
-$ incdiffs         &lt;dbl+lbl&gt; -1,  2, -1, -1,  4, -1,  2,  1,  1, -1,  3,  2, -…
-$ welfare2         &lt;dbl+lbl&gt;  2.500000,  3.125000,  3.125000,  2.250000,  3.37…
-$ leftrigh         &lt;dbl+lbl&gt;  2.4,  2.0,  2.2,  3.2,  1.6,  1.8,  2.4,  2.0,  …
-$ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  4.66…</code></pre>
+$ Sserial          &lt;dbl&gt; 312609, 312369, 311177, 311098, 311252, 313218, 31063…
+$ WtFactor         &lt;dbl&gt; 0.7469367, 1.3365985, 0.5831692, 0.6726622, 1.2260390…
+$ RSex             &lt;dbl+lbl&gt; 1, 1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2…
+$ RAgeCat          &lt;dbl+lbl&gt; 7, 3, 7, 7, 3, 3, 7, 2, 7, 2, 4, 3, 3, 2, 4, 7, 5…
+$ eq_inc_quintiles &lt;dbl+lbl&gt; NA, NA, NA,  3,  3,  2, NA,  4,  5,  3,  2,  5,  …
+$ RClassGp         &lt;dbl+lbl&gt; 3, 1, 2, 2, 5, 3, 1, 3, 1, 5, 5, 1, 1, 1, 3, 1, 1…
+$ HEdQual3         &lt;dbl+lbl&gt;  4,  1,  4,  4,  3,  3,  2,  2,  2,  2,  3,  1,  …
+$ Married          &lt;dbl+lbl&gt; 1, 1, 2, 3, 1, 1, 3, 1, 4, 2, 2, 1, 4, 1, 1, 3, 1…
+$ ChildHh          &lt;dbl+lbl&gt; 2, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2, 2, 2, 2…
+$ skipmeal         &lt;dbl+lbl&gt; NA, NA, NA, NA,  1,  1, NA, NA,  1,  2,  1,  1,  …
+$ paptype          &lt;dbl+lbl&gt; 1, 3, 2, 1, 2, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 3, 1…
+$ SMNews           &lt;dbl+lbl&gt; 8, 8, 8, 8, 8, 2, 8, 7, 8, 8, 2, 1, 2, 1, 2, 8, 8…
+$ PartyId2         &lt;dbl+lbl&gt; 1, 5, 1, 1, 2, 5, 1, 5, 1, 2, 1, 1, 3, 3, 2, 3, 2…
+$ Politics         &lt;dbl+lbl&gt; 2, 2, 4, 2, 3, 3, 1, 4, 2, 3, 4, 2, 1, 3, 1, 2, 1…
+$ SocTrust         &lt;dbl+lbl&gt; NA,  1,  2,  2, NA, NA, NA,  1, NA, NA, NA, NA, N…
+$ Spend1           &lt;dbl+lbl&gt; NA,  4,  3,  9, NA, NA, NA,  3, NA, NA, NA, NA, N…
+$ Dole             &lt;dbl+lbl&gt;  3,  3,  3,  3,  1,  7,  2,  1, NA,  1,  2, NA,  …
+$ TaxSpend         &lt;dbl+lbl&gt; 2, 2, 3, 2, 3, 1, 3, 2, 3, 2, 1, 3, 3, 2, 3, 3, 3…
+$ MuchPov          &lt;dbl+lbl&gt;  1,  2,  2,  2,  2,  2,  1,  1,  2,  2,  1, NA,  …
+$ Poverty1         &lt;dbl+lbl&gt;  1,  2,  2,  2,  2,  2,  2,  2,  2,  2,  1,  2,  …
+$ Poverty2         &lt;dbl+lbl&gt; 2, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1…
+$ NatFrEst         &lt;dbl&gt; 40, 20, 20, 60, 45, 66, 15, 75, 20, 40, 99, 10, 1, 60…
+$ incdiffs         &lt;dbl+lbl&gt; NA, NA, NA, NA,  1,  1, NA, NA,  2,  2,  2,  2,  …
+$ welfare2         &lt;dbl&gt; NA, 2.875000, NA, NA, 2.500000, 3.250000, NA, 3.12500…
+$ leftrigh         &lt;dbl&gt; NA, 3.6, NA, NA, 1.6, 2.4, NA, 2.4, 2.2, 2.0, 2.0, 2.…
+$ libauth          &lt;dbl&gt; NA, 2.166667, NA, NA, 4.000000, 4.000000, NA, 3.50000…</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df, <span class="at">details =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable         label                                                    
-  1  Sserial          Archive Serial                                           
-  2  WtFactor         Final BSA weight                                         
-  3  RSex             Sex of respondent                                        
-  4  RAgeCat          Age of respondent(grouped)&lt;7 category&gt; dv                
-  5  eq_inc_quintiles Quintiles of total equivalised household income, net of ~
-  6  RClassGp         NS-SEC analytic classes [respondent] 6 category dv       
-  7  HEdQual3         Highest educational qual obtained - dv                   
-  8  Married          Marital status &lt;4 categories&gt; dv                         
-  9  ChildHh          Whether respondent has any children in household: dv     
- 10  skipmeal         How often do you or other members of your household skip~
- 11  paptype          Newspaper readership (grouped)                           
- 12  SMNews           How often, if at all, do you read the news via a social ~
- 13  PartyId2         Party political id (compressed) dv                       
- 14  Politics         How much interest do you have in politics?               
- 15  SocTrust         Generally speaking, would you say that most people can b~
- 16  Spend1           Which would be your highest priority for extra govt spen~
- 17  Dole             Opinions differ about the level of benefits for unemploy~
- 18  TaxSpend         If it had to choose, should govt reduce/increase/maintai~
- 19  MuchPov          Some people say there is very little real poverty in Bri~
- 20  Poverty1         Is someone in Britain in poverty if they had enough to b~
- 21  Poverty2         Is someone in Britain in poverty if they had enough to e~
- 22  NatFrEst         Out of every 100 people receiving benefits in Britain, h~
- 23  incdiffs         Differences in income in GB are too large?: SC B, C      
- 24  welfare2         Welfarism scale (welfhelp to proudwlf) dv                
- 25  leftrigh         Left-right scale (redistrb to indust4) dv                
- 26  libauth          Libertarian-authoritarian scale (TradVals to censor) dv  </code></pre>
+<pre><code> pos variable         label                                               
+  1  Sserial          Archive Serial                                      
+  2  WtFactor         Final BSA weight                                    
+  3  RSex             Sex of respondent                                   
+  4  RAgeCat          —                                                   
+  5  eq_inc_quintiles —                                                   
+  6  RClassGp         —                                                   
+  7  HEdQual3         —                                                   
+  8  Married          —                                                   
+  9  ChildHh          Whether respondent has any children in household: dv
+ 10  skipmeal         —                                                   
+ 11  paptype          —                                                   
+ 12  SMNews           —                                                   
+ 13  PartyId2         —                                                   
+ 14  Politics         —                                                   
+ 15  SocTrust         —                                                   
+ 16  Spend1           —                                                   
+ 17  Dole             —                                                   
+ 18  TaxSpend         —                                                   
+ 19  MuchPov          —                                                   
+ 20  Poverty1         —                                                   
+ 21  Poverty2         —                                                   
+ 22  NatFrEst         —                                                   
+ 23  incdiffs         —                                                   
+ 24  welfare2         —                                                   
+ 25  leftrigh         —                                                   
+ 26  libauth          —                                                   </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> pos variable         label               col_type missing values             
- 1   Sserial          Archive Serial      dbl+lbl  0       [-9] Refused       
-                                                           [-8] Don't know    
-                                                           [-2] Schedule not ~
-                                                           [-1] Not applicable
- 2   WtFactor         Final BSA weight    dbl+lbl  0       [-2] Skip, version~
-                                                           [-1] Item not appl~
- 3   RSex             Sex of respondent   dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Male           
+ 1   Sserial          Archive Serial      dbl      0                          
+ 2   WtFactor         Final BSA weight    dbl      0                          
+ 3   RSex             Sex of respondent   dbl+lbl  0       [1] Male           
                                                            [2] Female         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 4   RAgeCat          Age of respondent(~ dbl+lbl  6       [-1] Item not appl~
-                                                           [1] 18-24          
+ 4   RAgeCat          —                   dbl+lbl  10      [1] 18-24          
                                                            [2] 25-34          
                                                            [3] 35-44          
                                                            [4] 45-54          
                                                            [5] 55-59          
                                                            [6] 60-64          
                                                            [7] 65+            
-                                                           [8] DK/Refused/Not~
- 5   eq_inc_quintiles Quintiles of total~ dbl+lbl  932     [-1] Item not appl~
-                                                           [1] Lowest quintil~
+ 5   eq_inc_quintiles —                   dbl+lbl  934     [1] Lowest quintil~
                                                            [2] 2nd quintile -~
                                                            [3] 3rd quintile -~
                                                            [4] 4th quintile -~
                                                            [5] Highest quinti~
- 6   RClassGp         NS-SEC analytic cl~ dbl+lbl  115     [-1] Not applicable
-                                                           [1] Managerial &amp; p~
+ 6   RClassGp         —                   dbl+lbl  102     [1] Managerial &amp; p~
                                                            [2] Intermediate o~
                                                            [3] Employers in s~
                                                            [4] Lower supervis~
                                                            [5] Semi-routine &amp;~
-                                                           [8] Not classifiab~
- 7   HEdQual3         Highest educationa~ dbl+lbl  66      [1] Degree         
+ 7   HEdQual3         —                   dbl+lbl  68      [1] Degree         
                                                            [2] Higher educ be~
                                                            [3] O level or equ~
                                                            [4] No qualificati~
-                                                           [8] DK/Refusal/NA  
- 8   Married          Marital status &lt;4 ~ dbl+lbl  3       [-1] Item not appl~
-                                                           [1] Married/living~
+ 8   Married          —                   dbl+lbl  8       [1] Married/living~
                                                            [2] Separated/divo~
                                                            [3] Widowed        
                                                            [4] Never married  
-                                                           [9] No information 
- 9   ChildHh          Whether respondent~ dbl+lbl  0       [-1] Item not appl~
-                                                           [1] Yes            
+ 9   ChildHh          Whether respondent~ dbl+lbl  0       [1] Yes            
                                                            [2] No             
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 10  skipmeal         How often do you o~ dbl+lbl  1567    [-1] skip, didn`t ~
-                                                           [1] Never          
+ 10  skipmeal         —                   dbl+lbl  1586    [1] Never          
                                                            [2] Less than once~
                                                            [3] Once a month   
                                                            [4] Several times ~
                                                            [5] Once a week    
                                                            [6] Several times ~
                                                            [7] Every day      
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 11  paptype          Newspaper readersh~ dbl+lbl  1       [-1] Item not appl~
-                                                           [0] No paper       
-                                                           [1] Popular        
-                                                           [2] Quality (inc r~
+ 11  paptype          —                   dbl+lbl  1       [1] No paper       
+                                                           [2] Popular        
+                                                           [3] Quality (inc r~
                                                            [4] Other/more tha~
-                                                           [8] DK/Ref         
- 12  SMNews           How often, if at a~ dbl+lbl  2       [-1] Item not appl~
-                                                           [1] Several times ~
+ 12  SMNews           —                   dbl+lbl  4       [1] Several times ~
                                                            [2] Every day      
                                                            [3] Several times ~
                                                            [4] At least once ~
@@ -413,31 +390,20 @@ $ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  
                                                            [6] Once a month   
                                                            [7] Less often tha~
                                                            [8] Never          
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 13  PartyId2         Party political id~ dbl+lbl  267     [-1] Item not appl~
-                                                           [1] Conservative   
+ 13  PartyId2         —                   dbl+lbl  257     [1] Conservative   
                                                            [2] Labour         
                                                            [3] Liberal Democr~
                                                            [4] Other party    
                                                            [5] None           
                                                            [6] Green Party    
-                                                           [8] Other/DK/Ref   
- 14  Politics         How much interest ~ dbl+lbl  1       [-1] Item not appl~
-                                                           [1] ... a great de~
+ 14  Politics         —                   dbl+lbl  3       [1] ... a great de~
                                                            [2] quite a lot,   
                                                            [3] some,          
                                                            [4] not very much, 
                                                            [5] or, none at al~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 15  SocTrust         Generally speaking~ dbl+lbl  2165    [-1] Item not appl~
-                                                           [1] Most people ca~
+ 15  SocTrust         —                   dbl+lbl  2145    [1] Most people ca~
                                                            [2] Can`t be too c~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 16  Spend1           Which would be you~ dbl+lbl  2152    [-1] Item not appl~
-                                                           [1] Education      
+ 16  Spend1           —                   dbl+lbl  2132    [1] Education      
                                                            [2] Defence        
                                                            [3] Health         
                                                            [4] Housing        
@@ -448,62 +414,32 @@ $ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  
                                                            [9] Help for indus~
                                                            [10] Overseas aid  
                                                            [11] (None of thes~
-                                                           [98] Don`t know    
-                                                           [99] Refusal       
- 17  Dole             Opinions differ ab~ dbl+lbl  154     [-1] Item not appl~
-                                                           [1] ...benefits fo~
+ 17  Dole             —                   dbl+lbl  149     [1] ...benefits fo~
                                                            [2] or, benefits f~
                                                            [3] (Neither)      
                                                            [4] BOTH: UNEMPLOY~
                                                            [5] BOTH: UNEMPLOY~
                                                            [6] About right/in~
                                                            [7] Other answer (~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 18  TaxSpend         If it had to choos~ dbl+lbl  48      [-1] Item not appl~
-                                                           [1] Reduce taxes a~
+ 18  TaxSpend         —                   dbl+lbl  48      [1] Reduce taxes a~
                                                            [2] Keep taxes and~
                                                            [3] Increase taxes~
                                                            [4] (None)         
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 19  MuchPov          Some people say th~ dbl+lbl  135     [-1] Item not appl~
-                                                           [1] ... that there~
+ 19  MuchPov          —                   dbl+lbl  140     [1] ... that there~
                                                            [2] or, that there~
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 20  Poverty1         Is someone in Brit~ dbl+lbl  80      [-1] Item not appl~
-                                                           [1] Was in poverty 
+ 20  Poverty1         —                   dbl+lbl  76      [1] Was in poverty 
                                                            [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 21  Poverty2         Is someone in Brit~ dbl+lbl  58      [-1] Item not appl~
-                                                           [1] Was in poverty 
+ 21  Poverty2         —                   dbl+lbl  51      [1] Was in poverty 
                                                            [2] Was not        
-                                                           [8] Don`t know     
-                                                           [9] Refusal        
- 22  NatFrEst         Out of every 100 p~ dbl+lbl  246     [998] Don`t know   
-                                                           [999] Refusal      
- 23  incdiffs         Differences in inc~ dbl+lbl  1574    [-1] skip, didn`t ~
-                                                           [1] Strongly agree 
+ 22  NatFrEst         —                   dbl      235                        
+ 23  incdiffs         —                   dbl+lbl  1601    [1] Strongly agree 
                                                            [2] Agree          
                                                            [3] Neither agree ~
                                                            [4] Disagree       
                                                            [5] Strongly disag~
-                                                           [8] Can't choose   
-                                                           [9] Not answered   
- 24  welfare2         Welfarism scale (w~ dbl+lbl  642     [-1] skip, didn`t ~
-                                                           [1] sympathetic    
-                                                           [5] poor don`t des~
-                                                           [9] Missing values 
- 25  leftrigh         Left-right scale (~ dbl+lbl  645     [-1] skip, didn`t ~
-                                                           [1] left           
-                                                           [5] right          
-                                                           [9] Missing values 
- 26  libauth          Libertarian-author~ dbl+lbl  637     [-1] skip, didn`t ~
-                                                           [1] libertarian    
-                                                           [5] authoritarian  
-                                                           [9] Missing values </code></pre>
+ 24  welfare2         —                   dbl      647                        
+ 25  leftrigh         —                   dbl      658                        
+ 26  libauth          —                   dbl      645                        </code></pre>
 </div>
 </div>
 

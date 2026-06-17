@@ -264,7 +264,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example - opions about benefits, simplifying dole2</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>Married)<span class="sc">$</span>label</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Marital status &lt;4 categories&gt; dv"</code></pre>
+<pre><code>Married/living as married        Separated/divorced                   Widowed 
+                        1                         2                         3 
+            Never married 
+                        4 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factorise opinions about benefits. </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Married2 =</span> <span class="fu">as_factor</span>(Married))</span>
@@ -274,17 +277,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 5 × 2
   Married2                      n
   &lt;fct&gt;                     &lt;int&gt;
-1 Married/living as married  1693
-2 Separated/divorced          457
-3 Widowed                     354
-4 Never married               717
-5 No information                3</code></pre>
+1 Married/living as married  1677
+2 Separated/divorced          482
+3 Widowed                     342
+4 Never married               715
+5 &lt;NA&gt;                          8</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Item not applicable"       "Married/living as married"
-[3] "Separated/divorced"        "Widowed"                  
-[5] "Never married"             "No information"           </code></pre>
+<pre><code>[1] "Married/living as married" "Separated/divorced"       
+[3] "Widowed"                   "Never married"            </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Collapse levels of a factor</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
@@ -297,25 +299,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 3 × 2
   Married3                      n
   &lt;fct&gt;                     &lt;int&gt;
-1 Married/living as married  1693
-2 Single                     1528
-3 No information                3</code></pre>
+1 Married/living as married  1677
+2 Single                     1539
+3 &lt;NA&gt;                          8</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Married3, Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   Married3                  Married2                      n
   &lt;fct&gt;                     &lt;fct&gt;                     &lt;int&gt;
-1 Married/living as married Married/living as married  1693
-2 Single                    Separated/divorced          457
-3 Single                    Widowed                     354
-4 Single                    Never married               717
-5 No information            No information                3</code></pre>
+1 Married/living as married Married/living as married  1677
+2 Single                    Separated/divorced          482
+3 Single                    Widowed                     342
+4 Single                    Never married               715
+5 &lt;NA&gt;                      &lt;NA&gt;                          8</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># Label needs updating, no longer makes sense</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>Married3)<span class="sc">$</span>label</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Marital status &lt;4 categories&gt; dv"</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -326,14 +328,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 8 × 2
   `as_factor(RAgeCat, levels = "both")`     n
   &lt;fct&gt;                                 &lt;int&gt;
-1 [1] 18-24                               202
-2 [2] 25-34                               429
-3 [3] 35-44                               525
-4 [4] 45-54                               543
-5 [5] 55-59                               249
-6 [6] 60-64                               261
-7 [7] 65+                                1009
-8 [8] DK/Refused/Not answered               6</code></pre>
+1 [1] 18-24                               190
+2 [2] 25-34                               447
+3 [3] 35-44                               501
+4 [4] 45-54                               567
+5 [5] 55-59                               235
+6 [6] 60-64                               288
+7 [7] 65+                                 986
+8 &lt;NA&gt;                                     10</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Other level to provide summary level for unused levels. </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age3 =</span> <span class="fu">fct_collapse</span>(<span class="fu">as_factor</span>(RAgeCat), </span>
@@ -341,30 +343,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Youngish"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"18-24"</span>, <span class="st">"25-34"</span>, <span class="st">"35-44"</span>), </span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">other_level =</span> <span class="st">"Older"</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `age3 = fct_collapse(...)`.
+Caused by warning:
+! Unknown levels in `f`: DK/Refused/Not answered</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
-  age3                        n
-  &lt;fct&gt;                   &lt;int&gt;
-1 Youngish                 1156
-2 DK/Refused/Not answered     6
-3 Older                    2062</code></pre>
+  age3         n
+  &lt;fct&gt;    &lt;int&gt;
+1 Youngish  1138
+2 Older     2076
+3 &lt;NA&gt;        10</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age3, <span class="fu">as_factor</span>(RAgeCat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age3, <span class="fu">as_factor</span>(RAgeCat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
-  age3                    `as_factor(RAgeCat)`        n
-  &lt;fct&gt;                   &lt;fct&gt;                   &lt;int&gt;
-1 Youngish                18-24                     202
-2 Youngish                25-34                     429
-3 Youngish                35-44                     525
-4 DK/Refused/Not answered DK/Refused/Not answered     6
-5 Older                   45-54                     543
-6 Older                   55-59                     249
-7 Older                   60-64                     261
-8 Older                   65+                      1009</code></pre>
+  age3     `as_factor(RAgeCat)`     n
+  &lt;fct&gt;    &lt;fct&gt;                &lt;int&gt;
+1 Youngish 18-24                  190
+2 Youngish 25-34                  447
+3 Youngish 35-44                  501
+4 Older    45-54                  567
+5 Older    55-59                  235
+6 Older    60-64                  288
+7 Older    65+                    986
+8 &lt;NA&gt;     &lt;NA&gt;                    10</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -372,83 +379,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fct_recode" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="fct_recode"><span class="header-section-number">6.2</span> fct_recode</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode factor levels</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married3 =</span> <span class="fu">fct_recode</span>(Married2, </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Separated, divorced, widowed"</span> <span class="ot">=</span> <span class="st">"Separated/divorced"</span>, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Separated, divorced, widowed"</span> <span class="ot">=</span> <span class="st">"Widowed"</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>     ))</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Married3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode factor levels</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married3 =</span> <span class="fu">fct_recode</span>(Married2, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Separated, divorced, widowed"</span> <span class="ot">=</span> <span class="st">"Separated/divorced"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Separated, divorced, widowed"</span> <span class="ot">=</span> <span class="st">"Widowed"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>     ))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Married3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   Married3                         n
   &lt;fct&gt;                        &lt;int&gt;
-1 Married/living as married     1693
-2 Separated, divorced, widowed   811
-3 Never married                  717
-4 No information                   3</code></pre>
+1 Married/living as married     1677
+2 Separated, divorced, widowed   824
+3 Never married                  715
+4 &lt;NA&gt;                             8</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Married3, Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Married3, Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   Married3                     Married2                      n
   &lt;fct&gt;                        &lt;fct&gt;                     &lt;int&gt;
-1 Married/living as married    Married/living as married  1693
-2 Separated, divorced, widowed Separated/divorced          457
-3 Separated, divorced, widowed Widowed                     354
-4 Never married                Never married               717
-5 No information               No information                3</code></pre>
+1 Married/living as married    Married/living as married  1677
+2 Separated, divorced, widowed Separated/divorced          482
+3 Separated, divorced, widowed Widowed                     342
+4 Never married                Never married               715
+5 &lt;NA&gt;                         &lt;NA&gt;                          8</code></pre>
 </div>
 </div>
 <p><br></p>
 <section id="fct_recode-with-an-external-vector" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="fct_recode-with-an-external-vector"><span class="header-section-number">6.2.1</span> fct_recode with an external vector</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First convert haven labelled varibale to a factor</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SMNews_f =</span> <span class="fu">as_factor</span>(SMNews))</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(SMNews_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First convert haven labelled varibale to a factor</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SMNews_f =</span> <span class="fu">as_factor</span>(SMNews))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(SMNews_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 2
   SMNews_f                         n
   &lt;fct&gt;                        &lt;int&gt;
-1 Several times a day            292
-2 Every day                      605
-3 Several times a week           229
-4 At least once a week           154
-5 A couple of times a month       62
-6 Once a month                    44
-7 Less often than once a month    94
-8 Never                         1742
-9 Don`t know                       2</code></pre>
+1 Several times a day            296
+2 Every day                      618
+3 Several times a week           218
+4 At least once a week           132
+5 A couple of times a month       66
+6 Once a month                    41
+7 Less often than once a month   103
+8 Never                         1746
+9 &lt;NA&gt;                             4</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define levels to recode...</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>to_recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Often =</span> <span class="st">"Several times a day"</span>, </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">Often =</span> <span class="st">"Every day"</span>, </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">Often =</span> <span class="st">"Several times a week"</span>, </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Never"</span>, </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Less often than once a month"</span>, </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Once a month"</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Recode factor levels in 'to_recode'</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">SMNews_f2 =</span> <span class="fu">fct_recode</span>(SMNews_f, <span class="sc">!!!</span>to_recode)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(SMNews_f2, SMNews_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define levels to recode...</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>to_recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Often =</span> <span class="st">"Several times a day"</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">Often =</span> <span class="st">"Every day"</span>, </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">Often =</span> <span class="st">"Several times a week"</span>, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Never"</span>, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Less often than once a month"</span>, </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Not often</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Once a month"</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Recode factor levels in 'to_recode'</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">SMNews_f2 =</span> <span class="fu">fct_recode</span>(SMNews_f, <span class="sc">!!!</span>to_recode)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(SMNews_f2, SMNews_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   SMNews_f2                 SMNews_f                         n
   &lt;fct&gt;                     &lt;fct&gt;                        &lt;int&gt;
-1 Often                     Several times a day            292
-2 Often                     Every day                      605
-3 Often                     Several times a week           229
-4 At least once a week      At least once a week           154
-5 A couple of times a month A couple of times a month       62
-6 Not often                 Once a month                    44
-7 Not often                 Less often than once a month    94
-8 Not often                 Never                         1742
-9 Don`t know                Don`t know                       2</code></pre>
+1 Often                     Several times a day            296
+2 Often                     Every day                      618
+3 Often                     Several times a week           218
+4 At least once a week      At least once a week           132
+5 A couple of times a month A couple of times a month       66
+6 Not often                 Once a month                    41
+7 Not often                 Less often than once a month   103
+8 Not often                 Never                         1746
+9 &lt;NA&gt;                      &lt;NA&gt;                             4</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -459,107 +466,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-fct_recode" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="using-fct_recode"><span class="header-section-number">6.3.1</span> Using fct_recode</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, setting levels to NA can be done in fct_recode</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">as_factor</span>(Married, <span class="at">levels =</span> <span class="st">"both"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, setting levels to NA can be done in fct_recode</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">as_factor</span>(Married, <span class="at">levels =</span> <span class="st">"both"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   `as_factor(Married, levels = "both")`     n
   &lt;fct&gt;                                 &lt;int&gt;
-1 [1] Married/living as married          1693
-2 [2] Separated/divorced                  457
-3 [3] Widowed                             354
-4 [4] Never married                       717
-5 [9] No information                        3</code></pre>
+1 [1] Married/living as married          1677
+2 [2] Separated/divorced                  482
+3 [3] Widowed                             342
+4 [4] Never married                       715
+5 &lt;NA&gt;                                      8</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Married =</span> <span class="fu">fct_recode</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_factor</span>(Married), </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">NULL =</span> <span class="st">"No information"</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Married)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Married =</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_factor</span>(Married), </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">NULL =</span> <span class="st">"No information"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Married)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   Married                       n
   &lt;fct&gt;                     &lt;int&gt;
-1 Married/living as married  1693
-2 Separated/divorced          457
-3 Widowed                     354
-4 Never married               717
-5 &lt;NA&gt;                          3</code></pre>
+1 Married/living as married  1677
+2 Separated/divorced          482
+3 Widowed                     342
+4 Never married               715
+5 &lt;NA&gt;                          8</code></pre>
 </div>
 </div>
 </section>
 <section id="remove-user-missing-data-in-haven-labelled-data" class="level3" data-number="6.3.2">
 <h3 data-number="6.3.2" class="anchored" data-anchor-id="remove-user-missing-data-in-haven-labelled-data"><span class="header-section-number">6.3.2</span> Remove user missing data in haven labelled data</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>Spend1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>Spend1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$label
-[1] "Which would be your highest priority for extra govt spending?"
-
-$na_values
-[1] -1 98 99
+<pre><code>$format.spss
+[1] "F8.0"
 
 $class
-[1] "haven_labelled_spss" "haven_labelled"      "vctrs_vctr"         
-[4] "double"             
-
-$format.spss
-[1] "F2.0"
+[1] "haven_labelled" "vctrs_vctr"     "double"        
 
 $labels
-     Item not applicable                Education                  Defence 
-                      -1                        1                        2 
-                  Health                  Housing         Public transport 
-                       3                        4                        5 
-                   Roads       Police and prisons Social security benefits 
-                       6                        7                        8 
-       Help for industry             Overseas aid          (None of these) 
-                       9                       10                       11 
-              Don`t know                  Refusal 
-                      98                       99 </code></pre>
+               Education                  Defence                   Health 
+                       1                        2                        3 
+                 Housing         Public transport                    Roads 
+                       4                        5                        6 
+      Police and prisons Social security benefits        Help for industry 
+                       7                        8                        9 
+            Overseas aid          (None of these) 
+                      10                       11 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 2
+<pre><code># A tibble: 11 × 2
    Spend1                            n
    &lt;dbl+lbl&gt;                     &lt;int&gt;
- 1 -1 (NA) [Item not applicable]  2149
- 2  1 [Education]                  205
- 3  2 [Defence]                     43
- 4  3 [Health]                     447
- 5  4 [Housing]                    105
- 6  5 [Public transport]            18
- 7  6 [Roads]                       30
- 8  7 [Police and prisons]         123
- 9  8 [Social security benefits]    41
-10  9 [Help for industry]           54
-11 10 [Overseas aid]                 1
-12 11 [(None of these)]              5
-13 98 (NA) [Don`t know]              3</code></pre>
+ 1  1 [Education]                  204
+ 2  2 [Defence]                     36
+ 3  3 [Health]                     450
+ 4  4 [Housing]                    102
+ 5  5 [Public transport]            32
+ 6  6 [Roads]                       42
+ 7  7 [Police and prisons]         130
+ 8  8 [Social security benefits]    38
+ 9  9 [Help for industry]           52
+10 11 [(None of these)]              6
+11 NA                             2132</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove user NA tagged labels with zap_missing()</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">as_factor</span>(<span class="fu">zap_missing</span>(Spend1)))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove user NA tagged labels with zap_missing()</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">as_factor</span>(<span class="fu">zap_missing</span>(Spend1)))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 2
+<pre><code># A tibble: 11 × 2
    Spend1_f                     n
    &lt;fct&gt;                    &lt;int&gt;
- 1 Education                  205
- 2 Defence                     43
- 3 Health                     447
- 4 Housing                    105
- 5 Public transport            18
- 6 Roads                       30
- 7 Police and prisons         123
- 8 Social security benefits    41
- 9 Help for industry           54
-10 Overseas aid                 1
-11 (None of these)              5
-12 &lt;NA&gt;                      2152</code></pre>
+ 1 Education                  204
+ 2 Defence                     36
+ 3 Health                     450
+ 4 Housing                    102
+ 5 Public transport            32
+ 6 Roads                       42
+ 7 Police and prisons         130
+ 8 Social security benefits    38
+ 9 Help for industry           52
+10 (None of these)              6
+11 &lt;NA&gt;                      2132</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(df<span class="sc">$</span>Spend1_f) <span class="co"># label retained</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(df<span class="sc">$</span>Spend1_f) <span class="co"># label retained</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Which would be your highest priority for extra govt spending?"</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 </section>
@@ -567,66 +562,63 @@ $labels
 <h3 data-number="6.3.3" class="anchored" data-anchor-id="baffling-fct-functions"><span class="header-section-number">6.3.3</span> Baffling fct functions</h3>
 <p>Set <code>NA</code> values to a valid factor level.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make NA a valid level</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 2
-   Spend1_f                     n
-   &lt;fct&gt;                    &lt;int&gt;
- 1 Education                  205
- 2 Defence                     43
- 3 Health                     447
- 4 Housing                    105
- 5 Public transport            18
- 6 Roads                       30
- 7 Police and prisons         123
- 8 Social security benefits    41
- 9 Help for industry           54
-10 Overseas aid                 1
-11 (None of these)              5
-12 &lt;NA&gt;                      2152</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">fct_na_value_to_level</span>(Spend1_f, <span class="at">level =</span> <span class="st">"No priority known"</span>)) </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make NA a valid level</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 2
+<pre><code># A tibble: 11 × 2
    Spend1_f                     n
    &lt;fct&gt;                    &lt;int&gt;
- 1 Education                  205
- 2 Defence                     43
- 3 Health                     447
- 4 Housing                    105
- 5 Public transport            18
- 6 Roads                       30
- 7 Police and prisons         123
- 8 Social security benefits    41
- 9 Help for industry           54
-10 Overseas aid                 1
-11 (None of these)              5
-12 No priority known         2152</code></pre>
+ 1 Education                  204
+ 2 Defence                     36
+ 3 Health                     450
+ 4 Housing                    102
+ 5 Public transport            32
+ 6 Roads                       42
+ 7 Police and prisons         130
+ 8 Social security benefits    38
+ 9 Help for industry           52
+10 (None of these)              6
+11 &lt;NA&gt;                      2132</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">fct_na_value_to_level</span>(Spend1_f, <span class="at">level =</span> <span class="st">"No priority known"</span>)) </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   Spend1_f                     n
+   &lt;fct&gt;                    &lt;int&gt;
+ 1 Education                  204
+ 2 Defence                     36
+ 3 Health                     450
+ 4 Housing                    102
+ 5 Public transport            32
+ 6 Roads                       42
+ 7 Police and prisons         130
+ 8 Social security benefits    38
+ 9 Help for industry           52
+10 (None of these)              6
+11 No priority known         2132</code></pre>
 </div>
 </div>
 <p>Set a particular factor level to <code>NA</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Move levels to NA</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">fct_na_level_to_value</span>(Spend1_f, <span class="at">extra_levels =</span> <span class="st">"No priority known"</span>))</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Move levels to NA</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Spend1_f =</span> <span class="fu">fct_na_level_to_value</span>(Spend1_f, <span class="at">extra_levels =</span> <span class="st">"No priority known"</span>))</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Spend1_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 2
+<pre><code># A tibble: 11 × 2
    Spend1_f                     n
    &lt;fct&gt;                    &lt;int&gt;
- 1 Education                  205
- 2 Defence                     43
- 3 Health                     447
- 4 Housing                    105
- 5 Public transport            18
- 6 Roads                       30
- 7 Police and prisons         123
- 8 Social security benefits    41
- 9 Help for industry           54
-10 Overseas aid                 1
-11 (None of these)              5
-12 &lt;NA&gt;                      2152</code></pre>
+ 1 Education                  204
+ 2 Defence                     36
+ 3 Health                     450
+ 4 Housing                    102
+ 5 Public transport            32
+ 6 Roads                       42
+ 7 Police and prisons         130
+ 8 Social security benefits    38
+ 9 Help for industry           52
+10 (None of these)              6
+11 &lt;NA&gt;                      2132</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -634,81 +626,76 @@ $labels
 <section id="combine-factor-levels" class="level3" data-number="6.3.4">
 <h3 data-number="6.3.4" class="anchored" data-anchor-id="combine-factor-levels"><span class="header-section-number">6.3.4</span> Combine factor levels</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_cross</span>(<span class="fu">as_factor</span>(df<span class="sc">$</span>RSex), <span class="fu">as_factor</span>(df<span class="sc">$</span>RAgeCat)) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>(., <span class="at">prop =</span> T) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_cross</span>(<span class="fu">as_factor</span>(df<span class="sc">$</span>RSex), <span class="fu">as_factor</span>(df<span class="sc">$</span>RAgeCat)) <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>(., <span class="at">prop =</span> T) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16 × 3
-   f                                  n        p
-   &lt;fct&gt;                          &lt;int&gt;    &lt;dbl&gt;
- 1 Male:18-24                        91 0.0282  
- 2 Female:18-24                     111 0.0344  
- 3 Male:25-34                       174 0.0540  
- 4 Female:25-34                     255 0.0791  
- 5 Male:35-44                       227 0.0704  
- 6 Female:35-44                     298 0.0924  
- 7 Male:45-54                       241 0.0748  
- 8 Female:45-54                     302 0.0937  
- 9 Male:55-59                       125 0.0388  
-10 Female:55-59                     124 0.0385  
-11 Male:60-64                       134 0.0416  
-12 Female:60-64                     127 0.0394  
-13 Male:65+                         460 0.143   
-14 Female:65+                       549 0.170   
-15 Male:DK/Refused/Not answered       2 0.000620
-16 Female:DK/Refused/Not answered     4 0.00124 </code></pre>
+<pre><code># A tibble: 15 × 3
+   f                n       p
+   &lt;fct&gt;        &lt;int&gt;   &lt;dbl&gt;
+ 1 Male:18-24      76 0.0236 
+ 2 Female:18-24   114 0.0354 
+ 3 Male:25-34     181 0.0561 
+ 4 Female:25-34   266 0.0825 
+ 5 Male:35-44     231 0.0717 
+ 6 Female:35-44   270 0.0837 
+ 7 Male:45-54     257 0.0797 
+ 8 Female:45-54   310 0.0962 
+ 9 Male:55-59     126 0.0391 
+10 Female:55-59   109 0.0338 
+11 Male:60-64     149 0.0462 
+12 Female:60-64   139 0.0431 
+13 Male:65+       424 0.132  
+14 Female:65+     562 0.174  
+15 &lt;NA&gt;            10 0.00310</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age_sex =</span> <span class="fu">fct_cross</span>(<span class="fu">as_factor</span>(RSex), <span class="fu">as_factor</span>(RAgeCat)))</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age_sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age_sex =</span> <span class="fu">fct_cross</span>(<span class="fu">as_factor</span>(RSex), <span class="fu">as_factor</span>(RAgeCat)))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(age_sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16 × 2
-   age_sex                            n
-   &lt;fct&gt;                          &lt;int&gt;
- 1 Male:18-24                        91
- 2 Female:18-24                     111
- 3 Male:25-34                       174
- 4 Female:25-34                     255
- 5 Male:35-44                       227
- 6 Female:35-44                     298
- 7 Male:45-54                       241
- 8 Female:45-54                     302
- 9 Male:55-59                       125
-10 Female:55-59                     124
-11 Male:60-64                       134
-12 Female:60-64                     127
-13 Male:65+                         460
-14 Female:65+                       549
-15 Male:DK/Refused/Not answered       2
-16 Female:DK/Refused/Not answered     4</code></pre>
+<pre><code># A tibble: 15 × 2
+   age_sex          n
+   &lt;fct&gt;        &lt;int&gt;
+ 1 Male:18-24      76
+ 2 Female:18-24   114
+ 3 Male:25-34     181
+ 4 Female:25-34   266
+ 5 Male:35-44     231
+ 6 Female:35-44   270
+ 7 Male:45-54     257
+ 8 Female:45-54   310
+ 9 Male:55-59     126
+10 Female:55-59   109
+11 Male:60-64     149
+12 Female:60-64   139
+13 Male:65+       424
+14 Female:65+     562
+15 &lt;NA&gt;            10</code></pre>
 </div>
 </div>
 </section>
 <section id="drop-empty-levels" class="level3" data-number="6.3.5">
 <h3 data-number="6.3.5" class="anchored" data-anchor-id="drop-empty-levels"><span class="header-section-number">6.3.5</span> Drop empty levels</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unused levels - fct_drop</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TaxSpend <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unused levels - fct_drop</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TaxSpend <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 2
+<pre><code># A tibble: 5 × 2
   f                                                                          n
   &lt;fct&gt;                                                                  &lt;int&gt;
-1 Item not applicable                                                        0
-2 Reduce taxes and spend less on health, education and social benefits     146
-3 Keep taxes and spending on these services at the same level as now      1106
-4 Increase taxes and spend more on health, education and social benefits  1812
-5 (None)                                                                   112
-6 Don`t know                                                                46
-7 Refusal                                                                    2</code></pre>
+1 Reduce taxes and spend less on health, education and social benefits     166
+2 Keep taxes and spending on these services at the same level as now      1105
+3 Increase taxes and spend more on health, education and social benefits  1803
+4 (None)                                                                   102
+5 &lt;NA&gt;                                                                      48</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TaxSpend <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_drop</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>TaxSpend <span class="sc">%&gt;%</span> <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_drop</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 2
+<pre><code># A tibble: 5 × 2
   f                                                                          n
   &lt;fct&gt;                                                                  &lt;int&gt;
-1 Reduce taxes and spend less on health, education and social benefits     146
-2 Keep taxes and spending on these services at the same level as now      1106
-3 Increase taxes and spend more on health, education and social benefits  1812
-4 (None)                                                                   112
-5 Don`t know                                                                46
-6 Refusal                                                                    2</code></pre>
+1 Reduce taxes and spend less on health, education and social benefits     166
+2 Keep taxes and spending on these services at the same level as now      1105
+3 Increase taxes and spend more on health, education and social benefits  1803
+4 (None)                                                                   102
+5 &lt;NA&gt;                                                                      48</code></pre>
 </div>
 </div>
 

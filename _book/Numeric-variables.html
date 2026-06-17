@@ -278,14 +278,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
   libauth_av     n
        &lt;dbl&gt; &lt;int&gt;
-1       2.80  3224</code></pre>
+1       3.56  3224</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(leftrigh_av)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   leftrigh_av     n
         &lt;dbl&gt; &lt;int&gt;
-1        2.01  3224</code></pre>
+1        2.53  3224</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -307,21 +307,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
   libauth_mean     n
          &lt;dbl&gt; &lt;int&gt;
-1         2.80  3224</code></pre>
+1         3.56  3224</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(leftrigh_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   leftrigh_mean     n
           &lt;dbl&gt; &lt;int&gt;
-1          2.01  3224</code></pre>
+1          2.53  3224</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(welfare2_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   welfare2_mean     n
           &lt;dbl&gt; &lt;int&gt;
-1          2.16  3224</code></pre>
+1          2.76  3224</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -343,18 +343,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,224 × 3
-   welfare2                welfare2_var_mean welfare2_sd
-   &lt;dbl+lbl&gt;                           &lt;dbl&gt;       &lt;dbl&gt;
- 1 2.5                                  2.16        1.79
- 2 3.12                                 2.16        1.79
- 3 3.12                                 2.16        1.79
- 4 2.25                                 2.16        1.79
- 5 3.38                                 2.16        1.79
- 6 2.88                                 2.16        1.79
- 7 2                                    2.16        1.79
- 8 2.75                                 2.16        1.79
- 9 1.25                                 2.16        1.79
-10 9 (NA) [Missing values]              2.16        1.79
+   welfare2 welfare2_var_mean welfare2_sd
+      &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1    NA                   NA          NA
+ 2     2.88                NA          NA
+ 3    NA                   NA          NA
+ 4    NA                   NA          NA
+ 5     2.5                 NA          NA
+ 6     3.25                NA          NA
+ 7    NA                   NA          NA
+ 8     3.12                NA          NA
+ 9     2.25                NA          NA
+10     1.62                NA          NA
 # ℹ 3,214 more rows</code></pre>
 </div>
 </div>
@@ -379,13 +379,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,224
 Columns: 7
-$ Sserial          &lt;dbl+lbl&gt; 310001, 310002, 310003, 310004, 310005, 310006, 3…
-$ WtFactor         &lt;dbl+lbl&gt; 0.9119594, 0.4439626, 1.2182741, 1.5839969, 0.474…
-$ welfare2         &lt;dbl+lbl&gt;  2.500000,  3.125000,  3.125000,  2.250000,  3.37…
-$ libauth          &lt;dbl+lbl&gt;  3.500000,  3.833333,  4.166667,  2.166667,  4.66…
-$ WtFactor_rounded &lt;dbl&gt; 1, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 1,…
-$ welfare2_rounded &lt;dbl&gt; 2, 3, 3, 2, 3, 3, 2, 3, 1, 9, 3, 2, 9, 2, 3, 3, 4, 3,…
-$ libauth_rounded  &lt;dbl&gt; 4, 4, 4, 2, 5, 4, 2, 3, 2, 4, 4, 2, 9, 2, 3, 4, 4, 3,…</code></pre>
+$ Sserial          &lt;dbl&gt; 312609, 312369, 311177, 311098, 311252, 313218, 31063…
+$ WtFactor         &lt;dbl&gt; 0.7469367, 1.3365985, 0.5831692, 0.6726622, 1.2260390…
+$ welfare2         &lt;dbl&gt; NA, 2.875000, NA, NA, 2.500000, 3.250000, NA, 3.12500…
+$ libauth          &lt;dbl&gt; NA, 2.166667, NA, NA, 4.000000, 4.000000, NA, 3.50000…
+$ WtFactor_rounded &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1,…
+$ welfare2_rounded &lt;dbl&gt; NA, 3, NA, NA, 2, 3, NA, 3, 2, 2, 4, 3, 2, 4, 1, 2, 2…
+$ libauth_rounded  &lt;dbl&gt; NA, 2, NA, NA, 4, 4, NA, 4, 4, 4, 4, 4, 2, 3, 3, 3, 2…</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -396,25 +396,25 @@ $ libauth_rounded  &lt;dbl&gt; 4, 4, 4, 2, 5, 4, 2, 3, 2, 4, 4, 2, 9, 2, 3, 4, 4
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">2</span>, round))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,224 × 31
-   Sserial   WtFactor RSex       RAgeCat   eq_inc_quintiles          RClassGp   
-   &lt;dbl+lbl&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;  &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;                 &lt;dbl+lbl&gt;  
- 1 310001           1 2 [Female] 6 [60-64] -1 (NA) [Item not applic… 1 [Manager…
- 2 310002           0 2 [Female] 3 [35-44]  5 [Highest quintile - M… 1 [Manager…
- 3 310003           1 2 [Female] 4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
- 4 310004           2 1 [Male]   2 [25-34]  4 [4th quintile - More … 1 [Manager…
- 5 310005           0 1 [Male]   6 [60-64] -1 (NA) [Item not applic… 5 [Semi-ro…
- 6 310006           1 1 [Male]   4 [45-54]  1 [Lowest quintile - Up… 3 [Employe…
- 7 310007           1 1 [Male]   2 [25-34]  5 [Highest quintile - M… 1 [Manager…
- 8 310008           1 2 [Female] 4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
- 9 310009           1 1 [Male]   4 [45-54] -1 (NA) [Item not applic… 1 [Manager…
-10 310010           1 1 [Male]   1 [18-24] -1 (NA) [Item not applic… 5 [Semi-ro…
+   Sserial WtFactor RSex      RAgeCat eq_inc_quintiles RClassGp HEdQual3 Married
+     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl+l&gt; &lt;dbl+lbl&gt;        &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt;
+ 1  312609        1 1 [Male]  7 [65+] NA               3 [Empl… 4 [No q… 1 [Mar…
+ 2  312369        1 1 [Male]  3 [35-… NA               1 [Mana… 1 [Degr… 1 [Mar…
+ 3  311177        1 2 [Femal… 7 [65+] NA               2 [Inte… 4 [No q… 2 [Sep…
+ 4  311098        1 2 [Femal… 7 [65+]  3 [3rd quintil… 2 [Inte… 4 [No q… 3 [Wid…
+ 5  311252        1 1 [Male]  3 [35-…  3 [3rd quintil… 5 [Semi… 3 [O le… 1 [Mar…
+ 6  313218        1 1 [Male]  3 [35-…  2 [2nd quintil… 3 [Empl… 3 [O le… 1 [Mar…
+ 7  310634        1 1 [Male]  7 [65+] NA               1 [Mana… 2 [High… 3 [Wid…
+ 8  312097        2 1 [Male]  2 [25-…  4 [4th quintil… 3 [Empl… 2 [High… 1 [Mar…
+ 9  311152        1 2 [Femal… 7 [65+]  5 [Highest qui… 1 [Mana… 2 [High… 4 [Nev…
+10  311327        1 2 [Femal… 2 [25-…  3 [3rd quintil… 5 [Semi… 2 [High… 2 [Sep…
 # ℹ 3,214 more rows
-# ℹ 25 more variables: HEdQual3 &lt;dbl+lbl&gt;, Married &lt;dbl+lbl&gt;,
-#   ChildHh &lt;dbl+lbl&gt;, skipmeal &lt;dbl+lbl&gt;, paptype &lt;dbl+lbl&gt;, SMNews &lt;dbl+lbl&gt;,
-#   PartyId2 &lt;dbl+lbl&gt;, Politics &lt;dbl+lbl&gt;, SocTrust &lt;dbl+lbl&gt;,
-#   Spend1 &lt;dbl+lbl&gt;, Dole &lt;dbl+lbl&gt;, TaxSpend &lt;dbl+lbl&gt;, MuchPov &lt;dbl+lbl&gt;,
-#   Poverty1 &lt;dbl+lbl&gt;, Poverty2 &lt;dbl+lbl&gt;, NatFrEst &lt;dbl+lbl&gt;,
-#   incdiffs &lt;dbl+lbl&gt;, welfare2 &lt;dbl+lbl&gt;, leftrigh &lt;dbl+lbl&gt;, …</code></pre>
+# ℹ 23 more variables: ChildHh &lt;dbl+lbl&gt;, skipmeal &lt;dbl+lbl&gt;,
+#   paptype &lt;dbl+lbl&gt;, SMNews &lt;dbl+lbl&gt;, PartyId2 &lt;dbl+lbl&gt;,
+#   Politics &lt;dbl+lbl&gt;, SocTrust &lt;dbl+lbl&gt;, Spend1 &lt;dbl+lbl&gt;, Dole &lt;dbl+lbl&gt;,
+#   TaxSpend &lt;dbl+lbl&gt;, MuchPov &lt;dbl+lbl&gt;, Poverty1 &lt;dbl+lbl&gt;,
+#   Poverty2 &lt;dbl+lbl&gt;, NatFrEst &lt;dbl&gt;, incdiffs &lt;dbl+lbl&gt;, welfare2 &lt;dbl&gt;,
+#   leftrigh &lt;dbl&gt;, libauth &lt;dbl&gt;, libauth_av &lt;dbl&gt;, leftrigh_av &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -422,63 +422,25 @@ $ libauth_rounded  &lt;dbl&gt; 4, 4, 4, 2, 5, 4, 2, 3, 2, 4, 4, 2, 9, 2, 3, 4, 4
 <section id="mean-across-multiple-variables" class="level3" data-number="3.4.3">
 <h3 data-number="3.4.3" class="anchored" data-anchor-id="mean-across-multiple-variables"><span class="header-section-number">3.4.3</span> Mean across multiple variables</h3>
 <p>Note variables calculated column-wise.</p>
-<p>DOES NOT WORK - this takes the average only of the first variable</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati =</span> <span class="fu">mean</span>(libauth, leftrigh, <span class="at">na.rm =</span> T))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(libauth, leftrigh, av_ati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 398 × 4
-   libauth                                        leftrigh          av_ati     n
-   &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;          &lt;dbl&gt; &lt;int&gt;
- 1 -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, d…   2.80   588
- 2  1 [libertarian]                                1 [left]           2.80     1
- 3  1 [libertarian]                                1.6                2.80     1
- 4  1 [libertarian]                                5 [right]          2.80     1
- 5  1.17                                           1.4                2.80     1
- 6  1.17                                           1.8                2.80     2
- 7  1.33                                           1 [left]           2.80     1
- 8  1.33                                           3.2                2.80     1
- 9  1.5                                            1 [left]           2.80     1
-10  1.5                                            1.4                2.80     2
-# ℹ 388 more rows</code></pre>
-</div>
-</div>
 <p>Mean of both variables for whole sample</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati =</span> <span class="fu">mean</span>(<span class="fu">c</span>(libauth, leftrigh), <span class="at">na.rm =</span> T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There was 1 warning in `mutate()`.
-ℹ In argument: `av_ati = mean(c(libauth, leftrigh), na.rm = T)`.
-Caused by warning:
-! `..1` and `..2` have conflicting value labels.
-ℹ Labels for these values will be taken from `..1`.
-✖ Values: 1 and 5</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati =</span> <span class="fu">mean</span>(<span class="fu">c</span>(libauth, leftrigh), <span class="at">na.rm =</span> T))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   av_ati     n
    &lt;dbl&gt; &lt;int&gt;
-1   2.40  3224</code></pre>
+1   3.05  3224</code></pre>
 </div>
 </div>
 <p>Mean of both variables allowing tidy select - use c_across</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There was 1 warning in `mutate()`.
-ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
-  na.rm = T)`.
-Caused by warning:
-! `libauth` and `leftrigh` have conflicting value labels.
-ℹ Labels for these values will be taken from `libauth`.
-✖ Values: 1 and 5</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">count</span>(av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   av_ati2     n
     &lt;dbl&gt; &lt;int&gt;
-1    2.40  3224</code></pre>
+1    3.05  3224</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -489,37 +451,25 @@ Caused by warning:
 <section id="row-wise-variable-summaries-slow" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="row-wise-variable-summaries-slow"><span class="header-section-number">3.5.1</span> Row-wise variable summaries [SLOW]</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(libauth, leftrigh, av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There were 3224 warnings in `mutate()`.
-The first warning was:
-ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
-  na.rm = T)`.
-ℹ In row 1.
-Caused by warning:
-! `libauth` and `leftrigh` have conflicting value labels.
-ℹ Labels for these values will be taken from `libauth`.
-✖ Values: 1 and 5
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 3223 remaining warnings.</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(libauth, leftrigh, av_ati2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 398 × 4
 # Rowwise: 
-   libauth                                        leftrigh         av_ati2     n
-   &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;          &lt;dbl&gt; &lt;int&gt;
- 1 -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, …   -1      588
- 2  1 [libertarian]                                1 [left]           1        1
- 3  1 [libertarian]                                1.6                1.3      1
- 4  1 [libertarian]                                5 [right]          3        1
- 5  1.17                                           1.4                1.28     1
- 6  1.17                                           1.8                1.48     2
- 7  1.33                                           1 [left]           1.17     1
- 8  1.33                                           3.2                2.27     1
- 9  1.5                                            1 [left]           1.25     1
-10  1.5                                            1.4                1.45     2
+   libauth leftrigh av_ati2     n
+     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
+ 1    1         1.4    1.2      1
+ 2    1         3      2        1
+ 3    1.17      1.8    1.48     1
+ 4    1.17      2      1.58     1
+ 5    1.17      2.2    1.68     2
+ 6    1.17      2.4    1.78     1
+ 7    1.17      2.6    1.88     1
+ 8    1.17      3.6    2.38     1
+ 9    1.33      1.4    1.37     1
+10    1.33      1.6    1.47     1
 # ℹ 388 more rows</code></pre>
 </div>
 </div>
@@ -528,79 +478,79 @@ Caused by warning:
 <section id="quicker-row-wise-functions" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="quicker-row-wise-functions"><span class="header-section-number">3.5.2</span> Quicker row-wise functions…</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">av_ati3 =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(libauth, leftrigh)), <span class="at">na.rm =</span> T)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(av_ati3, libauth, leftrigh) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">av_ati3 =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(libauth, leftrigh)), <span class="at">na.rm =</span> T)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(av_ati3, libauth, leftrigh) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 30 × 3
-   av_ati3 libauth                                        leftrigh              
-     &lt;dbl&gt; &lt;dbl+lbl&gt;                                      &lt;dbl+lbl&gt;             
- 1    3.77  4.33                                           3.2                  
- 2    3.25  3.5                                            3                    
- 3    3.45  4.5                                            2.4                  
- 4    3.58  4.17                                           3                    
- 5    3.02  3.83                                           2.2                  
- 6   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
- 7    3.38  4.17                                           2.6                  
- 8    2.97  3.33                                           2.6                  
- 9    3.25  4.5                                            2                    
-10   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
-11    2.1   3                                              1.2                  
-12   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
-13    3.08  4.17                                           2                    
-14    3.13  4.67                                           1.6                  
-15    3.58  4.17                                           3                    
-16   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
-17    1.88  2.17                                           1.6                  
-18    3.03  3.67                                           2.4                  
-19    2.97  3.33                                           2.6                  
-20    1.3   1 [libertarian]                                1.6                  
-21   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
-22    2.55  2.5                                            2.6                  
-23    2.78  3.17                                           2.4                  
-24    3.2   5 [authoritarian]                              1.4                  
-25    2.83  3.67                                           2                    
-26    3.58  4.17                                           3                    
-27   -1    -1 (NA) [skip, didn`t return SC questionnaire] -1 (NA) [skip, didn`t…
-28    3.17  4.33                                           2                    
-29    2.65  2.5                                            2.8                  
-30    1.98  2.17                                           1.8                  </code></pre>
+   av_ati3 libauth leftrigh
+     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+ 1    2.25    2.5       2  
+ 2    2.88    3.17      2.6
+ 3    3.37    3.33      3.4
+ 4    3.25    3.5       3  
+ 5    2.45    2.5       2.4
+ 6  NaN      NA        NA  
+ 7  NaN      NA        NA  
+ 8    3.18    3.17      3.2
+ 9  NaN      NA        NA  
+10  NaN      NA        NA  
+11    3.33    3.67      3  
+12    3.57    3.33      3.8
+13    2.13    2.67      1.6
+14    1.77    1.33      2.2
+15    2.77    3.33      2.2
+16    2.85    3.5       2.2
+17    3.25    4.5       2  
+18    3.5     4         3  
+19  NaN      NA        NA  
+20  NaN      NA        NA  
+21    2.82    3.83      1.8
+22  NaN      NA        NA  
+23    2.63    3.67      1.6
+24    3.08    4.17      2  
+25    4.07    4.33      3.8
+26    1.33    1.67      1  
+27    2.62    3.83      1.4
+28    3.43    4.67      2.2
+29    2.32    2.83      1.8
+30    3.1     4         2.2</code></pre>
 </div>
 </div>
 <p><br></p>
 <section id="another-example" class="level4" data-number="3.5.2.1">
 <h4 data-number="3.5.2.1" class="anchored" data-anchor-id="another-example"><span class="header-section-number">3.5.2.1</span> Another example</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">45</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var3 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var4 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var5 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="at">replace =</span> T)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> num_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># All columns</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_total =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">everything</span>()), <span class="at">na.rm =</span> T), </span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identify column numbers</span></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">rows_2_4 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)), <span class="at">na.rm =</span> T), </span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identfy variable with ends_with</span></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ends_with_3_5 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="fu">c</span>(<span class="st">"3"</span>,<span class="st">"5"</span>)))),</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># With character vector</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">1_and_2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>))))</span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>num_df <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">45</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var3 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var4 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="dv">50</span>, <span class="at">replace =</span> T),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var5 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="at">replace =</span> T)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> num_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># All columns</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_total =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">everything</span>()), <span class="at">na.rm =</span> T), </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identify column numbers</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">rows_2_4 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)), <span class="at">na.rm =</span> T), </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identfy variable with ends_with</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ends_with_3_5 =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="fu">c</span>(<span class="st">"3"</span>,<span class="st">"5"</span>)))),</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># With character vector</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">1_and_2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>))))</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>num_df <span class="sc">%&gt;%</span> <span class="fu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   var1 var2 var3 var4 var5 row_total rows_2_4 ends_with_3_5 1_and_2
 1    31   12   18   67   20       148       79            38      43
@@ -661,29 +611,17 @@ Caused by warning:
 <section id="group-wise-variable-summaries" class="level3" data-number="3.5.3">
 <h3 data-number="3.5.3" class="anchored" data-anchor-id="group-wise-variable-summaries"><span class="header-section-number">3.5.3</span> Group wise variable summaries</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RSex) <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(av_ati2) <span class="co"># Remember, without ungroup output is still grouped... </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There were 2 warnings in `mutate()`.
-The first warning was:
-ℹ In argument: `av_ati2 = mean(c_across(all_of(c("libauth", "leftrigh"))),
-  na.rm = T)`.
-ℹ In group 1: `RSex = 1`.
-Caused by warning:
-! `libauth` and `leftrigh` have conflicting value labels.
-ℹ Labels for these values will be taken from `libauth`.
-✖ Values: 1 and 5
-ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RSex) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">av_ati2 =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"libauth"</span>, <span class="st">"leftrigh"</span>))), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(av_ati2) <span class="co"># Remember, without ungroup output is still grouped... </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
 # Groups:   RSex [2]
   RSex       av_ati2     n
   &lt;dbl+lbl&gt;    &lt;dbl&gt; &lt;int&gt;
-1 1 [Male]      2.38  1454
-2 2 [Female]    2.42  1770</code></pre>
+1 1 [Male]      3.05  1448
+2 2 [Female]    3.04  1776</code></pre>
 </div>
 </div>
 

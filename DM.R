@@ -3,6 +3,8 @@
 
 ####### Set up... ##############################################################
 
+library(here)
+here::i_am("DM.R")
 library(haven)
 library(tidyverse)
 library(clean)
@@ -10,7 +12,7 @@ library(labelled)
 library(Hmisc) # weighted quantiles
 
 # Load BSA teaching data
-df <- read_sav('/Users/joecrowley/R/Data/BSA Teaching Data/spss/spss25/bsa2019_poverty_open.sav', user_na = T)
+df <- read_sav(here::here("data", "synthetic_bsa2019_sav.sav"), user_na = TRUE)
 
 
 ####### Variable summary #######################################################
