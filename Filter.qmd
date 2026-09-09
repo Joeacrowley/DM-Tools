@@ -20,7 +20,7 @@ df <- read_sav(here::here("data", "synthetic_bsa2019_sav.sav"), user_na = TRUE)
 
 ```
 
-<br> 
+<br>
 
 ## Basic filtering
 
@@ -43,7 +43,6 @@ df %>%
 
 ```
 
-
 ```{r}
 
 names(df) # RSex and RAgeCat occur right after each other
@@ -51,5 +50,19 @@ names(df) # RSex and RAgeCat occur right after each other
 df %>% 
   filter(if_all(RSex:RAgeCat, ~ . > 1)) %>% # Womeny older than 24
   count(RSex, RAgeCat)
+
+```
+
+## Conditions summing across variables
+
+```{r}
+
+df %>% filter(rowSums(
+  across(
+    all_of(c("Poverty1", "Poverty2")),
+    ~. == 1)
+        ) == 2
+  ) %>% 
+  count(Poverty1, Poverty2)
 
 ```
