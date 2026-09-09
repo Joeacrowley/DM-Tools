@@ -250,8 +250,7 @@ df %>% count(libauth_brack, libauth) %>% print(n=1000)
 
 This formats the output of cut. It assumes you'll want the breaks to close on the right and include the lowest value in the sequence of breaks.
 
-Access function: [nice_cut](Scripts/nice_cut.R). 
-
+Access function: [nice_cut](Scripts/nice_cut.R).
 
 ```{r}
 
@@ -263,7 +262,7 @@ nice_cut <- function(
     lab_style = 1
 ){
   
-  if(keep_user_na == F){variable <- user_na_to_na(variable)}
+  if(keep_user_na == F){variable <- labelled::user_na_to_na(variable)}
   
   new_variable <- cut(
     variable, 
@@ -273,8 +272,8 @@ nice_cut <- function(
     dig.lab = dig_lab
     )
 
-  new_levels <- new_variable %>% levels()
-  new_levels <- as.character(new_levels)
+  cur_levels <- new_variable %>% levels()
+  new_levels <- as.character(cur_levels)
      
    if(lab_style == 1){
      
@@ -297,6 +296,7 @@ nice_cut <- function(
   
   factor(
     new_variable, 
+    levels = cur_levels,
     labels = new_levels
     )
 
